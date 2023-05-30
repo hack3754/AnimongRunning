@@ -6,6 +6,8 @@ TagManager:
   tags:
   - TopCollider
   - BottomCollider
+  - Obstacle
+  - UICamera
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - BGColider
+  - BGCollider
   - 
   - 
   - 
@@ -42,4 +44,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Top
+    uniqueID: 2062875207
+    locked: 0
+  - name: Bottom
+    uniqueID: 268459767
+    locked: 0
+  - name: Player
+    uniqueID: 3312185107
+    locked: 0
+  - name: Trap
+    uniqueID: 132978529
     locked: 0

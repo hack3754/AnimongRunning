@@ -1,62 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject m_Obj;
     public Transform m_Trans;
+    public Animator m_Animator; //CharacterChange;
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
-    public bool m_IsUp;
-    public bool m_IsDown;
-    public List<RaycastHit2D> m_Hits;
-    GameObject m_BGCollision;
-    Vector3 m_Vec3;
-    private void Awake()
-    {
-        m_IsUp = true;
-        m_IsDown = true;
-        m_Hits = new List<RaycastHit2D>();
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("TopCollider"))
-        {
-            m_IsUp = false;            
-            Debug.Log("Top Enter");
-        }
-
-        if (collision.gameObject.CompareTag("BottomCollider"))
-        {
-            m_IsDown = false;
-            Debug.Log("Bottom Enter");
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
+  
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.gameObject.CompareTag("TopCollider"))
-        {
-            m_IsUp = true;
-            Debug.Log("Top Exit");
-        }
-        if (collision.gameObject.CompareTag("BottomCollider"))
-        {
-            m_IsDown = true;
-            Debug.Log("Bottom Exit");
-        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+     
         
+    }
+
+    #region hitTest
+    /*
+    RaycastHit2D[] m_Hits = new RaycastHit2D[5];
+    public bool Hit()
+    {
+        ContactFilter2D filter2d = new ContactFilter2D();
+ 
+        filter2d.SetLayerMask(Physics2D.GetLayerCollisionMask(LayerMask.NameToLayer("BGCollider")));
+        int count = m_Col.Cast(Vector2.up, filter2d, m_Hits, 0.5f);
+
+        if (count > 0)
+        {
+            m_Vec3 = m_Trans.localPosition;
+            m_Vec3.y = m_Hits[0].transform.localPosition.y + m_Hits[0].collider.bounds.extents.y;
+            m_Trans.localPosition = m_Vec3;
+        }
+
+        return false;
     }
 
     public void Move(Vector2 positionChange)
     {
         //Vector2 positionChange = new Vector2(m_Trans.localPosition.x, m_Trans.localPosition.y) * Time.deltaTime;
         ContactFilter2D filter2d = new ContactFilter2D();
-        m_Col.Cast(positionChange, filter2d, m_Hits, positionChange.magnitude);
+        filter2d.SetLayerMask(LayerMask.NameToLayer("BGColider"));
+        m_Col.Cast(Vector2.up, filter2d, m_Hits, positionChange.magnitude);
 
-        if(m_Hits.Count > 0)
+        if(m_Hits.Length > 0)
         {
             Debug.Log(m_Hits[0].transform.name);
             float colliderDistance = m_Hits[0].distance;
@@ -81,4 +76,6 @@ public class Player : MonoBehaviour
     {
         return Vector2.zero;
     }
+    */
+    #endregion
 }

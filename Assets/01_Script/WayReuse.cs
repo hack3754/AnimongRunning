@@ -20,12 +20,11 @@ public class WayReuse : MonoBehaviour
     }
     public void UpdateWay(Transform moveBg)
     {
-        if (-1 * m_TransWay[m_WayIndex[1]].localPosition.x >= moveBg.localPosition.x)
+        if (-m_TransWay[m_WayIndex[1]].localPosition.x >= moveBg.localPosition.x)
         {
-            m_Vec3 = m_TransWay[m_WayIndex[0]].position;
-            m_Vec3.x = m_TransWay[m_WayIndex[m_WayIndex.Length - 1]].position.x + m_TitleCount;
-            m_TransWay[m_WayIndex[0]].position = m_Vec3;
-
+            m_Vec3 = m_TransWay[m_WayIndex[0]].localPosition;
+            m_Vec3.x = m_TransWay[m_WayIndex[m_WayIndex.Length - 1]].localPosition.x + (m_TitleCount * 0.8f);
+            m_TransWay[m_WayIndex[0]].localPosition = m_Vec3;
 
             Sort();
         }
