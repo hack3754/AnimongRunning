@@ -1,9 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class TrapCollider : MonoBehaviour
+public class TrapCollider : ObjectEntries
 {
-    public GameObject m_Obj;
-    public Transform m_Trans;
+    public string m_PrefabName;
+
+    public bool IsEnable { get; set; }
+
+    public void Init()
+    {
+        IsEnable = false;
+    }
+    
+    public void Set(bool isSet)
+    {
+        SetActive(isSet);
+        IsEnable = isSet;
+    }
 }

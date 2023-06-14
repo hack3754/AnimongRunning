@@ -12,7 +12,12 @@ public class Player : MonoBehaviour
     public Animator m_Animator; //CharacterChange;
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
-  
+
+    private void Awake()
+    {
+        m_Animator.Play("Run");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         

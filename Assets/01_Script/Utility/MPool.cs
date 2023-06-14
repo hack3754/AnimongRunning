@@ -47,6 +47,10 @@ namespace MRPG
             {
                 m_freeObjects.Push(obj);
             }
+
+            obj.transform.SetParent(m_parent);
+            obj.transform.localScale = m_baseResource.transform.localScale;
+
             Reset(obj);
         }
 

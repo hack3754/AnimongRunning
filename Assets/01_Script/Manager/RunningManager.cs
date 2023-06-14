@@ -48,6 +48,8 @@ public class RunningManager : MonoBehaviour
         {
             m_isMove = true;
             m_Time = 0;
+
+            m_BGSpeed = 10;
         }
 
         if (m_isMove)
@@ -100,7 +102,7 @@ public class RunningManager : MonoBehaviour
         {
 #if UNITY_EDITOR
             float Vertical = Input.GetAxis("Vertical") * m_PlayerSpeed * Time.deltaTime;
-            Debug.Log(Vertical);
+            //Debug.Log(Vertical);
             m_Vec2.y += Vertical;
             m_Player.m_RigidBody.velocity = m_Vec2;
 
