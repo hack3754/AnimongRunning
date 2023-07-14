@@ -88,13 +88,13 @@ public class RunningManager : MonoBehaviour
             if (m_JumpValue <= 0)
             {
                 m_IsJump = false;
-                m_Player.m_RigidBody.position = m_PerJumpValue;
+                //m_Player.m_RigidBody.position = m_PerJumpValue;
                 m_Player.m_Col.enabled = true;
             }
             else
             {
                 m_Vec2.y = m_PerJumpValue.y + m_JumpValue;
-                m_Player.m_RigidBody.position = m_Vec2;
+               // m_Player.m_RigidBody.position = m_Vec2;
             }
 
         }
