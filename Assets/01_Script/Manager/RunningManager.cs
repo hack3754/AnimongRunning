@@ -36,7 +36,7 @@ public class RunningManager : MonoBehaviour
 
     //data
     float m_MaxSpeed;
-    private void LateUpdate()
+    public void Running()
     {
         m_Time += Time.deltaTime;
         m_BgUpdate.BgMove(m_BGSpeed);
@@ -108,14 +108,25 @@ public class RunningManager : MonoBehaviour
 
             if(m_IsJump == false && Input.GetKey(KeyCode.Z))
             {
-                Jump();
+                Jump("Jump_01");
+            }
+
+            if (m_IsJump == false && Input.GetKey(KeyCode.X))
+            {
+                Jump("Jump_02");
+            }
+
+            if (m_IsJump == false && Input.GetKey(KeyCode.C))
+            {
+                Jump("Gomong_Jump_Run");
             }
 #endif
         }
     }
 
-    public void Jump()
+    public void Jump(string aniName)
     {
+        m_Player.Jump(aniName);
         m_Player.m_Col.enabled = false;
         m_IsJump = true;
         m_JumpState = JumpState.Up;

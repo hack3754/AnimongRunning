@@ -6,8 +6,10 @@ TagManager:
   tags:
   - TopCollider
   - BottomCollider
-  - Obstacle
   - UICamera
+  - Lane
+  - Trap
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -51,9 +53,9 @@ TagManager:
   - name: Bottom
     uniqueID: 268459767
     locked: 0
-  - name: Player
+  - name: LaneObject
     uniqueID: 3312185107
     locked: 0
-  - name: Trap
-    uniqueID: 132978529
+  - name: UI
+    uniqueID: 3087436257
     locked: 0

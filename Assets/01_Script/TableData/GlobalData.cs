@@ -18,9 +18,8 @@ public class GlobalData : DataBase
 		ad_cnt = 1;
 		ad_wait_time = 1f;
 
-        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv#gid=0");
-
-	  }
+        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=0");
+    }
 
     protected override void ParseData(string[] _row)
     {

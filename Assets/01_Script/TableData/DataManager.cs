@@ -3,10 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-public class DataManager : MonoBehaviour
+public class DataManager : MSingleton<DataManager>
 {
-	public static DataManager ins;
-
 	//public PopupLoaing loading;
 	public GameObject go;
 
@@ -24,15 +22,6 @@ public class DataManager : MonoBehaviour
 
     public void Awake()
 	{
-		if (ins != null && ins != this)
-		{
-			Destroy(gameObject);
-			return;
-		}
-
-		ins = this;
-		DontDestroyOnLoad(gameObject);
-
 		load_cnt = 0;
 		is_load = false;
 		is_first_load = false;
@@ -44,8 +33,9 @@ public class DataManager : MonoBehaviour
 			m_GlobalData, 
 			m_TrapData 
 		};
-        
-	}
+
+		LoadFirstLoad();
+    }
 
 	public void LoadFirstLoad()
 	{
@@ -80,10 +70,12 @@ public class DataManager : MonoBehaviour
 		is_load = false;
 		is_first_load = true;
 
-		//Debug.Log("*** " + user.dic[2].value.ContainsKey(SkillData.move_speed));
-		//Debug.Log("*** " + user.dic[2].value[SkillData.move_speed]);
-	
+		GameManager.Instance.GameStart();
 
-		//if (PlayManager.ins != null) PlayManager.ins.Init(false);
-	}
+        //Debug.Log("*** " + user.dic[2].value.ContainsKey(SkillData.move_speed));
+        //Debug.Log("*** " + user.dic[2].value[SkillData.move_speed]);
+
+
+        //if (PlayManager.ins != null) PlayManager.ins.Init(false);
+    }
 }

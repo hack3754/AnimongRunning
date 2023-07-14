@@ -72,7 +72,7 @@ public class DataBase  : MonoBehaviour
 		
 		www.Dispose();
 
-		DataManager.ins.CheckLoad();
+		DataManager.Instance.CheckLoad();
 		yield break;
 	}
 	protected virtual void ParseDataFirst(string[] _row)

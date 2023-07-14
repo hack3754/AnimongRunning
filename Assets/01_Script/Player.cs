@@ -9,24 +9,73 @@ public class Player : MonoBehaviour
 {
     public GameObject m_Obj;
     public Transform m_Trans;
+    public Transform m_TransBody;
+    public SpriteRenderer[] m_Sprites;
     public Animator m_Animator; //CharacterChange;
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
+    
+    int m_LineIndex;
+    TrapCollider m_Trap;
 
     private void Awake()
     {
-        m_Animator.Play("Run");
+        Run();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == TagName.Lane.ToString())
+        {
+            LaneObject lane = collision.gameObject.GetComponent<LaneObject>();
+            if (lane != null)
+            {
+                m_LineIndex = lane.m_Index;
+                SetSort(lane.m_Index);
+            }
+        }
+
+        if (collision.tag == TagName.Trap.ToString())
+        {
+            TrapCollider trap = collision.gameObject.GetComponent<TrapCollider>();
+            if (trap != null)
+            {
+                m_Trap = trap;
+            }
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-     
-        
+        if (collision.tag == TagName.Trap.ToString())
+        {
+            TrapCollider trap = collision.gameObject.GetComponent<TrapCollider>();
+            if (m_Trap != null && m_Trap.Equals(trap))
+            {
+                m_Trap = null;
+            }
+        }
+    }
+
+    void SetSort(int lane)
+    {
+        for (int i = 0; i < m_Sprites.Length; i++)
+        {
+            m_Sprites[i].sortingOrder = (lane * 3) - (i + 1);
+        }
+    }
+
+    public void Run()
+    {
+        m_Animator.Play("Run", -1, 0);
+        m_Animator.speed = 0.5f;
+    }
+
+    public void Jump(string aniName)
+    {
+        m_Animator.Play(aniName, -1, 0);
+        m_Animator.speed = 0.5f;
     }
 
     #region hitTest

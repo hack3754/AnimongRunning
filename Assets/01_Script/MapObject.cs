@@ -6,5 +6,10 @@ public class MapObject : MonoBehaviour
 {
     public Transform m_TransBG;
     public Transform m_TransWay;
-    public Transform m_TransTrap;
+    public TrapManager m_Trap;
+
+    public void Init()
+    {
+        m_Trap.Init();
+    }
 }

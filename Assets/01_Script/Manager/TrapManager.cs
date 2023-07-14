@@ -7,7 +7,7 @@ public class TrapManager : MonoBehaviour
 {
     public Transform m_Parent;
     public Tilemap m_Tilemap;
-    private void Start()
+    public void Init()
     {
         foreach (Vector3Int pos in m_Tilemap.cellBounds.allPositionsWithin)
         {
@@ -18,6 +18,7 @@ public class TrapManager : MonoBehaviour
             if(col != null)
             {
                 col.m_Trans.position = position;
+                col.Init();
             }
         }
     }

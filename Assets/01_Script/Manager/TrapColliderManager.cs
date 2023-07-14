@@ -12,17 +12,21 @@ public class TrapColliderManager : MonoBehaviour
     public TrapCollider[] m_PrefabsTrap;
     Dictionary<string, List<TrapCollider>> m_Traps;
 
-    private void Awake()
+    public void Init()
     {
         m_Traps = new Dictionary<string, List<TrapCollider>>();
         for (int i = 0; i < m_PrefabsTrap.Length; i++)
         {
-            if (m_Traps.ContainsKey(m_PrefabsTrap[i].m_PrefabName) == false)
+            m_PrefabsTrap[i].Init();
+            if (m_PrefabsTrap[i].m_tData != null)
             {
-                m_Traps.Add(m_PrefabsTrap[i].m_PrefabName, new List<TrapCollider>());
-            }
+                if (m_Traps.ContainsKey(m_PrefabsTrap[i].m_tData.name) == false)
+                {
+                    m_Traps.Add(m_PrefabsTrap[i].m_tData.name, new List<TrapCollider>());
+                }
 
-            m_Traps[m_PrefabsTrap[i].m_PrefabName].Add(m_PrefabsTrap[i]);
+                m_Traps[m_PrefabsTrap[i].name].Add(m_PrefabsTrap[i]);
+            }
         }
     }
 

@@ -5,12 +5,15 @@ using UnityEditor;
 using UnityEngine;
 public enum TrapType
 {
-    Noraml
+    Slow,
 }
 public class TrapDataItem
 {
     public string name;
-    public TrapType type; 
+    public TrapType type;
+    public string prefab;
+    public bool IsUnder;
+    public float value;
 }
 public class TrapData : DataBase
 {
@@ -50,12 +53,23 @@ public class TrapData : DataBase
         {
             if (i == idx_max) break;
             if (i == idx_key || i == idx_desc) continue;
+            if (string.IsNullOrEmpty(_row[i])) continue;
             idx = m_ListIdx[i];
             switch (_row[idx_key])
             {
+                
                 case "name": m_Dic[idx].name = _row[i]; break;
-                case "type": m_Dic[idx].type = (TrapType)int.Parse(_row[i]); break;
-            }
+                case "type": m_Dic[idx].type = (TrapType)Enum.Parse(typeof(TrapType), _row[i]); break;
+                case "IsUnder": m_Dic[idx].IsUnder = int.Parse(_row[i]) == 1; break;
+                case "value": m_Dic[idx].value = float.Parse(_row[i]); break;
         }
+        }
+    }
+
+    public TrapDataItem GetData(int id)
+    {
+        if(m_Dic.ContainsKey(id)) return m_Dic[id];
+
+        return null;
     }
 }
