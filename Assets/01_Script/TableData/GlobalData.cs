@@ -30,7 +30,8 @@ public class GlobalData : DataBase
 			case "ad_id": ad_id = _row[idx_value]; break;
 			case "ad_cnt": ad_cnt = int.Parse(_row[idx_value]); break;
 			case "ad_wait_time": ad_wait_time = float.Parse(_row[idx_value]); break;
-		}
+            case "bg_speed": bg_speed = float.Parse(_row[idx_value]); break;
+        }
     }
 
 }

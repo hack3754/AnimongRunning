@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using Unity.VisualScripting;
 using UnityEngine;
 public enum JumpState
@@ -32,10 +33,19 @@ public class RunningManager : MonoBehaviour
     JumpState m_JumpState;
 
     bool m_isMove;
+    bool m_IsJumpBlock;
     float m_Time = 0;
 
     //data
     float m_MaxSpeed;
+
+    public void Init()
+    {
+        m_BgUpdate.Init();
+        m_IsJumpBlock = false;
+        m_BGSpeed = DataManager.Instance.m_GlobalData.bg_speed;
+    }
+
     public void Running()
     {
         m_Time += Time.deltaTime;
@@ -101,10 +111,13 @@ public class RunningManager : MonoBehaviour
         else
         {
 #if UNITY_EDITOR
-            float Vertical = Input.GetAxis("Vertical") * m_PlayerSpeed * Time.deltaTime;
-            //Debug.Log(Vertical);
-            m_Vec2.y += Vertical;
-            m_Player.m_RigidBody.velocity = m_Vec2;
+            if (m_IsJump == false)
+            {
+                float Vertical = Input.GetAxis("Vertical") * m_PlayerSpeed * Time.deltaTime;
+                //Debug.Log(Vertical);
+                m_Vec2.y += Vertical;
+                m_Player.m_RigidBody.velocity = m_Vec2;
+            }
 
             if(m_IsJump == false && Input.GetKey(KeyCode.Z))
             {
@@ -124,8 +137,27 @@ public class RunningManager : MonoBehaviour
         }
     }
 
+    public void ResetRunning()
+    {
+        m_BGSpeed = DataManager.Instance.m_GlobalData.bg_speed;
+        m_IsJumpBlock = false;
+    }
+
+    public void SetTrap(TrapCollider trap)
+    {
+        if (trap == null || trap.m_tData == null) return;
+        switch(trap.m_tData.type)
+        {
+            case TrapType.Slow:
+                m_BGSpeed = trap.m_tData.value;
+                m_IsJumpBlock = true;
+                break;
+        }
+    }
+
     public void Jump(string aniName)
     {
+        if (m_IsJumpBlock) return;
         m_Player.Jump(aniName);
         m_Player.m_Col.enabled = false;
         m_IsJump = true;

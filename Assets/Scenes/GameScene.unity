@@ -678,7 +678,7 @@ MonoBehaviour:
   m_BGSpeed: 5
   m_PlayerSpeed: 800
   m_PlayerJumpSpeed: 5
-  m_HeightPeak: 1.5
+  m_HeightPeak: 1
 --- !u!1 &565615078
 GameObject:
   m_ObjectHideFlags: 0
