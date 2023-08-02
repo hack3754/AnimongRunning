@@ -47,7 +47,8 @@ public class TrapColliderManager : MonoBehaviour
 
             if (col == null)
             {
-                col = Instantiate(m_Traps[name][0], parent);
+                col = Instantiate(m_Traps[name][0]);
+                col.m_Trans.SetParent(parent);
                 m_Traps[name].Add(col);
             }
             else

@@ -16,6 +16,7 @@ public class DataManager : MSingleton<DataManager>
 
 	public GlobalData m_GlobalData;
 	public TrapData m_TrapData;
+	public MapData m_MapData;
 
 	private List<DataBase> m_ListData;
 
@@ -28,11 +29,13 @@ public class DataManager : MSingleton<DataManager>
 
         m_GlobalData = go.AddComponent<GlobalData>();
 		m_TrapData = go.AddComponent<TrapData>();
+		m_MapData = go.AddComponent<MapData>();
 
-		m_ListData = new List<DataBase>() { 
+        m_ListData = new List<DataBase>() { 
 			m_GlobalData, 
-			m_TrapData 
-		};
+			m_TrapData,
+            m_MapData
+        };
 
 		LoadFirstLoad();
     }
@@ -70,7 +73,7 @@ public class DataManager : MSingleton<DataManager>
 		is_load = false;
 		is_first_load = true;
 
-		GameManager.Instance.GameStart();
+		GameManager.Instance.Init();
 
         //Debug.Log("*** " + user.dic[2].value.ContainsKey(SkillData.move_speed));
         //Debug.Log("*** " + user.dic[2].value[SkillData.move_speed]);

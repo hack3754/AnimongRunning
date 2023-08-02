@@ -18,9 +18,9 @@ public class Player : MonoBehaviour
     int m_LineIndex;
     TrapCollider m_Trap;
 
-    private void Awake()
+    public void Init()
     {
-        Run();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
             if (trap != null)
             {
                 m_Trap = trap;
+                //GameManager.Instance.m_Running.SetTrap(m_Trap);
             }
         }
 
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
             if (m_Trap != null && m_Trap.Equals(trap))
             {
                 m_Trap = null;
+                //GameManager.Instance.m_Running.ResetRunning();
             }
         }
     }
@@ -76,6 +78,12 @@ public class Player : MonoBehaviour
     {
         m_Animator.Play(aniName, -1, 0);
         m_Animator.speed = 0.5f;
+    }
+
+    public void EndJump()
+    {
+        GameManager.Instance.m_Running.EndJump();
+        m_Col.enabled = true;
     }
 
     #region hitTest
@@ -133,3 +141,4 @@ public class Player : MonoBehaviour
     */
     #endregion
 }
+

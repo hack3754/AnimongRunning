@@ -14,11 +14,22 @@ public class GameManager : MSingleton<GameManager>
         
     }
 
-    public void GameStart()
+    public void Init()
     {
         m_TrapColliderManager.Init();
+        m_Running.Init();
+        m_UIManager.Init();
+
+
+        StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad(GameStart));
+    }
+
+    void GameStart()
+    {
         m_IsGameStart = true;
-        m_Running.m_BgUpdate.Init();
+        m_Running.m_Player.Run();
+        GameData.Init();
+        GameTimeSystem.SetTime();
     }
 
     private void Update()

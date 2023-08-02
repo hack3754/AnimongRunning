@@ -8,7 +8,11 @@ public class GlobalData : DataBase
 	public int ad_cnt;
 	public float ad_wait_time;
 	public float bg_speed;
-	public float jump_max;
+	public float hp_max;
+	public float min_speed;
+	public float max_speed;
+    public float sprint_time;
+    public float sprint_speed;
 
     public override void Init()
     {
@@ -31,6 +35,11 @@ public class GlobalData : DataBase
 			case "ad_cnt": ad_cnt = int.Parse(_row[idx_value]); break;
 			case "ad_wait_time": ad_wait_time = float.Parse(_row[idx_value]); break;
             case "bg_speed": bg_speed = float.Parse(_row[idx_value]); break;
+			case "hp_max": hp_max = float.Parse(_row[idx_value]); break;
+            case "min_speed": min_speed = float.Parse(_row[idx_value]); break;
+            case "max_speed": max_speed = float.Parse(_row[idx_value]); break;
+            case "sprint_time": sprint_time = float.Parse(_row[idx_value]); break;
+            case "sprint_speed": sprint_speed = float.Parse(_row[idx_value]); break;
         }
     }
 

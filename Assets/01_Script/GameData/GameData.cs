@@ -2,7 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameData : CSingleton<GameData>
+public static class GameData
 {
-    public PlayerData m_Player;
+    public static PlayerData m_Player;
+    public static float m_BGSpeed;
+    public static void Init()
+    {
+        m_Player = new PlayerData();
+        m_Player.Init();
+        m_BGSpeed = DataManager.Instance.m_GlobalData.bg_speed;
+    }
 }

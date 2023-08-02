@@ -79,7 +79,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e0bf0670587fafe4c97087f9eb34e194, type: 3}
   - {fileID: 21300000, guid: 2da6ac70c0829724388208c35bb72177, type: 3}
   - {fileID: 21300000, guid: 0ced2090b135eec479f0ac528550dec4, type: 3}
-  - {fileID: 21300000, guid: eada1690037fd594aa273c45e598b673, type: 3}
   - {fileID: 21300000, guid: 6be65a90618881a4097d3bc7313239a6, type: 3}
   - {fileID: 21300000, guid: cf2ceda007c151244aa28c415f2ebac3, type: 3}
   - {fileID: 21300000, guid: da7dabb074d7c104da971f1e318691d7, type: 3}
@@ -208,7 +207,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d34aeca827e57cd449777008df56902b, type: 3}
   - {fileID: 21300000, guid: edc141d85959bab47b85ffa215ed571e, type: 3}
   - {fileID: 21300000, guid: 0e68d2d873469f148b9b0ad71f7169a6, type: 3}
-  - {fileID: 21300000, guid: 9013f3d8ac43c364e8f3ee2d3c2829f1, type: 3}
   - {fileID: 21300000, guid: cd73e9d8366848744a77dbe2caa33a38, type: 3}
   - {fileID: 21300000, guid: c4a588e8a913ab847af473b072f56970, type: 3}
   - {fileID: 21300000, guid: 20a44809de104de4aa32d914fbcddd2b, type: 3}
@@ -312,7 +310,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2bd4ba1f0924f1343ac944a432a466f9, type: 3}
   - {fileID: 21300000, guid: 1283982fc3f72224f8c3ab829fa52319, type: 3}
   - {fileID: 21300000, guid: bbdbca2fd16505942b0f4f3c9bfa0ae7, type: 3}
-  - {fileID: 21300000, guid: bf24485f442e92b4da941b8d64cba0dc, type: 3}
   - {fileID: 21300000, guid: cb0eeb8fa608d99468faf822e2bc7513, type: 3}
   - {fileID: 21300000, guid: 133fbb9ff562dad44b0f3da3b60674ac, type: 3}
   - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
@@ -339,7 +336,6 @@ SpriteAtlas:
   - Mozzi_M01_Damage_02
   - Gomong_Basic
   - Bush_5_80x40_05
-  - bg_deco
   - Tree_4_200x320_04
   - btn_rp_setting
   - Mozzi_S04_Run_04
@@ -468,7 +464,6 @@ SpriteAtlas:
   - InGame_LV_Gauge_BG
   - InGame_CA_Run_01
   - img_newrecord
-  - bg_shop_ca
   - Mozzi_S02_Run_01
   - Bg_Basic_01_80x88_03
   - Bush_10_160x120_01
@@ -572,7 +567,6 @@ SpriteAtlas:
   - InGame_HP_Gauge_BG
   - Grass_2_56x16_01
   - btn_ad
-  - bg_deco_02
   - icon_coin_01
   - Mozzi_S_Damage_Type04
   - Gomong_Shadow_02

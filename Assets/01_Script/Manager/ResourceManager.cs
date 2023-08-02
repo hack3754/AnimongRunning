@@ -366,7 +366,7 @@ public class ResourceManager : MSingleton<ResourceManager>
     #region LOAD
     public void Instantiate( string key, Transform perant = null, Action<GameObject> onEnd = null )
     {
-        string addressableName = GetKey( PathType.PREFAB, key );
+        string addressableName = key;//GetKey( PathType.PREFAB, key );
         
         LoadAsync<GameObject>( addressableName, ( result, isSucess ) =>
         {
@@ -388,6 +388,46 @@ public class ResourceManager : MSingleton<ResourceManager>
                 onEnd?.Invoke( null );
             }
         } );
+    }
+
+    public IEnumerator CoInstantiate(string key, Transform perant = null, Action<GameObject> onEnd = null)
+    {
+        var checkOp = Addressables.LoadResourceLocationsAsync(key);
+
+        yield return checkOp;
+        if (checkOp.Result.Count > 0)
+        {
+            if (m_Handles.ContainsKey(key))
+            {
+                onEnd?.Invoke(m_Handles[key].Result as GameObject);
+            }
+            else
+            {
+                var op = Addressables.InstantiateAsync(key, perant);
+
+                yield return op;
+
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    if (op.Result != null)
+                    {
+                        //AddHandle(key, op);
+                    }
+
+                    onEnd?.Invoke(op.Task.Result);
+                }
+                else
+                {
+                    onEnd?.Invoke(null);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError($"Resource Load Failed!! : {key}");
+
+            onEnd?.Invoke(null);
+        }
     }
 
     public T LoadResource<T>( string path, string name ) where T : UnityEngine.Object
