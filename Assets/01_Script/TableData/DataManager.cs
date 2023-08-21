@@ -17,8 +17,9 @@ public class DataManager : MSingleton<DataManager>
 	public GlobalData m_GlobalData;
 	public TrapData m_TrapData;
 	public MapData m_MapData;
+	public BackgroundData m_BGData;
 
-	private List<DataBase> m_ListData;
+    private List<DataBase> m_ListData;
 
 
     public void Awake()
@@ -30,11 +31,13 @@ public class DataManager : MSingleton<DataManager>
         m_GlobalData = go.AddComponent<GlobalData>();
 		m_TrapData = go.AddComponent<TrapData>();
 		m_MapData = go.AddComponent<MapData>();
+        m_BGData = go.AddComponent<BackgroundData>();
 
         m_ListData = new List<DataBase>() { 
 			m_GlobalData, 
 			m_TrapData,
-            m_MapData
+            m_MapData,
+            m_BGData
         };
 
 		LoadFirstLoad();

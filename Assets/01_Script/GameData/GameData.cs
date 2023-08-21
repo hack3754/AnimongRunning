@@ -10,6 +10,6 @@ public static class GameData
     {
         m_Player = new PlayerData();
         m_Player.Init();
-        m_BGSpeed = DataManager.Instance.m_GlobalData.bg_speed;
+        m_BGSpeed = 0;
     }
 }

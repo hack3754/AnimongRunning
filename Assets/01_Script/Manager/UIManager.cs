@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour
 
     public void SetHP(float hpValue)
     {
-        Debug.Log(hpValue);
-        m_UIHP.SetValue(hpValue / DataManager.Instance.m_GlobalData.hp_max);
+        m_UIHP.SetValue(hpValue / DataManager.Instance.m_BGData.hp_max);
     }
 }

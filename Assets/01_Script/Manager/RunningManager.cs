@@ -51,19 +51,15 @@ public class RunningManager : MonoBehaviour
         m_Vec3 = Vector3.zero;
         m_Vec2 = Vector2.zero;
 
-        if (GameData.m_BGSpeed < DataManager.Instance.m_GlobalData.max_speed)
+        if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
         {
-            if (m_Time >= 0.1f)
-            {
-                GameData.m_BGSpeed += DataManager.Instance.m_GlobalData.bg_speed;
-                m_Time = 0;
-               
-            }
+            GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
+            Debug.Log(GameData.m_BGSpeed);
 
-            if (GameData.m_BGSpeed >= DataManager.Instance.m_GlobalData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_GlobalData.max_speed;
+            if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
 
             m_Time += Time.deltaTime;
-            m_TransCamera.Translate(-(Time.deltaTime * 2f), 0, 0);
+            m_TransCamera.Translate(-(Time.deltaTime * DataManager.Instance.m_BGData.cam_speed), 0, 0);
         }
        
    
@@ -73,14 +69,14 @@ public class RunningManager : MonoBehaviour
             float Vertical = Input.GetAxis("Vertical") * m_PlayerSpeed * Time.deltaTime;
             m_Vec2.y += Vertical;
             m_Player.m_RigidBody.velocity = m_Vec2;
-            
-            if (Vertical == 0 && GameData.m_BGSpeed >= DataManager.Instance.m_GlobalData.max_speed)
+            /*
+            if (Vertical == 0 && GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed)
             {
                 GameData.m_Player.m_SprintTime += Time.deltaTime;
                 if (GameData.m_Player.m_IsSprint == false && GameData.m_Player.m_SprintTime > 2)
                 {
                     GameData.m_Player.m_IsSprint = true;
-                    GameData.m_BGSpeed = DataManager.Instance.m_GlobalData.sprint_speed;
+                    GameData.m_BGSpeed = DataManager.Instance.m_BGData.sprint_speed;
 
                     m_Vec3 = m_TransCamera.localPosition;
                     m_Vec3.x = -4.16f;
@@ -97,7 +93,7 @@ public class RunningManager : MonoBehaviour
 
                 GameData.m_Player.m_SprintTime = 0;
             }
-            
+            */
 
             if (Input.GetKey(KeyCode.Z))
             {

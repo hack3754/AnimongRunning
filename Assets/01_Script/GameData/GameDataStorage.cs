@@ -15,8 +15,8 @@ public class PlayerData
 
     public void Init()
     {
-        m_MaxHP = DataManager.Instance.m_GlobalData.hp_max;
-        m_HP = DataManager.Instance.m_GlobalData.hp_max;
+        m_MaxHP = DataManager.Instance.m_BGData.hp_max;
+        m_HP = DataManager.Instance.m_BGData.hp_max;
         m_SprintTime = 0;
         m_IsSprint = false;
     }
