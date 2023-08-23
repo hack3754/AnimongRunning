@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6141470375105828823}
   - component: {fileID: 3941551977243321782}
   m_Layer: 5
-  m_Name: Btn_BG_W192H80_03
+  m_Name: Btn_BG_W192H80_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a6034ce056e5de441b7bb0410bb7eff2, type: 2}
-  m_sharedMaterial: {fileID: 7764126929291918805, guid: a6034ce056e5de441b7bb0410bb7eff2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: de6972292121b894890efaef7d59bfb8, type: 2}
+  m_sharedMaterial: {fileID: 6546915424285403237, guid: de6972292121b894890efaef7d59bfb8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
