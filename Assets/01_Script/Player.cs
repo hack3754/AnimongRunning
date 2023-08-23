@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
             if (trap != null)
             {
                 m_Trap = trap;
-                //GameManager.Instance.m_Running.SetTrap(m_Trap);
+                GameManager.Instance.m_Running.SetTrap(m_Trap);
             }
         }
 
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
             if (m_Trap != null && m_Trap.Equals(trap))
             {
                 m_Trap = null;
-                //GameManager.Instance.m_Running.ResetRunning();
+                GameManager.Instance.m_Running.ResetRunning();
             }
         }
     }

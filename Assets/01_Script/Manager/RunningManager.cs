@@ -51,15 +51,33 @@ public class RunningManager : MonoBehaviour
         m_Vec3 = Vector3.zero;
         m_Vec2 = Vector2.zero;
 
-        if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
+     
+        if(GameData.m_SlowSpeed > 0)
         {
-            GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
-            Debug.Log(GameData.m_BGSpeed);
+            if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.min_speed)
+            {
+                GameData.m_BGSpeed -= GameData.m_SlowSpeed * Time.deltaTime;
+                if (GameData.m_BGSpeed <= DataManager.Instance.m_BGData.min_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
+            }
+        }
+        else
+        {
+            if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
+            {
+                GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
+                Debug.Log(GameData.m_BGSpeed);
 
-            if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
+                if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
 
-            m_Time += Time.deltaTime;
-            m_TransCamera.Translate(-(Time.deltaTime * DataManager.Instance.m_BGData.cam_speed), 0, 0);
+                m_Time += Time.deltaTime;
+            }
+
+            if (GameData.m_CAMSpeed < DataManager.Instance.m_BGData.cam_max_speed)
+            {
+                GameData.m_CAMSpeed += DataManager.Instance.m_BGData.cam_speed * Time.deltaTime;
+                Debug.Log("CAM SPEED " + GameData.m_CAMSpeed);
+                m_TransCamera.Translate(-(GameData.m_CAMSpeed * Time.deltaTime), 0, 0);
+            }
         }
        
    
@@ -115,7 +133,7 @@ public class RunningManager : MonoBehaviour
 
     public void ResetRunning()
     {
-        GameData.m_BGSpeed = 0;
+        GameData.m_SlowSpeed = 0;
         m_IsJumpBlock = false;
     }
 
@@ -125,7 +143,7 @@ public class RunningManager : MonoBehaviour
         switch(trap.m_tData.type)
         {
             case TrapType.Slow:
-                GameData.m_BGSpeed = trap.m_tData.value;
+                GameData.m_SlowSpeed = trap.m_tData.value;
                 m_IsJumpBlock = true;
                 break;
         }

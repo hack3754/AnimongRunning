@@ -10,6 +10,7 @@ public class BackgroundData : DataBase
     public float max_speed;
     public float sprint_time;
     public float sprint_speed;
+    public float cam_max_speed;
     public float cam_speed;
 
     public override void Init()
@@ -30,7 +31,8 @@ public class BackgroundData : DataBase
             case "max_speed": max_speed = float.Parse(_row[idx_value]); break;
             case "sprint_time": sprint_time = float.Parse(_row[idx_value]); break;
             case "sprint_speed": sprint_speed = float.Parse(_row[idx_value]); break;
-            case "cam_speed": sprint_speed = float.Parse(_row[idx_value]); break;
+            case "cam_max_speed": cam_max_speed = float.Parse(_row[idx_value]); break;
+            case "cam_speed": cam_speed = float.Parse(_row[idx_value]); break;
         }
     }
 
