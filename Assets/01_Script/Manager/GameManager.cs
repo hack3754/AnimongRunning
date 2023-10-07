@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MSingleton<GameManager>
 {
+    public SoundManager m_Sound;
     public RunningManager m_Running;
     public TrapColliderManager m_TrapColliderManager;
     public UIManager m_UIManager;
@@ -11,16 +12,19 @@ public class GameManager : MSingleton<GameManager>
     bool m_IsGameStart;
     private void Awake()
     {
-        
+       
     }
 
     public void Init()
     {
+        GameData.Init();
         m_TrapColliderManager.Init();
         m_Running.Init();
         m_UIManager.Init();
+    }
 
-
+    public void GameReady()
+    {
         StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad(GameStart));
     }
 
@@ -28,7 +32,7 @@ public class GameManager : MSingleton<GameManager>
     {
         m_IsGameStart = true;
         m_Running.m_Player.Run();
-        GameData.Init();
+
         GameTimeSystem.SetTime();
     }
 

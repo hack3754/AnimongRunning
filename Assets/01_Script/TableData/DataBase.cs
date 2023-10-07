@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class DataBase  : MonoBehaviour
+public class DataBase : MonoBehaviour
 {
     //데이터 키 값이 좌로 설정 되어 있는지
     protected bool is_key_right = false;
@@ -17,7 +17,7 @@ public class DataBase  : MonoBehaviour
 	protected int idx_max;
     virtual public void Init()
     {
-
+      
     }
 
     virtual public void Load(string _path)
@@ -83,5 +83,4 @@ public class DataBase  : MonoBehaviour
     {
 
     }
-
 }

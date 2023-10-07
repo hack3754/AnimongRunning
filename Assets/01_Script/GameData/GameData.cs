@@ -9,10 +9,14 @@ public static class GameData
     public static float m_CAMSpeed;
 
     public static float m_SlowSpeed;
+
+    public static LocalDataSave m_LocalData;
     public static void Init()
     {
         m_Player = new PlayerData();
         m_Player.Init();
         m_BGSpeed = 0;
+        m_LocalData = new LocalDataSave();
+        m_LocalData.Init();
     }
 }

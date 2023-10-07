@@ -9,22 +9,17 @@ public enum TrapType
 }
 public class TrapDataItem
 {
-    public string name;
+    public string res;
     public TrapType type;
     public string prefab;
     public bool IsUnder;
     public float value;
 }
-public class TrapData : DataBase
+public class TrapData : DataDicBase<int, TrapDataItem>
 {
-    public Dictionary<int, TrapDataItem> m_Dic;
-    public List<int> m_ListIdx = new List<int>();
     public override void Init()
     {
         base.Init();
-        m_Dic = new Dictionary<int, TrapDataItem>();
-
-
         Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=932822041");
     }
 
@@ -58,7 +53,7 @@ public class TrapData : DataBase
             switch (_row[idx_key])
             {
                 
-                case "name": m_Dic[idx].name = _row[i]; break;
+                case "res": m_Dic[idx].res = _row[i]; break;
                 case "type": m_Dic[idx].type = (TrapType)Enum.Parse(typeof(TrapType), _row[i]); break;
                 case "IsUnder": m_Dic[idx].IsUnder = int.Parse(_row[i]) == 1; break;
                 case "value": m_Dic[idx].value = float.Parse(_row[i]); break;

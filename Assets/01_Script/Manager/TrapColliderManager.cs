@@ -20,9 +20,9 @@ public class TrapColliderManager : MonoBehaviour
             m_PrefabsTrap[i].Init();
             if (m_PrefabsTrap[i].m_tData != null)
             {
-                if (m_Traps.ContainsKey(m_PrefabsTrap[i].m_tData.name) == false)
+                if (m_Traps.ContainsKey(m_PrefabsTrap[i].m_tData.res) == false)
                 {
-                    m_Traps.Add(m_PrefabsTrap[i].m_tData.name, new List<TrapCollider>());
+                    m_Traps.Add(m_PrefabsTrap[i].m_tData.res, new List<TrapCollider>());
                 }
 
                 m_Traps[m_PrefabsTrap[i].name].Add(m_PrefabsTrap[i]);

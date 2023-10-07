@@ -37,7 +37,7 @@ public class BgUpdate : MonoBehaviour
         {
             if (i == 0)
             {
-                tData = DataManager.Instance.m_MapData.GetData(i + 1);
+                tData = DataManager.Instance.m_MapData.Get(i + 1);
             }
             else
             {
@@ -45,16 +45,16 @@ public class BgUpdate : MonoBehaviour
                 if (tData != null)
                 {
                     nextId = tData.nextMaps[UnityEngine.Random.Range(0, tData.nextMaps.Count)];
-                    tData = DataManager.Instance.m_MapData.GetData(nextId);
+                    tData = DataManager.Instance.m_MapData.Get(nextId);
                 }
 
-                if (tData == null || nextId == 0) tData = DataManager.Instance.m_MapData.GetData(i + 1);
+                if (tData == null || nextId == 0) tData = DataManager.Instance.m_MapData.Get(i + 1);
             }
 
             if (tData != null)
             {
                 m_Ways[m_WayCount].SetMapData(tData);
-                yield return  StartCoroutine(ResourceManager.Instance.CoInstantiate(tData.name, m_Ways[i].m_Trans, OnEndLoad));
+                yield return  StartCoroutine(ResourceManager.Instance.CoInstantiate(tData.res, m_Ways[i].m_Trans, OnEndLoad));
                 m_WayCount++;
             }
         }
@@ -75,7 +75,7 @@ public class BgUpdate : MonoBehaviour
         m_TransBg.Translate(-(m_BgValue), 0, 0);
         m_Score += m_BgValue;
 
-        GameManager.Instance.m_UIManager.SetScore((int)m_Score);
+        GameManager.Instance.m_UIManager.m_InGame.SetScore((int)m_Score);
 
         UpdateWay(m_TransBg);     
     }

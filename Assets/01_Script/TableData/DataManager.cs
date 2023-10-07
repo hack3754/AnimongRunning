@@ -18,6 +18,8 @@ public class DataManager : MSingleton<DataManager>
 	public TrapData m_TrapData;
 	public MapData m_MapData;
 	public BackgroundData m_BGData;
+	public SoundData m_SoundData;
+	public CharData m_CharData;
 
     private List<DataBase> m_ListData;
 
@@ -32,12 +34,17 @@ public class DataManager : MSingleton<DataManager>
 		m_TrapData = go.AddComponent<TrapData>();
 		m_MapData = go.AddComponent<MapData>();
         m_BGData = go.AddComponent<BackgroundData>();
+		m_SoundData = go.AddComponent<SoundData>();
+		m_CharData = go.AddComponent<CharData>();
+
 
         m_ListData = new List<DataBase>() { 
 			m_GlobalData, 
 			m_TrapData,
             m_MapData,
-            m_BGData
+            m_BGData,
+			m_SoundData,
+            m_CharData
         };
 
 		LoadFirstLoad();

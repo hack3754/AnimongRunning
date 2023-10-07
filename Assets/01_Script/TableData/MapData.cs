@@ -6,17 +6,14 @@ using UnityEngine;
 
 public class MapDataItem
 {
-    public string name;
+    public string res;
     public List<int> nextMaps;
 }
-public class MapData : DataBase
+public class MapData : DataDicBase<int, MapDataItem>
 {
-    public Dictionary<int, MapDataItem> m_Dic;
-    public List<int> m_ListIdx = new List<int>();
     public override void Init()
     {
         base.Init();
-        m_Dic = new Dictionary<int, MapDataItem>();
 
         //Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=932822041");
         Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=1808877930");
@@ -52,7 +49,7 @@ public class MapData : DataBase
             switch (_row[idx_key])
             {
 
-                case "name": m_Dic[idx].name = string.Format("Assets/04_Prefabs/Map/{0}.prefab", _row[i]); break;
+                case "res": m_Dic[idx].res = string.Format("Assets/04_Prefabs/Map/{0}.prefab", _row[i]); break;
                 case "nextMaps":
                     m_Dic[idx].nextMaps = new List<int>();
                     string value = _row[i];
@@ -70,19 +67,11 @@ public class MapData : DataBase
             }
         }
     }
-
-    public MapDataItem GetData(int id)
-    {
-        if (m_Dic.ContainsKey(id)) return m_Dic[id];
-
-        return null;
-    }
-
     public string GetRes(int id)
     {
         if(m_Dic.ContainsKey(id))
         {
-
+            return m_Dic[id].res;
         }
 
         return string.Empty;

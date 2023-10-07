@@ -186,6 +186,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f412a77729f02e142870dd3a50ee4f9b, type: 3}
   - {fileID: 21300000, guid: e4bf6a773c5970244b0f1f353b916ee3, type: 3}
   - {fileID: 21300000, guid: 45b5e3a7c4959174ea42d1724d2414af, type: 3}
+  - {fileID: 21300000, guid: 979f35a7223c33b4a8373d107f3de387, type: 3}
   - {fileID: 21300000, guid: a988e1b7f00df4b43b0a4b99ec79fdbd, type: 3}
   - {fileID: 21300000, guid: 23671ec79a58b2a47930885026886c54, type: 3}
   - {fileID: 21300000, guid: 9df01ed789c344544b2fe93c42c44385, type: 3}
@@ -291,6 +292,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2496e42ee31040a43b0c5633079873e7, type: 3}
   - {fileID: 21300000, guid: 3a526d2e0539c254189456a18f0dcee6, type: 3}
   - {fileID: 21300000, guid: 6d0b2f2e7a501af46af4a4f0652a544c, type: 3}
+  - {fileID: 21300000, guid: 2131f13e131327841a132e3f2b2bbebb, type: 3}
   - {fileID: 21300000, guid: 8392e23e22a34074e8357754453b5bac, type: 3}
   - {fileID: 21300000, guid: 15cdb44eb8d761a46b01f6a00543b23c, type: 3}
   - {fileID: 21300000, guid: c357fc4ea68457a4aabf4976b919c3fe, type: 3}
@@ -313,6 +315,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: cb0eeb8fa608d99468faf822e2bc7513, type: 3}
   - {fileID: 21300000, guid: 133fbb9ff562dad44b0f3da3b60674ac, type: 3}
   - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
+  - {fileID: 21300000, guid: a88a2d9f328213843b6bdfc41d04d679, type: 3}
   - {fileID: 21300000, guid: f5e668bfa412b5c49b078df2c525db3c, type: 3}
   - {fileID: 21300000, guid: b09927cf88f39fd4a85194570d203250, type: 3}
   - {fileID: 21300000, guid: b3f621dfb84e6464f9cd8aeae48d76d5, type: 3}
@@ -443,6 +446,7 @@ SpriteAtlas:
   - FlowerGarden_6_80x80_01
   - btn_share
   - Gomong_Groggy_01
+  - InGame_Text_Img_01
   - Gomong_Jump_04
   - img_balloon
   - InGame_GoldBox_BG
@@ -548,6 +552,7 @@ SpriteAtlas:
   - FlowerGarden_7_120x80_01
   - Bg_Tree_03_400x304_03
   - Mozzi_M_Damage_Type05
+  - InGame_Text_Img_02
   - Mozzi_S05_Damage_02
   - btn_orange_h80
   - Bg_Bush_03_120x120_04
@@ -570,6 +575,7 @@ SpriteAtlas:
   - icon_coin_01
   - Mozzi_S_Damage_Type04
   - Gomong_Shadow_02
+  - InGame_EF_BG_01
   - Bush_6_80x80_01
   - Bg_Start_01
   - Mozzi_M04_Damage_02

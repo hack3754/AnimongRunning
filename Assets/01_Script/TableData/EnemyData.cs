@@ -20,16 +20,11 @@ public class EnemyDataItem
 	public bool hit_enemy;
 }
 
-public class EnemyData : DataBase
+public class EnemyData : DataDicBase<int, EnemyDataItem>
 {
-    public Dictionary<int, EnemyDataItem> dic;
-    private List<int> listIdx;
-
     public override void Init()
     {
         base.Init();
-        dic = new Dictionary<int, EnemyDataItem>();
-        listIdx = new List<int>();
 
         Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=1660719681");
 /*
@@ -50,13 +45,13 @@ public class EnemyData : DataBase
             if( i == idx_max) break;
             if( i == idx_key || i == idx_desc) 
             {
-                listIdx.Add(-1);
+                m_ListIdx.Add(-1);
                 continue;
             }
-            listIdx.Add(int.Parse(_row[i]));
-            if(dic.ContainsKey(listIdx[i])) continue;
-            dic.Add(listIdx[i], new EnemyDataItem());
-            dic[listIdx[i]].id = listIdx[i];
+            m_ListIdx.Add(int.Parse(_row[i]));
+            if(m_Dic.ContainsKey(m_ListIdx[i])) continue;
+            m_Dic.Add(m_ListIdx[i], new EnemyDataItem());
+            m_Dic[m_ListIdx[i]].id = m_ListIdx[i];
         }        
     }
     protected override void ParseData(string[] _row)
@@ -67,23 +62,23 @@ public class EnemyData : DataBase
         {
             if( i == idx_max) break;
             if( i == idx_key || i == idx_desc) continue;
-            idx = listIdx[i];
+            idx = m_ListIdx[i];
             switch(_row[idx_key])
             {
-                case "prefab":              
-                    dic[idx].prefab = _row[i]; 
+                case "prefab":
+                    m_Dic[idx].prefab = _row[i]; 
                     break;
-                 case "hp": dic[idx].hp = int.Parse(_row[i]); break;
-                case "speed": dic[idx].speed = int.Parse(_row[i]); break;
-                case "attack": dic[idx].attack = int.Parse(_row[i]); break;
-                case "attack_delay": dic[idx].attack_delay = float.Parse(_row[i]) * 0.001f; break;
-                case "life_time": dic[idx].life_time = float.Parse(_row[i]) * 0.001f; break;
-                case "direct_type": dic[idx].direct_type = _row[i]; break;
-                case "touch_type": dic[idx].touch_type = _row[i]; break;
-                case "scale": dic[idx].scale = float.Parse(_row[i]) * 0.01f; break;
-                case "color": dic[idx].color = StrToColor(_row[i].Replace("#", "")); break;    
-				case "hit_bg": dic[idx].hit_bg = _row[i]== "true"; break;
-				case "hit_enemy": dic[idx].hit_enemy = _row[i]== "true"; break;
+                 case "hp": m_Dic[idx].hp = int.Parse(_row[i]); break;
+                case "speed": m_Dic[idx].speed = int.Parse(_row[i]); break;
+                case "attack": m_Dic[idx].attack = int.Parse(_row[i]); break;
+                case "attack_delay": m_Dic[idx].attack_delay = float.Parse(_row[i]) * 0.001f; break;
+                case "life_time": m_Dic[idx].life_time = float.Parse(_row[i]) * 0.001f; break;
+                case "direct_type": m_Dic[idx].direct_type = _row[i]; break;
+                case "touch_type": m_Dic[idx].touch_type = _row[i]; break;
+                case "scale": m_Dic[idx].scale = float.Parse(_row[i]) * 0.01f; break;
+                case "color": m_Dic[idx].color = StrToColor(_row[i].Replace("#", "")); break;    
+				case "hit_bg": m_Dic[idx].hit_bg = _row[i].Equals("true"); break;
+				case "hit_enemy": m_Dic[idx].hit_enemy = _row[i].Equals("true"); break;
             }
         }
     }

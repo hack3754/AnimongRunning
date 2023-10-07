@@ -20,13 +20,9 @@ public class RunningManager : MonoBehaviour
     public float m_PlayerSpeed;
     public float m_PlayerJumpSpeed;
     public float m_HeightPeak;
-
-
-    Vector3 m_Vec3;
     Vector2 m_Vec2;
 
     bool m_IsJump;
-    bool m_isMove;
     bool m_IsJumpBlock;
 
     float m_Time = 0;
@@ -45,10 +41,9 @@ public class RunningManager : MonoBehaviour
         m_BgUpdate.BgMove(GameData.m_BGSpeed);
 
         GameData.m_Player.m_HP -= Time.deltaTime;
-        GameManager.Instance.m_UIManager.SetHP(GameData.m_Player.m_HP);
-        GameManager.Instance.m_UIManager.SetTime();
+        GameManager.Instance.m_UIManager.m_InGame.SetHP(GameData.m_Player.m_HP);
+        GameManager.Instance.m_UIManager.m_InGame.SetTime();
 
-        m_Vec3 = Vector3.zero;
         m_Vec2 = Vector2.zero;
 
      

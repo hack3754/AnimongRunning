@@ -33,11 +33,11 @@ public class WayControl : MonoBehaviour
     }
     public void MapLoad(int id)
     {
-        m_tData = DataManager.Instance.m_MapData.GetData(id);
+        m_tData = DataManager.Instance.m_MapData.Get(id);
         if (m_tData != null)
         {
             //ResourceManager.Instance.Instantiate(m_tData.name, m_Trans, OnEndLoad);
-            StartCoroutine(ResourceManager.Instance.CoInstantiate(m_tData.name, m_Trans, OnEndLoad));
+            StartCoroutine(ResourceManager.Instance.CoInstantiate(m_tData.res, m_Trans, OnEndLoad));
         }
     }
 
