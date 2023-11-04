@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     public void Init()
     {
-        
+        m_Animator.speed = 0.5f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,16 +68,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Idle()
+    {
+        m_Animator.Play("Idle", -1, 0);
+        //m_Animator.speed = 0.2f;
+    }
+
     public void Run()
     {
         m_Animator.Play("Run", -1, 0);
-        m_Animator.speed = 0.5f;
+        //m_Animator.speed = 0.5f;
     }
 
     public void Jump(string aniName)
     {
         m_Animator.Play(aniName, -1, 0);
-        m_Animator.speed = 0.5f;
+        //m_Animator.speed = 0.5f;
     }
 
     public void EndJump()

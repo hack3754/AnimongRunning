@@ -5,28 +5,34 @@ using UnityEngine.UI;
 
 public class InGameUIMain : UIObject
 {
-    public Text m_TxtTime;
-    public Text m_TxtScore;
-    public UIGauge m_UIHP;
+    public UIInGame m_UIMian;
     public void Init()
     {
-        m_TxtScore.text = "0";
-        m_UIHP.Init();
-        m_UIHP.SetValue(1);
+        m_UIMian.Init();
+    }
+
+    public void Show()
+    {
+        SetActive(true);
+    }
+
+    public void Reset()
+    {
+        m_UIMian.Reset();
     }
 
     public void SetTime()
     {
-        m_TxtTime.text = string.Format("{0}:{1}.{2}", GameTimeSystem.GetTime().Minutes.ToString("00"), GameTimeSystem.GetTime().Seconds.ToString("00"), GameTimeSystem.GetTime().Milliseconds.ToString("00"));
+        m_UIMian.SetTime();
     }
 
     public void SetScore(int score)
     {
-        m_TxtScore.text = score.ToString();
+        m_UIMian.SetScore(score);
     }
 
     public void SetHP(float hpValue)
     {
-        m_UIHP.SetValue(hpValue / DataManager.Instance.m_BGData.hp_max);
+        m_UIMian.SetHP(hpValue);
     }
 }

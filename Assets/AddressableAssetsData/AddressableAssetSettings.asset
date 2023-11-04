@@ -85,6 +85,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Map
+    - UIPrefab
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: f4fa77b32d7a05b4fab7fcf910f46f53, type: 2}

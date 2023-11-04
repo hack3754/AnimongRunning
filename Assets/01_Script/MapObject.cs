@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MapObject : MonoBehaviour
 {
-    public Transform m_TransBG;
     public Transform m_TransWay;
     public TrapManager m_Trap;
 

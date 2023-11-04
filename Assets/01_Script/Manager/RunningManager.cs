@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using Unity.VisualScripting;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 public enum JumpState
 {
@@ -11,6 +12,7 @@ public enum JumpState
 
 public class RunningManager : MonoBehaviour
 {
+    public GameObject m_Obj;
     public Player m_Player;
     public BgUpdate m_BgUpdate;
     public Transform m_TransCamera;
@@ -20,8 +22,9 @@ public class RunningManager : MonoBehaviour
     public float m_PlayerSpeed;
     public float m_PlayerJumpSpeed;
     public float m_HeightPeak;
+    public Vector3 m_StartPos;
     Vector2 m_Vec2;
-
+    Vector3 m_PosOri;
     bool m_IsJump;
     bool m_IsJumpBlock;
 
@@ -34,15 +37,40 @@ public class RunningManager : MonoBehaviour
     {
         m_Player.Init();
         m_IsJumpBlock = false;
+        m_PosOri = m_BgUpdate.m_TransBg.localPosition;
+    }
+
+    public void SetOutGame()
+    {
+        m_Obj.SetActive(true);
+    }
+
+    public void GameReadyStart()
+    {
+        m_Time += Time.deltaTime;
+        m_BgUpdate.m_TransBg.localPosition = Vector3.Lerp(m_PosOri, m_StartPos, m_Time);
+        if(m_Time < 1) GameManager.Instance.m_BGControl.BgMove();
+        if (m_Time >= 1)
+        {
+            StartCoroutine(GameStart());
+        }
+    }
+
+    IEnumerator GameStart()
+    {
+        m_Player.Idle();
+        yield return new WaitForSeconds(1.0f);
+        GameManager.Instance.GameStart();
+        m_Time = 0;
     }
 
     public void Running()
     {
-        m_BgUpdate.BgMove(GameData.m_BGSpeed);
+        m_BgUpdate.BgMoveScore(GameData.m_BGSpeed);
 
         GameData.m_Player.m_HP -= Time.deltaTime;
-        GameManager.Instance.m_UIManager.m_InGame.SetHP(GameData.m_Player.m_HP);
-        GameManager.Instance.m_UIManager.m_InGame.SetTime();
+        GameManager.Instance.m_InGameUI.SetHP(GameData.m_Player.m_HP);
+        GameManager.Instance.m_InGameUI.SetTime();
 
         m_Vec2 = Vector2.zero;
 
@@ -57,6 +85,7 @@ public class RunningManager : MonoBehaviour
         }
         else
         {
+            
             if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
             {
                 GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
@@ -66,13 +95,14 @@ public class RunningManager : MonoBehaviour
 
                 m_Time += Time.deltaTime;
             }
-
+            /*
             if (GameData.m_CAMSpeed < DataManager.Instance.m_BGData.cam_max_speed)
             {
                 GameData.m_CAMSpeed += DataManager.Instance.m_BGData.cam_speed * Time.deltaTime;
                 Debug.Log("CAM SPEED " + GameData.m_CAMSpeed);
                 m_TransCamera.Translate(-(GameData.m_CAMSpeed * Time.deltaTime), 0, 0);
             }
+            */
         }
        
    

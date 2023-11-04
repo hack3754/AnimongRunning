@@ -46,8 +46,6 @@ public class DataManager : MSingleton<DataManager>
 			m_SoundData,
             m_CharData
         };
-
-		LoadFirstLoad();
     }
 
 	public void LoadFirstLoad()
@@ -83,7 +81,7 @@ public class DataManager : MSingleton<DataManager>
 		is_load = false;
 		is_first_load = true;
 
-		GameManager.Instance.Init();
+		GameManager.Instance.GameReady();
 
         //Debug.Log("*** " + user.dic[2].value.ContainsKey(SkillData.move_speed));
         //Debug.Log("*** " + user.dic[2].value[SkillData.move_speed]);

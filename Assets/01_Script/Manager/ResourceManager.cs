@@ -24,6 +24,7 @@ public class ResourceManager : MSingleton<ResourceManager>
     Dictionary<string, Texture2D>               m_CharTextrue   = new Dictionary<string, Texture2D>();
     Dictionary<string, AsyncOperationHandle>    m_Handles       = new Dictionary<string, AsyncOperationHandle>();
 
+
     private void OnDestroy()
     {
         Release();
@@ -525,6 +526,40 @@ public class ResourceManager : MSingleton<ResourceManager>
             }
         }
     }
+
+    public IEnumerator LoadPrefab(string key, Action<string, GameObject> onResult)
+    {
+        var checkOp = Addressables.LoadResourceLocationsAsync(key);
+
+        yield return checkOp;
+
+        if (checkOp.Result.Count > 0)
+        {
+            if (m_Handles.ContainsKey(key))
+            {
+                onResult?.Invoke(key, m_Handles[key].Result as GameObject);
+            }
+            else
+            {
+                var op = Addressables.LoadAssetAsync<GameObject>(key);
+
+                yield return op;
+
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    if (op.Result != null)
+                    {
+                        AddHandle(key, op);
+                    }
+                    else
+                        Addressables.Release(op);
+
+                    onResult?.Invoke(key, op.Task.Result);
+                }
+            }
+        }
+    }
+
     /*
     public void LoadScene( JMSceneLoadManager.SCENES scenes, Action<float> progress, Action onFinish, LoadSceneMode loadMode = LoadSceneMode.Single )
     {

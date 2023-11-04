@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42595f77d1b5e434a8d97be69a47cc38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2cfa55d3adab98647aa4c135fc087640, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42595f77d1b5e434a8d97be69a47cc38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4d717dc8c14bb74d8615ee0dace920b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 42595f77d1b5e434a8d97be69a47cc38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4cf6fd3222c5f474dbd8817d8c292e3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -835,6 +835,24 @@ MonoBehaviour:
   m_DeltaValue: 2
   m_MoveValue: 216
   m_MoveTime: 0.3
+  m_ObjSpeed:
+  - {fileID: 1178784680746818602}
+  - {fileID: 4135150910575545442}
+  - {fileID: 5887975147379447316}
+  - {fileID: 5710675524543598069}
+  - {fileID: 7751383788362342587}
+  m_ObjHealth:
+  - {fileID: 9021965404445933734}
+  - {fileID: 2627407271830457526}
+  - {fileID: 8081672706948802942}
+  - {fileID: 5352946980294985572}
+  - {fileID: 4910814789563918929}
+  m_ObjLuck:
+  - {fileID: 2382236041242798429}
+  - {fileID: 6444315965532131236}
+  - {fileID: 1920475405052444301}
+  - {fileID: 8668385673129103322}
+  - {fileID: 1841832627500238302}
   m_BtnSelect: {fileID: 2840427196963179474}
   m_ObjBtnPurchase: {fileID: 8615721121057329442}
   m_BtnPurchase: {fileID: 2324845918055653383}
@@ -851,7 +869,7 @@ GameObject:
   - component: {fileID: 25454646117006053}
   - component: {fileID: 818035860384361903}
   m_Layer: 5
-  m_Name: Attack_Box
+  m_Name: Speed_Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

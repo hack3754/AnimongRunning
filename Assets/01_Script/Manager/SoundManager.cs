@@ -9,8 +9,6 @@ public class SoundManager : MonoBehaviour
     readonly int TOTAL_SOUND_MAX = 10;
 
     public AudioSource  m_audioSoundBGM;
-	public AudioSource  m_audioSoundVoice;
-	public GameObject   m_soundSourceObject;
 
     public System.Action <AudioClip>          onEnd;
 

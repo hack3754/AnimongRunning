@@ -17,18 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ca491e04a84e0f345934dafef4f89f4c
   m_SerializeEntries:
-  - m_GUID: 45d7d6487b0dfa04b83ee09b52413338
-    m_Address: Assets/04_Prefabs/Map/Map1.prefab
+  - m_GUID: c9bafe438135276418a453622e2281b0
+    m_Address: Assets/04_Prefabs/UI/Character/UI_Ca_01_Go.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Map
-  - m_GUID: 907edf15f2982d6409819459316ee854
-    m_Address: Assets/04_Prefabs/Map/Map2.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
+    - UIPrefab
   - m_GUID: 2bdb53dde8ef74e42baef061f3b91c12
     m_Address: Assets/04_Prefabs/Map/Map3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 45d7d6487b0dfa04b83ee09b52413338
+    m_Address: Assets/04_Prefabs/Map/Map1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map
@@ -37,6 +37,15 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map
+  - m_GUID: 907edf15f2982d6409819459316ee854
+    m_Address: Assets/04_Prefabs/Map/Map2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 06702ba96d0582349a6269835556c1bb
+    m_Address: Assets/04_Prefabs/Map/MapStart.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 37d5b46f01917074abbe2c18df07aab1, type: 2}
   m_SchemaSet:

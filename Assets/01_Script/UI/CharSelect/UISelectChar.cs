@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UISelectChar : UIDragBase
 {
+    public GameObject[] m_ObjSpeed;
+    public GameObject[] m_ObjHealth;
+    public GameObject[] m_ObjLuck;
     public ButtonObject m_BtnSelect;
     public UIObject m_ObjBtnPurchase;
     public ButtonObject m_BtnPurchase;
@@ -35,8 +38,6 @@ public class UISelectChar : UIDragBase
 
         if (m_BtnSelect != null) m_BtnSelect.m_FncOnClick = OnClickSelect;
         if (m_BtnPurchase != null) m_BtnPurchase.m_FncOnClick = OnClickPurchase;
-
-        Show();
     }
 
     public override void Show()
@@ -81,6 +82,45 @@ public class UISelectChar : UIDragBase
     void SetCenter(IDragCellData data)
     {
         CharCardDragData itemData = (CharCardDragData)data;
+
+        m_ObjBtnPurchase.SetActive(itemData.m_IsLock);
+        m_BtnSelect.SetActive(!itemData.m_IsLock);
+
+        //Speed
+        for(int i = 0;i < itemData.m_tData.speed;i++)
+        {
+            m_ObjSpeed[i].SetActive(true);
+        }
+
+        for (int i = itemData.m_tData.speed; i < m_ObjSpeed.Length; i++)
+        {
+            m_ObjSpeed[i].SetActive(false);
+        }
+
+
+        //Health
+        for (int i = 0; i < itemData.m_tData.health; i++)
+        {
+            m_ObjHealth[i].SetActive(true);
+        }
+
+        for (int i = itemData.m_tData.health; i < m_ObjHealth.Length; i++)
+        {
+            m_ObjHealth[i].SetActive(false);
+        }
+
+
+        //Luck
+        for (int i = 0; i < itemData.m_tData.luck; i++)
+        {
+            m_ObjLuck[i].SetActive(true);
+        }
+
+        for (int i = itemData.m_tData.luck; i < m_ObjLuck.Length; i++)
+        {
+            m_ObjLuck[i].SetActive(false);
+        }
+
     }
 
     void SetMove(IDragCellData data)

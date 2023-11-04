@@ -28,7 +28,7 @@ public class BgUpdate : MonoBehaviour
         }
     }
 
-    public IEnumerator FirstMapLoad(System.Action fncStart)
+    public IEnumerator FirstMapLoad()
     {
         MapDataItem tData = null;
         int nextId = 0;
@@ -54,12 +54,10 @@ public class BgUpdate : MonoBehaviour
             if (tData != null)
             {
                 m_Ways[m_WayCount].SetMapData(tData);
-                yield return  StartCoroutine(ResourceManager.Instance.CoInstantiate(tData.res, m_Ways[i].m_Trans, OnEndLoad));
+                yield return ResourceManager.Instance.StartCoroutine(ResourceManager.Instance.CoInstantiate(tData.res, m_Ways[i].m_Trans, OnEndLoad));
                 m_WayCount++;
             }
         }
-
-        fncStart?.Invoke();
     }
 
     void OnEndLoad(GameObject obj)
@@ -72,17 +70,42 @@ public class BgUpdate : MonoBehaviour
     public void BgMove(float bgSpeed)
     {
         m_BgValue = Time.deltaTime * bgSpeed;
-        m_TransBg.Translate(-(m_BgValue), 0, 0);
+        //m_TransBg.Translate(-(m_BgValue), 0, 0);
+
+        for(int i = 0;i < m_Ways.Length;i++)
+        {
+            m_Ways[i].m_Trans.Translate(-(m_BgValue), 0, 0);
+        }
+        UpdateWay();
+    }
+    public void BgMoveScore(float bgSpeed)
+    {
+        m_BgValue = Time.deltaTime * bgSpeed;
+        //m_TransBg.Translate(-(m_BgValue), 0, 0);
+
+        for (int i = 0; i < m_Ways.Length; i++)
+        {
+            m_Ways[i].m_Trans.Translate(-(m_BgValue), 0, 0);
+        }
+        UpdateWay();
+
+        //UI Score
         m_Score += m_BgValue;
-
-        GameManager.Instance.m_UIManager.m_InGame.SetScore((int)m_Score);
-
-        UpdateWay(m_TransBg);     
+        GameManager.Instance.m_InGameUI.SetScore((int)m_Score);
     }
 
-    public void UpdateWay(Transform moveBg)
+
+    public void BgStop()
     {
-        if (-m_Ways[m_WayIndex[1]].m_Trans.localPosition.x >= moveBg.localPosition.x)
+        for (int i = 0; i < m_Ways.Length; i++)
+        {
+            //m_Ways[i].m_Trans.Translate(0, 0, 0);
+        }
+    }
+
+    public void UpdateWay()
+    {
+        if (m_Ways[m_WayIndex[0]].m_Trans.localPosition.x <= -(m_TitleCount * 0.8f))
         {
             m_Vec3 = m_Ways[m_WayIndex[0]].m_Trans.localPosition;
             m_Vec3.x = m_Ways[m_WayIndex[m_WayIndex.Length - 1]].m_Trans.localPosition.x + (m_TitleCount * 0.8f);

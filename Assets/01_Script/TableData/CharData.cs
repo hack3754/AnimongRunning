@@ -6,6 +6,12 @@ public class CharDataItem
 {
     public int id;
     public string res;
+    public int health;
+    public int power;
+    public int speed;
+    public int vitality;
+    public int luck;
+    public int price;
 }
 
 public class CharData : DataDicBase<int, CharDataItem>
@@ -54,6 +60,12 @@ public class CharData : DataDicBase<int, CharDataItem>
             switch (_row[idx_key])
             {
                 case "res": m_Dic[idx].res = _row[i]; break;
+                case "health": m_Dic[idx].health = int.Parse(_row[i]); break;
+                case "power": m_Dic[idx].power = int.Parse(_row[i]); break;
+                case "speed": m_Dic[idx].speed = int.Parse(_row[i]); break;
+                case "vitality": m_Dic[idx].vitality= int.Parse(_row[i]); break;
+                case "luck": m_Dic[idx].luck = int.Parse(_row[i]); break;
+                case "price": m_Dic[idx].price = int.Parse(_row[i]); break;
             }
         }
     }
