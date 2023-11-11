@@ -111,7 +111,7 @@ public class BgUpdate : MonoBehaviour
             m_Vec3.x = m_Ways[m_WayIndex[m_WayIndex.Length - 1]].m_Trans.localPosition.x + (m_TitleCount * 0.8f);
             m_Ways[m_WayIndex[0]].m_Trans.localPosition = m_Vec3;
 
-            Debug.Log(m_WayIndex[0]);
+            //Debug.Log(m_WayIndex[0]);
             m_Ways[m_WayIndex[0]].NextMapLoad();
             Sort();
         }

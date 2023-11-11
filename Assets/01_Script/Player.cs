@@ -70,13 +70,14 @@ public class Player : MonoBehaviour
 
     public void Idle()
     {
-        m_Animator.Play("Idle", -1, 0);
+        //m_Animator.Play("Idle", -1, 0);
+        m_Animator.Play("Idle");
         //m_Animator.speed = 0.2f;
     }
 
     public void Run()
     {
-        m_Animator.Play("Run", -1, 0);
+        m_Animator.Play("Run");
         //m_Animator.speed = 0.5f;
     }
 

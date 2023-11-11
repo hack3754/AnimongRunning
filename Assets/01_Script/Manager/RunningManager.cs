@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Permissions;
 using Unity.VisualScripting;
 using UnityEditor.SceneTemplate;
+using UnityEditorInternal;
 using UnityEngine;
 public enum JumpState
 {
@@ -12,32 +13,50 @@ public enum JumpState
 
 public class RunningManager : MonoBehaviour
 {
+    public Camera m_Cam;
     public GameObject m_Obj;
     public Player m_Player;
     public BgUpdate m_BgUpdate;
     public Transform m_TransCamera;
-
+    public LaneObject[] m_LaneObjects;
     public Transform[] m_Points;
 
     public float m_PlayerSpeed;
+    public float m_VerticalSpeed;
     public float m_PlayerJumpSpeed;
     public float m_HeightPeak;
     public Vector3 m_StartPos;
-    Vector2 m_Vec2;
+    
     Vector3 m_PosOri;
     bool m_IsJump;
     bool m_IsJumpBlock;
+
+    Vector2 m_Vec2;
+    Vector3 m_Vec3;
+
+    public float m_Vertical;
+    public int m_Dir;
+    public Vector3 m_BeginPos;
+    public Vector3 m_DragPos;
+    public float m_LanePos;
+
+    int m_LaneIndex;
+
 
     float m_Time = 0;
 
     //data
     float m_MaxSpeed;
 
+    bool m_IsDrag;
+
     public void Init()
     {
         m_Player.Init();
         m_IsJumpBlock = false;
         m_PosOri = m_BgUpdate.m_TransBg.localPosition;
+
+        m_LaneIndex = m_LaneObjects.Length / 2;
     }
 
     public void SetOutGame()
@@ -89,7 +108,7 @@ public class RunningManager : MonoBehaviour
             if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
             {
                 GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
-                Debug.Log(GameData.m_BGSpeed);
+                //Debug.Log(GameData.m_BGSpeed);
 
                 if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
 
@@ -109,9 +128,29 @@ public class RunningManager : MonoBehaviour
         if (m_IsJump == false)
         {
 #if UNITY_EDITOR
-            float Vertical = Input.GetAxis("Vertical") * m_PlayerSpeed * Time.deltaTime;
+            /* Touch Move
+            if (Input.GetMouseButtonUp(0))
+            {
+                m_IsDrag = false;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_IsDrag = true;
+                m_BeginPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);                
+            }
+
+            if (m_IsDrag && Input.GetMouseButton(0))
+            {
+                m_DragPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                m_BeginPos = m_DragPos;
+            }
+
+            float Vertical = m_Vertical * m_PlayerSpeed * Time.deltaTime;
             m_Vec2.y += Vertical;
             m_Player.m_RigidBody.velocity = m_Vec2;
+            */
+
             /*
             if (Vertical == 0 && GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed)
             {
@@ -138,17 +177,37 @@ public class RunningManager : MonoBehaviour
             }
             */
 
+            //float Vertical = Input.GetAxis("Vertical") * m_PlayerSpeed * Time.deltaTime;
+            //m_Vec2.y += Vertical;
+            //m_Player.m_RigidBody.velocity = m_Vec2;
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (m_LaneIndex <= 0)
+                {
+                    m_LaneIndex = 0;
+                    return;
+                }
+
+                m_LaneIndex--;
+                
+                m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (m_LaneIndex >= m_LaneObjects.Length - 1)
+                {
+                    m_LaneIndex = m_LaneObjects.Length - 1;
+                    return;
+                }
+
+                m_LaneIndex++;
+
+                m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+            }
+
             if (Input.GetKey(KeyCode.Z))
-            {
-                Jump("Jump_01");
-            }
-
-            if (Input.GetKey(KeyCode.X))
-            {
-                Jump("Jump_02");
-            }
-
-            if (Input.GetKey(KeyCode.C))
             {
                 Jump("Gomong_Jump_Run");
             }
@@ -176,7 +235,7 @@ public class RunningManager : MonoBehaviour
 
     public void Jump(string aniName)
     {
-        if (m_IsJumpBlock) return;
+        if (m_IsJumpBlock || m_IsJump) return;
         m_Player.Jump(aniName);
         m_Player.m_Col.enabled = false;
         m_Player.m_RigidBody.velocity = Vector2.zero;
