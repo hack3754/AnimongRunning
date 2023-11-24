@@ -31,6 +31,12 @@ public class WayControl : MonoBehaviour
     {
         m_Map = map;
     }
+
+    public void InitMap()
+    {
+        m_Map.Init();
+    }
+
     public void MapLoad(int id)
     {
         m_tData = DataManager.Instance.m_MapData.Get(id);

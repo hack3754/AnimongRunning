@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public Animator m_Animator; //CharacterChange;
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
-    
+    public MapObject m_Map;
     int m_LineIndex;
     TrapCollider m_Trap;
 
@@ -45,6 +45,25 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (collision.tag == TagName.Block.ToString())
+        {
+            BlockObject block = collision.gameObject.GetComponent<BlockObject>();
+            if (block != null)
+            {
+                GameManager.Instance.m_IsStop = true;
+            }
+        }
+
+        if (collision.tag == TagName.Map.ToString())
+        {
+            MapCollider mapCol = collision.gameObject.GetComponent<MapCollider>();
+            if (mapCol != null)
+            {
+                m_Map = mapCol.m_MapObj;
+            }
+        }
+
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -56,6 +75,15 @@ public class Player : MonoBehaviour
             {
                 m_Trap = null;
                 GameManager.Instance.m_Running.ResetRunning();
+            }
+        }
+
+        if (collision.tag == TagName.Block.ToString())
+        {
+            BlockObject block = collision.gameObject.GetComponent<BlockObject>();
+            if (block != null)
+            {
+                GameManager.Instance.m_IsStop = false;
             }
         }
     }

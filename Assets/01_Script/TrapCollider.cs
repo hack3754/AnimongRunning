@@ -36,16 +36,11 @@ public class TrapCollider : ObjectEntries
         if(m_LineIndex == 0 && collision.tag == TagName.Lane.ToString())
         {
             LaneObject lane = collision.gameObject.GetComponent<LaneObject>();
-            Debug.Log(collision.name);
+            
             if (lane != null)
             {
                 m_LineIndex = lane.m_Index;
                 SetSort(lane.m_Index);
-            }
-
-            for (int i = 0; i < m_Sprites.Length; i++)
-            {
-                Debug.Log(m_Sprites[i].sortingOrder);
             }
         }
 

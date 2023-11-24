@@ -13,11 +13,13 @@ public class GameManager : MSingleton<GameManager>
     public OutGameUIMain m_OutGameUI;
     public BGControl m_BGControl;
     public GameObject m_BG;
+    public bool m_IsStop;
     bool m_IsGameStart;
     bool m_IsReadyStart;
     private void Awake()
     {
         m_LoignUI.Init();
+        m_IsStop = false;
     }
 
     private void Start()
@@ -71,6 +73,7 @@ public class GameManager : MSingleton<GameManager>
         UIInit();
         m_BG.SetActive(true);
         ShowOutGame();
+        m_Running.m_BgUpdate.InitMap();
     }
 
     void AddPrefab(string key, GameObject prefab)
@@ -110,6 +113,7 @@ public class GameManager : MSingleton<GameManager>
 
         if (m_IsGameStart == false) return;
         m_Running.Running();
+        if (m_IsStop) return;
         m_BGControl.BgMove();
     }
 

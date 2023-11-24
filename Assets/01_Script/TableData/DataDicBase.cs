@@ -17,7 +17,14 @@ public class DataDicBase<U, T> : DataBase where T : class
     public Dictionary<U, T> Get() { return m_Dic; }
     public T Get(U id)
     {
-        if (m_Dic.ContainsKey(id)) return m_Dic[id];
+        if (m_Dic != null && m_Dic.ContainsKey(id)) return m_Dic[id];
         return null;
+    }
+
+    public int GetCount()
+    {
+        if (m_Dic != null) return m_Dic.Count;
+
+        return 0;
     }
 }

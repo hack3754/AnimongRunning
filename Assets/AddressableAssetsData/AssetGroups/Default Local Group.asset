@@ -45,7 +45,88 @@ MonoBehaviour:
   - m_GUID: 06702ba96d0582349a6269835556c1bb
     m_Address: Assets/04_Prefabs/Map/MapStart.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Map
+  - m_GUID: f95d3f01e4e55634d851628127e675a5
+    m_Address: Assets/04_Prefabs/Map/Map5.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 057255eea02bcb34685ede7a6a52a29f
+    m_Address: Assets/04_Prefabs/Map/Map6.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 660b73e1a60e2254cbe1ad65bdcc511a
+    m_Address: Assets/04_Prefabs/Map/Map7.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: ce249d4a6e381ed4e889086085f1a60e
+    m_Address: Assets/04_Prefabs/Map/Map8.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 1bbe2522d4fdf144dbfea8414119276b
+    m_Address: Assets/04_Prefabs/Map/Map9.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 3d21da7f3ee76c144b4aa9248a0298c5
+    m_Address: Assets/04_Prefabs/Map/Map10.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: cc2238591aa203c41bbe06ec07e1b99e
+    m_Address: Assets/04_Prefabs/Map/Map11.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: ef36fe072de3f1f4d907d787fbec1935
+    m_Address: Assets/04_Prefabs/Map/Map12.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 1813a0cf058126840884e8de6b8455de
+    m_Address: Assets/04_Prefabs/Map/Map13.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: bb2e370bb46f5d74eb641bca4663d60d
+    m_Address: Assets/04_Prefabs/Map/Map14.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 2ceff598fbd420c40b337de7857a60ec
+    m_Address: Assets/04_Prefabs/Map/Map15.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: e3ae3891870862f438b046e61ed1e8b9
+    m_Address: Assets/04_Prefabs/Map/Map16.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: ad7ef198252e30f40981afdcc7d43438
+    m_Address: Assets/04_Prefabs/Map/Map17.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: ec230d5f13c766942b91665d15a4c75d
+    m_Address: Assets/04_Prefabs/Map/Map18.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 9612ae459680ee5499acc16609054e08
+    m_Address: Assets/04_Prefabs/Map/Map19.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+  - m_GUID: 8de62c027b7b7d54ebdb7dc3c91b68f9
+    m_Address: Assets/04_Prefabs/Map/Map20.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 37d5b46f01917074abbe2c18df07aab1, type: 2}
   m_SchemaSet:

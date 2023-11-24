@@ -44,11 +44,12 @@ public class BgUpdate : MonoBehaviour
                 nextId = 0;
                 if (tData != null)
                 {
-                    nextId = tData.nextMaps[UnityEngine.Random.Range(0, tData.nextMaps.Count)];
+                    //nextId = tData.nextMaps[UnityEngine.Random.Range(0, tData.nextMaps.Count)];
+                    nextId = DataManager.Instance.m_MapData.GetRandom();
                     tData = DataManager.Instance.m_MapData.Get(nextId);
                 }
 
-                if (tData == null || nextId == 0) tData = DataManager.Instance.m_MapData.Get(i + 1);
+                if (tData == null || nextId == 0) tData = DataManager.Instance.m_MapData.Get(2);
             }
 
             if (tData != null)
@@ -63,8 +64,15 @@ public class BgUpdate : MonoBehaviour
     void OnEndLoad(GameObject obj)
     {
         MapObject map = obj.GetComponent<MapObject>();
-        map.Init();
         m_Ways[m_WayCount].MapLoad(map);
+    }
+
+    public void InitMap()
+    {
+        for(int i = 0;i < m_Ways.Length;i++)
+        {
+            m_Ways[i].InitMap();
+        }
     }
 
     public void BgMove(float bgSpeed)

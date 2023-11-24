@@ -6,7 +6,7 @@ public class MapObject : MonoBehaviour
 {
     public Transform m_TransWay;
     public TrapManager m_Trap;
-
+    public List<int> m_BlockIndex;
     public void Init()
     {
         m_Trap.Init();

@@ -85,43 +85,46 @@ public class RunningManager : MonoBehaviour
 
     public void Running()
     {
-        m_BgUpdate.BgMoveScore(GameData.m_BGSpeed);
-
         GameData.m_Player.m_HP -= Time.deltaTime;
         GameManager.Instance.m_InGameUI.SetHP(GameData.m_Player.m_HP);
         GameManager.Instance.m_InGameUI.SetTime();
 
-        m_Vec2 = Vector2.zero;
-
-     
-        if(GameData.m_SlowSpeed > 0)
+        if (GameManager.Instance.m_IsStop == false)
         {
-            if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.min_speed)
-            {
-                GameData.m_BGSpeed -= GameData.m_SlowSpeed * Time.deltaTime;
-                if (GameData.m_BGSpeed <= DataManager.Instance.m_BGData.min_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
-            }
-        }
-        else
-        {
-            
-            if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
-            {
-                GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
-                //Debug.Log(GameData.m_BGSpeed);
+            m_BgUpdate.BgMoveScore(GameData.m_BGSpeed);
 
-                if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
+            m_Vec2 = Vector2.zero;
 
-                m_Time += Time.deltaTime;
-            }
-            /*
-            if (GameData.m_CAMSpeed < DataManager.Instance.m_BGData.cam_max_speed)
+
+            if (GameData.m_SlowSpeed > 0)
             {
-                GameData.m_CAMSpeed += DataManager.Instance.m_BGData.cam_speed * Time.deltaTime;
-                Debug.Log("CAM SPEED " + GameData.m_CAMSpeed);
-                m_TransCamera.Translate(-(GameData.m_CAMSpeed * Time.deltaTime), 0, 0);
+                if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.min_speed)
+                {
+                    GameData.m_BGSpeed -= GameData.m_SlowSpeed * Time.deltaTime;
+                    if (GameData.m_BGSpeed <= DataManager.Instance.m_BGData.min_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
+                }
             }
-            */
+            else
+            {
+
+                if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
+                {
+                    GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
+                    //Debug.Log(GameData.m_BGSpeed);
+
+                    if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
+
+                    m_Time += Time.deltaTime;
+                }
+                /*
+                if (GameData.m_CAMSpeed < DataManager.Instance.m_BGData.cam_max_speed)
+                {
+                    GameData.m_CAMSpeed += DataManager.Instance.m_BGData.cam_speed * Time.deltaTime;
+                    Debug.Log("CAM SPEED " + GameData.m_CAMSpeed);
+                    m_TransCamera.Translate(-(GameData.m_CAMSpeed * Time.deltaTime), 0, 0);
+                }
+                */
+            }
         }
        
    
@@ -189,6 +192,13 @@ public class RunningManager : MonoBehaviour
                     return;
                 }
 
+                if (m_Player.m_Map != null)
+                {
+                    if(GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
+                    {
+                        return;
+                    }
+                }
                 m_LaneIndex--;
                 
                 m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
@@ -200,6 +210,14 @@ public class RunningManager : MonoBehaviour
                 {
                     m_LaneIndex = m_LaneObjects.Length - 1;
                     return;
+                }
+
+                if (m_Player.m_Map != null)
+                {
+                    if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
+                    {
+                        return;
+                    }
                 }
 
                 m_LaneIndex++;
@@ -235,10 +253,12 @@ public class RunningManager : MonoBehaviour
 
     public void Jump(string aniName)
     {
+        if (GameManager.Instance.m_IsStop) return;
+
         if (m_IsJumpBlock || m_IsJump) return;
         m_Player.Jump(aniName);
         m_Player.m_Col.enabled = false;
-        m_Player.m_RigidBody.velocity = Vector2.zero;
+        //m_Player.m_RigidBody.velocity = Vector2.zero;
         m_IsJump = true;
     }
 

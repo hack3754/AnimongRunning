@@ -10,6 +10,8 @@ TagManager:
   - Lane
   - Trap
   - Obstacle
+  - Block
+  - Map
   layers:
   - Default
   - TransparentFX

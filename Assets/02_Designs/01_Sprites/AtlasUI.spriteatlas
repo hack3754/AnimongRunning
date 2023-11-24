@@ -85,6 +85,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e565d9c054483d04a99adbcdec83275f, type: 3}
   - {fileID: 21300000, guid: c72524e0562b5774a891c071a6d65353, type: 3}
   - {fileID: 21300000, guid: 66516c1191b1b6b41bc854b63eb2917d, type: 3}
+  - {fileID: 21300000, guid: 5e9c6f11cbeabd944851ced3f86f5942, type: 3}
   - {fileID: 21300000, guid: bec8b621a8da9ea42a15529d8086d59a, type: 3}
   - {fileID: 21300000, guid: e99bee21ce447da48b439c4f80cde4c9, type: 3}
   - {fileID: 21300000, guid: 6142e141a2fba514f94b1f739a8714ca, type: 3}
@@ -100,6 +101,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 14dd1222bb2f3bd4a8cc0e7c7442da15, type: 3}
   - {fileID: 21300000, guid: 7d38eb226cc962949b5a35b9c7a44fa4, type: 3}
   - {fileID: 21300000, guid: 52334f220e8ea8d428279e14c4ff5a37, type: 3}
+  - {fileID: 21300000, guid: 4e8a03324f8068c4cb4b14339988a50e, type: 3}
   - {fileID: 21300000, guid: f1301e4266350574c95c3d6bcecbd733, type: 3}
   - {fileID: 21300000, guid: 110a9d526daca8c46a0c0988b0344e71, type: 3}
   - {fileID: 21300000, guid: dd0a81725e207fd498f2a1ae359884a2, type: 3}
@@ -110,6 +112,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 546640d2e7a8add4bb5f4f8e1212f3ac, type: 3}
   - {fileID: 21300000, guid: b13fced220dc45642ad3ec168d34862b, type: 3}
   - {fileID: 21300000, guid: 22d178f2b0c5d61458736c771a0e70a7, type: 3}
+  - {fileID: 21300000, guid: ba97b013fc103a8409811abbe540e846, type: 3}
   - {fileID: 21300000, guid: 5f6c6513688179347a084e65886090ce, type: 3}
   - {fileID: 21300000, guid: 66c47b138b9caa546bb51d73334fc1c1, type: 3}
   - {fileID: 21300000, guid: ef76f1231f501aa41b4856eadd4aed9d, type: 3}
@@ -215,6 +218,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c4511b393b3872c44bcba297497b9880, type: 3}
   - {fileID: 21300000, guid: e6034a5932bc32e4da5c30c147d137c0, type: 3}
   - {fileID: 21300000, guid: 64b1bf5919cd06f408e5a5ca9ec23206, type: 3}
+  - {fileID: 21300000, guid: 3dfbda69cb4c5084ab5fbaae5a2d3c2a, type: 3}
   - {fileID: 21300000, guid: cc3b5c79868f200429b0900b3f903247, type: 3}
   - {fileID: 21300000, guid: 031e09899c13813429204ec37804862e, type: 3}
   - {fileID: 21300000, guid: 02a7ee89f9098d2408f1e920c63dc124, type: 3}
@@ -268,6 +272,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 399f561d5dcbd6d4a94d5d63fe01c3c8, type: 3}
   - {fileID: 21300000, guid: 921f9f1dd563e6044ad0a593c65151fe, type: 3}
   - {fileID: 21300000, guid: 2ea8a22d3b98bb24bb99b056b190544f, type: 3}
+  - {fileID: 21300000, guid: 7edf773d1fe8a784280429c372daf27a, type: 3}
   - {fileID: 21300000, guid: 4d01ed3d16e66034f9bf2a17c187c511, type: 3}
   - {fileID: 21300000, guid: dcb6464d0ae5c164f9a9860054a0a87d, type: 3}
   - {fileID: 21300000, guid: 0503485d54c81a942b2f1dd7fddd44a9, type: 3}
@@ -304,6 +309,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7357ff9e74ba46943a6d03414a3eb493, type: 3}
   - {fileID: 21300000, guid: b17e10beda223234086fa61b423a51c2, type: 3}
   - {fileID: 21300000, guid: e025dbbe46bcfa94b99d5c3da47af4c4, type: 3}
+  - {fileID: 21300000, guid: 0df567ce220fc5a4091476812dd60618, type: 3}
   - {fileID: 21300000, guid: 3c6e81ee893816d409e5ee13498febfd, type: 3}
   - {fileID: 21300000, guid: 64b994fe4f1d0284a8b6f7b71f9c8aa3, type: 3}
   - {fileID: 21300000, guid: a0c319fe2a80ac74b826306c4ea55bb2, type: 3}
@@ -345,6 +351,7 @@ SpriteAtlas:
   - Bg_Tree_03_400x304_02
   - btn_blue_h80
   - Tree_2_200x320_02
+  - InGame_Btn_Move_01
   - Mozzi_S03_Run_04
   - Tod_Run_02
   - Mozzi_M02_Run_04
@@ -360,6 +367,7 @@ SpriteAtlas:
   - Mozzi_S03_Damage_02
   - icon_coin_h200
   - Mozzi_M02_Damage_01
+  - InGame_Item_Box_01
   - bg_coin
   - Mozzi_S01_Run_04
   - Bg_Bush_03_120x120_02
@@ -370,6 +378,7 @@ SpriteAtlas:
   - Mozzi_S01_Run_06
   - Mozzi_M04_Run_04
   - Mozzi_M03_Run_01
+  - InGame_Item_Box_02
   - FlowerGarden_5_40x24_02
   - Mozzi_M03_Run_02
   - Bg_Bush_01_160x160_01
@@ -475,6 +484,7 @@ SpriteAtlas:
   - Bush_8_80x80_03
   - Mozzi_M02_Run_02
   - Mozzi_M04_Run_03
+  - InGame_Item_Box_03
   - btn_dis_h80
   - Mozzi_M01_Run_03
   - Grass_5_80x48_01
@@ -528,6 +538,7 @@ SpriteAtlas:
   - Bg_Basic_01_8x8_01
   - Mozzi_M05_Run_02
   - Mozzi_S03_Run_02
+  - InGame_LV_Gauge_Img_00
   - InGame_CA_Run_03
   - InGame_HP_Gauge_Img
   - BGbasic_01
@@ -564,6 +575,7 @@ SpriteAtlas:
   - FlowerGarden_4_40x24_01
   - Bg_Basic_01_160x240_01
   - Mozzi_M01_Run_04
+  - InGame_LV_Gauge_Img_01
   - img_cloud_01
   - Bg_Bush_01_160x160_03
   - Mozzi_M04_Run_06

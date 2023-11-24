@@ -69,11 +69,18 @@ public class MapData : DataDicBase<int, MapDataItem>
     }
     public string GetRes(int id)
     {
-        if(m_Dic.ContainsKey(id))
+        if(m_Dic != null && m_Dic.ContainsKey(id))
         {
             return m_Dic[id].res;
         }
 
         return string.Empty;
+    }
+
+    public int GetRandom()
+    {
+        if (m_Dic == null) return 2;
+
+        return UnityEngine.Random.Range(1, m_Dic.Count) + 1;
     }
 }
