@@ -98,8 +98,7 @@ public class BgUpdate : MonoBehaviour
         UpdateWay();
 
         //UI Score
-        m_Score += m_BgValue;
-        GameManager.Instance.m_InGameUI.SetScore((int)m_Score);
+        //SetScore(m_BgValue);
     }
 
 
@@ -133,5 +132,11 @@ public class BgUpdate : MonoBehaviour
             m_WayIndex[i + 1] = m_WayIndex[i];
             m_WayIndex[i] = temp;
         }
+    }
+
+    public void SetScore(float score)
+    {
+        m_Score += score;
+        GameManager.Instance.m_InGameUI.SetScore((int)m_Score);
     }
 }

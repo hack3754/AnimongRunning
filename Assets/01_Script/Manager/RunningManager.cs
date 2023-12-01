@@ -248,6 +248,10 @@ public class RunningManager : MonoBehaviour
                 GameData.m_SlowSpeed = trap.m_tData.value;
                 m_IsJumpBlock = true;
                 break;
+            case TrapType.Score:
+                m_BgUpdate.SetScore(trap.m_tData.value);
+                trap.SetDisable();
+                break;
         }
     }
 

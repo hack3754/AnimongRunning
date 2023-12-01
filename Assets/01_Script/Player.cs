@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (collision.tag == TagName.Trap.ToString())
+        if (collision.tag == TagName.Obstacle.ToString())
         {
             TrapCollider trap = collision.gameObject.GetComponent<TrapCollider>();
             if (trap != null)
@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
             if (block != null)
             {
                 GameManager.Instance.m_IsStop = true;
+                GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
             }
         }
 
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == TagName.Trap.ToString())
+        if (collision.tag == TagName.Obstacle.ToString())
         {
             TrapCollider trap = collision.gameObject.GetComponent<TrapCollider>();
             if (m_Trap != null && m_Trap.Equals(trap))

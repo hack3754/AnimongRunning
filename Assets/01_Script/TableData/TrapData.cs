@@ -6,6 +6,12 @@ using UnityEngine;
 public enum TrapType
 {
     Slow,
+    Score,
+    Gold,
+    Carrot,
+    HpRecovery,
+    Speed,
+    Rainboots
 }
 public class TrapDataItem
 {

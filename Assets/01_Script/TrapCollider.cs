@@ -70,4 +70,10 @@ public class TrapCollider : ObjectEntries
             m_Sprites[i].sortingOrder = lane * 3;
         }
     }
+
+    public void SetDisable()
+    {
+        m_Obj.SetActive(false);
+        //disable Ani
+    }
 }

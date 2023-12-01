@@ -10,6 +10,8 @@ public static class GameData
 
     public static float m_SlowSpeed;
 
+    public static int m_RadomSeed;
+
     public static LocalDataSave m_LocalData;
     public static void Init()
     {
@@ -18,5 +20,7 @@ public static class GameData
         m_BGSpeed = 0;
         m_LocalData = new LocalDataSave();
         m_LocalData.Init();
+
+        m_RadomSeed = 1;
     }
 }

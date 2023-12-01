@@ -6,11 +6,27 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum ObstacleType
+{
+    Trap,
+    Item,
+    Score,
+    Gold,
+    Max,
+}
+
 public class TrapColliderManager : MonoBehaviour
 {
     public Transform m_Parent;
     public TrapCollider[] m_PrefabsTrap;
+    public TrapCollider[] m_PrefabsItem;
+    public TrapCollider[] m_PrefabsScore;
+    public TrapCollider[] m_PrefabsGold;
+
     List<string> m_TrapNames;
+    List<string> m_ItemNames;
+    List<string> m_ScoreNames;
+    List<string> m_GoldNames;
     Dictionary<string, List<TrapCollider>> m_Traps;
 
     public void Init()
@@ -32,46 +48,140 @@ public class TrapColliderManager : MonoBehaviour
                 m_Traps[m_PrefabsTrap[i].name].Add(m_PrefabsTrap[i]);
             }
         }
+
+        m_ItemNames = new List<string>();
+        for (int i = 0; i < m_PrefabsItem.Length; i++)
+        {
+            if (m_ItemNames.Contains(m_PrefabsItem[i].name) == false) m_ItemNames.Add(m_PrefabsItem[i].name);
+
+            m_PrefabsItem[i].Init();
+            if (m_PrefabsItem[i].m_tData != null)
+            {
+                if (m_Traps.ContainsKey(m_PrefabsItem[i].m_tData.res) == false)
+                {
+                    m_Traps.Add(m_PrefabsItem[i].m_tData.res, new List<TrapCollider>());
+                }
+
+                m_Traps[m_PrefabsItem[i].name].Add(m_PrefabsItem[i]);
+            }
+        }
+
+        m_ScoreNames = new List<string>();
+        for (int i = 0; i < m_PrefabsScore.Length; i++)
+        {
+            if (m_ScoreNames.Contains(m_PrefabsScore[i].name) == false) m_ScoreNames.Add(m_PrefabsScore[i].name);
+
+            m_PrefabsScore[i].Init();
+            if (m_PrefabsScore[i].m_tData != null)
+            {
+                if (m_Traps.ContainsKey(m_PrefabsScore[i].m_tData.res) == false)
+                {
+                    m_Traps.Add(m_PrefabsScore[i].m_tData.res, new List<TrapCollider>());
+                }
+
+                m_Traps[m_PrefabsScore[i].name].Add(m_PrefabsScore[i]);
+            }
+        }
+
+        m_GoldNames = new List<string>();
+        for (int i = 0; i < m_PrefabsGold.Length; i++)
+        {
+            if (m_GoldNames.Contains(m_PrefabsGold[i].name) == false) m_GoldNames.Add(m_PrefabsGold[i].name);
+
+            m_PrefabsGold[i].Init();
+            if (m_PrefabsGold[i].m_tData != null)
+            {
+                if (m_Traps.ContainsKey(m_PrefabsGold[i].m_tData.res) == false)
+                {
+                    m_Traps.Add(m_PrefabsGold[i].m_tData.res, new List<TrapCollider>());
+                }
+
+                m_Traps[m_PrefabsGold[i].name].Add(m_PrefabsGold[i]);
+            }
+        }
     }
-    /*
-    public TrapCollider GetTrapCollider(string name, Transform parent)
+
+    public TrapCollider GetTrapCollider(Transform parent, ObstacleType obstacleType)
     {
-        if (m_Traps.ContainsKey(name))
+        string trap = string.Empty;
+        if (obstacleType == ObstacleType.Trap)
+        {
+            if (m_TrapNames == null || m_TrapNames.Count <= 0) return null;
+            trap = m_TrapNames[UnityEngine.Random.Range(0, m_TrapNames.Count)];
+        }
+        else if (obstacleType == ObstacleType.Item)
+        {
+            if (m_ItemNames == null || m_ItemNames.Count <= 0) return null;
+            trap = m_ItemNames[UnityEngine.Random.Range(0, m_ItemNames.Count)];
+        }
+        else if (obstacleType == ObstacleType.Score)
+        {
+            if (m_ScoreNames == null || m_ScoreNames.Count <= 0) return null;
+            trap = m_ScoreNames[UnityEngine.Random.Range(0, m_ScoreNames.Count)];
+        }
+        else if (obstacleType == ObstacleType.Gold)
+        {
+            if (m_GoldNames == null || m_GoldNames.Count <= 0) return null;
+            trap = m_GoldNames[UnityEngine.Random.Range(0, m_GoldNames.Count)];
+        }
+        else return null;
+
+        if (m_Traps.ContainsKey(trap))
         {
             TrapCollider col = null;
 
-            for (int i = 1; i < m_Traps[name].Count; i++)
+            for (int i = 1; i < m_Traps[trap].Count; i++)
             {
-                if (m_Traps[name][i].IsEnable == false)
+                if (m_Traps[trap][i].IsEnable == false)
                 {
-                    col = m_Traps[name][i];
+                    col = m_Traps[trap][i];
                     break;
                 }
             }
 
             if (col == null)
             {
-                col = Instantiate(m_Traps[name][0]);
+                col = Instantiate(m_Traps[trap][0]);
                 col.m_Trans.SetParent(parent);
-                m_Traps[name].Add(col);
+                m_Traps[trap].Add(col);
             }
             else
                 col.m_Trans.SetParent(parent);
 
             col.Set(true);
-            col.transform.localScale = m_Traps[name][0].m_Trans.localScale;
+            col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
 
             return col;
         }
 
         return null;
     }
-    */
-    public TrapCollider GetTrapCollider(Transform parent)
-    {
-        if (m_TrapNames == null || m_TrapNames.Count <= 0) return null;
 
-        string trap = m_TrapNames[UnityEngine.Random.Range(0, m_TrapNames.Count)];
+    public TrapCollider GetRandomTrapCollider(Transform parent)
+    {
+        ObstacleType obstacleType = ObstacleType.Score;
+
+        if (UnityEngine.Random.Range(0, 1000) <= 1) obstacleType = ObstacleType.Item;
+        else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
+        else if (UnityEngine.Random.Range(0, 1000) <= 300) obstacleType = ObstacleType.Max;
+
+        string trap = string.Empty;
+        if (obstacleType == ObstacleType.Trap)
+        {
+            if (m_TrapNames == null || m_TrapNames.Count <= 0) return null;
+            trap = m_TrapNames[UnityEngine.Random.Range(0, m_TrapNames.Count)];
+        }
+        else if (obstacleType == ObstacleType.Item)
+        {
+            if (m_ItemNames == null || m_ItemNames.Count <= 0) return null;
+            trap = m_ItemNames[UnityEngine.Random.Range(0, m_ItemNames.Count)];
+        }
+        else if (obstacleType == ObstacleType.Score)
+        {
+            if (m_ScoreNames == null || m_ScoreNames.Count <= 0) return null;
+            trap = m_ScoreNames[UnityEngine.Random.Range(0, m_ScoreNames.Count)];
+        }
+        else return null;
 
         if (m_Traps.ContainsKey(trap))
         {

@@ -12,10 +12,12 @@ public enum TagName
     Trap,
     Block,
     Map,
+    Obstacle
 }
 
 public static class AMUtility
 {
     //Object Key
     public readonly static string TRAP = "Trap";
+    public readonly static string ITEM = "Item";
 }

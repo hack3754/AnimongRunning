@@ -12,6 +12,7 @@ TagManager:
   - Obstacle
   - Block
   - Map
+  - Item
   layers:
   - Default
   - TransparentFX
