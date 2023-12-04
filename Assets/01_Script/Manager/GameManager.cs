@@ -14,12 +14,14 @@ public class GameManager : MSingleton<GameManager>
     public BGControl m_BGControl;
     public GameObject m_BG;
     public bool m_IsStop;
+    public bool m_IsStun;
     bool m_IsGameStart;
     bool m_IsReadyStart;
     private void Awake()
     {
         m_LoignUI.Init();
         m_IsStop = false;
+        m_IsStun = false;
     }
 
     private void Start()
@@ -113,7 +115,7 @@ public class GameManager : MSingleton<GameManager>
 
         if (m_IsGameStart == false) return;
         m_Running.Running();
-        if (m_IsStop) return;
+        if (m_IsStop || m_IsStun) return;
         m_BGControl.BgMove();
     }
 

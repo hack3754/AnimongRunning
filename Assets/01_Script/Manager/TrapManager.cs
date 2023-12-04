@@ -13,9 +13,7 @@ public class TrapManager : MonoBehaviour
     {
         if (m_Tilemaps == null || m_Tilemaps.Length <= 0) return;
 
-        if (GameData.m_RadomSeed > 9999) GameData.m_RadomSeed = 1;
-        float temp = Time.time * GameData.m_RadomSeed;
-        UnityEngine.Random.InitState((int)temp);
+        AMUtility.RandomSeed();
 
         Tilemap tileMap = m_Tilemaps[UnityEngine.Random.Range(0, m_Tilemaps.Length)];
 
@@ -31,18 +29,12 @@ public class TrapManager : MonoBehaviour
             Vector3 position = tileMap.GetCellCenterWorld(pos);
             TrapCollider col = null;
 
-            Enum.TryParse<ObstacleType>(tileBase.name, out obstacleType);
             /*
-            if (tileBase.name.Equals(AMUtility.TRAP))
-                col = GameManager.Instance.m_TrapColliderMgr.GetTrapCollider(m_Parent, obstacleType);
-            else if (tileBase.name.Equals(AMUtility.ITEM))
-                col = GameManager.Instance.m_TrapColliderMgr.GetTrapCollider(m_Parent, ObstacleType.Item);
+            Enum.TryParse<ObstacleType>(tileBase.name, out obstacleType);
+            col = GameManager.Instance.m_TrapColliderMgr.GetTrapCollider(m_Parent, obstacleType);
             */
 
-            //col = GameManager.Instance.m_TrapColliderMgr.GetTrapCollider(m_Parent, obstacleType);
-
-            if (tileBase.name.Equals(AMUtility.TRAP))
-                col = GameManager.Instance.m_TrapColliderMgr.GetRandomTrapCollider(m_Parent);
+            col = GameManager.Instance.m_TrapColliderMgr.GetRandomTrapCollider(m_Parent, tileBase.name);
 
             if (col != null)
             {

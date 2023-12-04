@@ -5,6 +5,13 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public class StateInfo
+{
+    public float m_Time;
+    public TrapType m_Type;
+    public int m_Value;
+}
+
 public class Player : MonoBehaviour
 {
     public GameObject m_Obj;
@@ -17,10 +24,16 @@ public class Player : MonoBehaviour
     public MapObject m_Map;
     int m_LineIndex;
     TrapCollider m_Trap;
-
+    List<TrapCollider> m_DmgStops = new List<TrapCollider>();
+    List<StateInfo> m_States = new List<StateInfo>();
     public void Init()
     {
         m_Animator.speed = 0.5f;
+    }
+
+    private void UpdateState()
+    {
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,6 +74,7 @@ public class Player : MonoBehaviour
             if (mapCol != null)
             {
                 m_Map = mapCol.m_MapObj;
+                m_DmgStops.Clear();
             }
         }
 
@@ -120,6 +134,36 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.m_Running.EndJump();
         m_Col.enabled = true;
+    }
+
+    public void SetDmgStop(TrapCollider trap)
+    {
+        if (m_DmgStops.Contains(trap) == false)
+        {
+            m_DmgStops.Add(trap);
+        }
+    }
+
+    public void SetDotTrap(TrapCollider trap, TrapType trapType, int value)
+    {
+        if (trap.m_tData != null) return;
+
+        for (int i = 0;i < m_States.Count;i++)
+        {
+            if (m_States[i].m_Type == trapType)
+            {
+                m_States[i].m_Time = trap.m_tData.time;
+                m_States[i].m_Value = value;
+                return;
+            }
+        }
+
+        StateInfo stateInfo = new StateInfo();
+        stateInfo.m_Time = trap.m_tData.time;
+        stateInfo.m_Type = trapType;
+        stateInfo.m_Value = value;
+
+        m_States.Add(stateInfo);
     }
 
     #region hitTest

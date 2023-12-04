@@ -29,6 +29,8 @@ public class TrapColliderManager : MonoBehaviour
     List<string> m_GoldNames;
     Dictionary<string, List<TrapCollider>> m_Traps;
 
+
+
     public void Init()
     {
         m_TrapNames = new List<string>();
@@ -157,13 +159,22 @@ public class TrapColliderManager : MonoBehaviour
         return null;
     }
 
-    public TrapCollider GetRandomTrapCollider(Transform parent)
+    public TrapCollider GetRandomTrapCollider(Transform parent, string trapType)
     {
         ObstacleType obstacleType = ObstacleType.Score;
 
-        if (UnityEngine.Random.Range(0, 1000) <= 1) obstacleType = ObstacleType.Item;
-        else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
-        else if (UnityEngine.Random.Range(0, 1000) <= 300) obstacleType = ObstacleType.Max;
+        if (trapType.Equals(AMUtility.TRAP))
+        {
+            if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
+            else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
+            else if (UnityEngine.Random.Range(0, 1000) <= 300) obstacleType = ObstacleType.Max;
+        }
+        else if (trapType.Equals(AMUtility.ITEM))
+        {
+            if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
+            else if (UnityEngine.Random.Range(0, 1000) <= 300) obstacleType = ObstacleType.Max;
+        }
+        else return null;
 
         string trap = string.Empty;
         if (obstacleType == ObstacleType.Trap)

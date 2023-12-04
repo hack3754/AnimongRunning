@@ -81,6 +81,8 @@ public class DataManager : MSingleton<DataManager>
 		is_load = false;
 		is_first_load = true;
 
+		
+		
 		GameManager.Instance.GameReady();
 
         //Debug.Log("*** " + user.dic[2].value.ContainsKey(SkillData.move_speed));

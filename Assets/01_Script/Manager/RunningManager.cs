@@ -47,7 +47,6 @@ public class RunningManager : MonoBehaviour
 
     //data
     float m_MaxSpeed;
-
     bool m_IsDrag;
 
     public void Init()
@@ -89,7 +88,7 @@ public class RunningManager : MonoBehaviour
         GameManager.Instance.m_InGameUI.SetHP(GameData.m_Player.m_HP);
         GameManager.Instance.m_InGameUI.SetTime();
 
-        if (GameManager.Instance.m_IsStop == false)
+        if (GameManager.Instance.m_IsStop == false && GameManager.Instance.m_IsStun == false)
         {
             m_BgUpdate.BgMoveScore(GameData.m_BGSpeed);
 
@@ -184,50 +183,53 @@ public class RunningManager : MonoBehaviour
             //m_Vec2.y += Vertical;
             //m_Player.m_RigidBody.velocity = m_Vec2;
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (GameManager.Instance.m_IsStun == false)
             {
-                if (m_LaneIndex <= 0)
+                if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    m_LaneIndex = 0;
-                    return;
-                }
-
-                if (m_Player.m_Map != null)
-                {
-                    if(GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
+                    if (m_LaneIndex <= 0)
                     {
+                        m_LaneIndex = 0;
                         return;
                     }
-                }
-                m_LaneIndex--;
-                
-                m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
-            }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                if (m_LaneIndex >= m_LaneObjects.Length - 1)
-                {
-                    m_LaneIndex = m_LaneObjects.Length - 1;
-                    return;
-                }
-
-                if (m_Player.m_Map != null)
-                {
-                    if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
+                    if (m_Player.m_Map != null)
                     {
+                        if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
+                        {
+                            return;
+                        }
+                    }
+                    m_LaneIndex--;
+
+                    m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+                }
+
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    if (m_LaneIndex >= m_LaneObjects.Length - 1)
+                    {
+                        m_LaneIndex = m_LaneObjects.Length - 1;
                         return;
                     }
+
+                    if (m_Player.m_Map != null)
+                    {
+                        if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
+                        {
+                            return;
+                        }
+                    }
+
+                    m_LaneIndex++;
+
+                    m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
                 }
 
-                m_LaneIndex++;
-
-                m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
-            }
-
-            if (Input.GetKey(KeyCode.Z))
-            {
-                Jump("Gomong_Jump_Run");
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    Jump("Gomong_Jump_Run");
+                }
             }
 #endif
         }
@@ -237,22 +239,50 @@ public class RunningManager : MonoBehaviour
     {
         GameData.m_SlowSpeed = 0;
         m_IsJumpBlock = false;
+        GameManager.Instance.m_IsStop = false;
     }
 
     public void SetTrap(TrapCollider trap)
     {
         if (trap == null || trap.m_tData == null) return;
-        switch(trap.m_tData.type)
+        ObstacleTrigger(trap.m_tData.type, trap.m_tData.value, trap);
+        ObstacleTrigger(trap.m_tData.type2, trap.m_tData.value2, trap);
+    }
+
+    void ObstacleTrigger(TrapType trapType, int dataValue, TrapCollider trap)
+    {
+        float time = trap.m_tData.time / 100f;
+        switch (trapType)
         {
             case TrapType.Slow:
-                GameData.m_SlowSpeed = trap.m_tData.value;
+                GameData.m_SlowSpeed = dataValue;
                 m_IsJumpBlock = true;
                 break;
             case TrapType.Score:
-                m_BgUpdate.SetScore(trap.m_tData.value);
+                m_BgUpdate.SetScore(dataValue);
                 trap.SetDisable();
                 break;
+            case TrapType.Stop:
+                GameManager.Instance.m_IsStun = true;
+                GameData.m_BGSpeed = 0;
+                StartCoroutine(RunAgain(time));
+                break;
+            case TrapType.Blow:
+                trap.SetDisable();
+                break;
+            case TrapType.DmgStop:
+                GameManager.Instance.m_IsStop = true;
+                m_Player.SetDmgStop(trap);
+                break;
+            case TrapType.DotDmg:
+                break;
         }
+    }
+
+    IEnumerator RunAgain(float time)
+    {
+        yield return new WaitForSeconds(time);
+        GameManager.Instance.m_IsStun = false;
     }
 
     public void Jump(string aniName)
