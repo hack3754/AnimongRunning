@@ -1,9 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Permissions;
-using Unity.VisualScripting;
-using UnityEditor.SceneTemplate;
-using UnityEditorInternal;
 using UnityEngine;
 public enum JumpState
 {
@@ -26,7 +22,7 @@ public class RunningManager : MonoBehaviour
     public float m_PlayerJumpSpeed;
     public float m_HeightPeak;
     public Vector3 m_StartPos;
-    
+
     Vector3 m_PosOri;
     bool m_IsJump;
     bool m_IsJumpBlock;
@@ -49,6 +45,8 @@ public class RunningManager : MonoBehaviour
     float m_MaxSpeed;
     bool m_IsDrag;
 
+    List<StateInfo> m_States = new List<StateInfo>();
+
     public void Init()
     {
         m_Player.Init();
@@ -56,6 +54,21 @@ public class RunningManager : MonoBehaviour
         m_PosOri = m_BgUpdate.m_TransBg.localPosition;
 
         m_LaneIndex = m_LaneObjects.Length / 2;
+    }
+
+    public void GameReset()
+    {
+        m_Time = 0;
+        GameData.GameReset();
+        m_Player.GameRest();
+        m_BgUpdate.m_TransBg.localPosition = m_PosOri;
+        m_BgUpdate.GameReset();
+
+        GameManager.Instance.m_IsStop = false;
+        GameManager.Instance.m_IsStun = false;
+
+        m_LaneIndex = m_LaneObjects.Length / 2;
+        m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
     }
 
     public void SetOutGame()
@@ -67,7 +80,7 @@ public class RunningManager : MonoBehaviour
     {
         m_Time += Time.deltaTime;
         m_BgUpdate.m_TransBg.localPosition = Vector3.Lerp(m_PosOri, m_StartPos, m_Time);
-        if(m_Time < 1) GameManager.Instance.m_BGControl.BgMove();
+        if (m_Time < 1) GameManager.Instance.m_BGControl.BgMove();
         if (m_Time >= 1)
         {
             StartCoroutine(GameStart());
@@ -86,6 +99,13 @@ public class RunningManager : MonoBehaviour
     {
         GameData.m_Player.m_HP -= Time.deltaTime;
         GameManager.Instance.m_InGameUI.SetHP(GameData.m_Player.m_HP);
+        if (GameData.m_Player.m_HP <= 0)
+        {
+            //GameOver;
+            GameManager.Instance.GameOver();
+            return;
+        }
+
         GameManager.Instance.m_InGameUI.SetTime();
 
         if (GameManager.Instance.m_IsStop == false && GameManager.Instance.m_IsStun == false)
@@ -125,8 +145,8 @@ public class RunningManager : MonoBehaviour
                 */
             }
         }
-       
-   
+
+
         if (m_IsJump == false)
         {
 #if UNITY_EDITOR
@@ -187,49 +207,19 @@ public class RunningManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (m_LaneIndex <= 0)
-                    {
-                        m_LaneIndex = 0;
-                        return;
-                    }
-
-                    if (m_Player.m_Map != null)
-                    {
-                        if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
-                        {
-                            return;
-                        }
-                    }
-                    m_LaneIndex--;
-
-                    m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+                    MoveUp();
                 }
 
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    if (m_LaneIndex >= m_LaneObjects.Length - 1)
-                    {
-                        m_LaneIndex = m_LaneObjects.Length - 1;
-                        return;
-                    }
-
-                    if (m_Player.m_Map != null)
-                    {
-                        if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
-                        {
-                            return;
-                        }
-                    }
-
-                    m_LaneIndex++;
-
-                    m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+                    MoveDown();
                 }
-
+                /*
                 if (Input.GetKey(KeyCode.Z))
                 {
                     Jump("Gomong_Jump_Run");
                 }
+                */
             }
 #endif
         }
@@ -237,26 +227,79 @@ public class RunningManager : MonoBehaviour
 
     public void ResetRunning()
     {
-        GameData.m_SlowSpeed = 0;
-        m_IsJumpBlock = false;
+        //GameData.m_SlowSpeed = 0;
+        //m_IsJumpBlock = false;
         GameManager.Instance.m_IsStop = false;
+    }
+
+    public void MoveUp()
+    {
+        if (m_LaneIndex <= 0)
+        {
+            m_LaneIndex = 0;
+            return;
+        }
+
+        if (m_Player.m_Map != null)
+        {
+            if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
+            {
+                return;
+            }
+        }
+        m_LaneIndex--;
+
+        m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+    }
+
+    public void MoveDown()
+    {
+        if (m_LaneIndex >= m_LaneObjects.Length - 1)
+        {
+            m_LaneIndex = m_LaneObjects.Length - 1;
+            return;
+        }
+
+        if (m_Player.m_Map != null)
+        {
+            if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
+            {
+                return;
+            }
+        }
+
+        m_LaneIndex++;
+
+        m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
     }
 
     public void SetTrap(TrapCollider trap)
     {
         if (trap == null || trap.m_tData == null) return;
+
         ObstacleTrigger(trap.m_tData.type, trap.m_tData.value, trap);
         ObstacleTrigger(trap.m_tData.type2, trap.m_tData.value2, trap);
     }
 
     void ObstacleTrigger(TrapType trapType, int dataValue, TrapCollider trap)
     {
-        float time = trap.m_tData.time / 100f;
+        float dataTime = 0;
+        if (trap.m_tData.time > 0) dataTime = trap.m_tData.time / 100f;
         switch (trapType)
         {
             case TrapType.Slow:
                 GameData.m_SlowSpeed = dataValue;
                 m_IsJumpBlock = true;
+                if(dataTime > 0)
+                {
+                    AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
+                }
+                break;
+            case TrapType.SpdUp:
+                if (dataTime > 0)
+                {
+                    AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
+                }
                 break;
             case TrapType.Score:
                 m_BgUpdate.SetScore(dataValue);
@@ -264,8 +307,8 @@ public class RunningManager : MonoBehaviour
                 break;
             case TrapType.Stop:
                 GameManager.Instance.m_IsStun = true;
-                GameData.m_BGSpeed = 0;
-                StartCoroutine(RunAgain(time));
+                GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
+                StartCoroutine(RunAgain(dataTime));
                 break;
             case TrapType.Blow:
                 trap.SetDisable();
@@ -275,6 +318,10 @@ public class RunningManager : MonoBehaviour
                 m_Player.SetDmgStop(trap);
                 break;
             case TrapType.DotDmg:
+                if (dataTime > 0)
+                {
+                    AddDotTrap(trapType, dataValue / 100f, dataTime, !trap.m_tData.IsTrap);
+                }
                 break;
         }
     }
@@ -283,6 +330,58 @@ public class RunningManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         GameManager.Instance.m_IsStun = false;
+    }
+
+    public bool AddDotTrap(TrapType trapType, float dataValue, float dataTime, bool isItem)
+    {
+        for (int i = 0; i < m_States.Count; i++)
+        {
+            if (m_States[i].m_Type == trapType)
+            {
+                Debug.Log("Re Start");
+                m_States[i].m_StateTime = 0;
+                m_States[i].m_Time = dataTime;
+                m_States[i].m_Value = dataValue;
+                return false;
+            }
+        }
+
+        StateInfo stateInfo = new StateInfo();
+        stateInfo.m_StateTime = 0;
+        stateInfo.m_Time = dataTime;
+        stateInfo.m_Type = trapType;
+        stateInfo.m_Value = dataValue;
+
+        m_States.Add(stateInfo);
+        GameManager.Instance.m_InGameUI.m_UIMian.SetState(stateInfo, isItem);
+        return true;
+    }    
+
+    public void DeleteDotTrap(StateInfo info)
+    {
+        if(info.m_Type == TrapType.Slow)
+        {
+            GameData.m_SlowSpeed = 0;
+            m_IsJumpBlock = false;
+        }
+
+        if(m_States.Contains(info)) m_States.Remove(info);
+    }
+
+    public void SetDotTrigger(StateInfo stateInfo)
+    {
+        switch (stateInfo.m_Type)
+        {
+            case TrapType.Slow:
+                GameData.m_SlowSpeed = stateInfo.m_Value;
+                m_IsJumpBlock = true;
+                break;
+            case TrapType.SpdUp:
+                break;
+            case TrapType.DotDmg:
+                GameData.m_Player.m_HP -= stateInfo.m_Value;
+                break;
+        }
     }
 
     public void Jump(string aniName)

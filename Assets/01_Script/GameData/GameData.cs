@@ -13,6 +13,8 @@ public static class GameData
     public static int m_RadomSeed;
 
     public static LocalDataSave m_LocalData;
+
+    public static float m_Score;
     public static void Init()
     {
         m_Player = new PlayerData();
@@ -22,5 +24,12 @@ public static class GameData
         m_LocalData.Init();
 
         m_RadomSeed = 1;
+    }
+
+    public static void GameReset()
+    {
+        m_BGSpeed = 0;
+        m_RadomSeed = 1;
+        m_Score = 0;
     }
 }

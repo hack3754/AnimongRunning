@@ -716,6 +716,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_In_Item_Box
       objectReference: {fileID: 0}
+    - target: {fileID: 7690864237714906945, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
 --- !u!224 &391655579378166336 stripped
@@ -817,6 +821,10 @@ PrefabInstance:
     - target: {fileID: 7690864237714906945, guid: 1c3a4eb4e1dff9d4c8bff211594d0c07, type: 3}
       propertyPath: m_Name
       value: UI_In_Item_Box_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690864237714906945, guid: 1c3a4eb4e1dff9d4c8bff211594d0c07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c3a4eb4e1dff9d4c8bff211594d0c07, type: 3}
@@ -920,6 +928,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_In_Item_Box (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7690864237714906945, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
 --- !u!224 &3005502614513098384 stripped
@@ -1021,6 +1033,10 @@ PrefabInstance:
     - target: {fileID: 7690864237714906945, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
       propertyPath: m_Name
       value: UI_In_Item_Box (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690864237714906945, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
@@ -1124,6 +1140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_In_Item_Box (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7690864237714906945, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 700ebf541f3f8854daeda2e6ad1551b7, type: 3}
 --- !u!224 &7937445613939423560 stripped
@@ -1225,6 +1245,10 @@ PrefabInstance:
     - target: {fileID: 7690864237714906945, guid: 1c3a4eb4e1dff9d4c8bff211594d0c07, type: 3}
       propertyPath: m_Name
       value: UI_In_Item_Box_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690864237714906945, guid: 1c3a4eb4e1dff9d4c8bff211594d0c07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c3a4eb4e1dff9d4c8bff211594d0c07, type: 3}

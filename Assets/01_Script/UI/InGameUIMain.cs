@@ -1,24 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameUIMain : UIObject
 {
     public UIInGame m_UIMian;
+    public UIResult m_UIResult;
+    public GameObject m_ObjBG;
     public void Init()
     {
         m_UIMian.Init();
+        m_UIResult.Init();
+        m_ObjBG.SetActive(false);
+        m_UIResult.Hide();
     }
 
     public void Show()
     {
         SetActive(true);
+        m_UIMian.m_Obj.SetActive(true);
     }
 
-    public void Reset()
+    public void GameReset()
     {
-        m_UIMian.Reset();
+        SetActive(false);
+        m_ObjBG.SetActive(false);
+        m_UIResult.Hide();
+        m_UIMian.GameReset();
     }
 
     public void SetTime()
@@ -34,5 +44,12 @@ public class InGameUIMain : UIObject
     public void SetHP(float hpValue)
     {
         m_UIMian.SetHP(hpValue);
+    }
+
+    public void ShowResult(int score, System.TimeSpan time)
+    {
+        m_ObjBG.SetActive(true);
+        m_UIMian.m_Obj.SetActive(false);
+        m_UIResult.Show(score, time);
     }
 }

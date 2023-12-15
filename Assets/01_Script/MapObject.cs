@@ -11,4 +11,9 @@ public class MapObject : MonoBehaviour
     {
         m_Trap.Init();
     }
+
+    public void TrapsRelase()
+    {
+        m_Trap.TrapsRelase();
+    }
 }

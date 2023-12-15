@@ -27,7 +27,9 @@ public class TrapDataItem
     public TrapType type2;
     public string prefab;
     public bool IsUnder;
+    public bool IsTrap;
     public int time;
+    public int time2;
     public int value;
     public int value2;
 }
@@ -74,8 +76,11 @@ public class TrapData : DataDicBase<int, TrapDataItem>
                 case "type2": m_Dic[idx].type2 = (TrapType)Enum.Parse(typeof(TrapType), _row[i]); break;
                 case "IsUnder": m_Dic[idx].IsUnder = int.Parse(_row[i]) == 1; break;
                 case "time": m_Dic[idx].time = int.Parse(_row[i]); break;
+                case "time2": m_Dic[idx].time2 = int.Parse(_row[i]); break;
                 case "value": m_Dic[idx].value = int.Parse(_row[i]); break;
                 case "value2": m_Dic[idx].value2 = int.Parse(_row[i]); break;
+                case "IsTrap": m_Dic[idx].IsTrap = int.Parse(_row[i]) == 1; break;
+                    
             }
         }
     }

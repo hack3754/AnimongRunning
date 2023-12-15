@@ -9,10 +9,12 @@ public class TrapManager : MonoBehaviour
 {
     public Transform m_Parent;
     public Tilemap[] m_Tilemaps;
+
+    List<TrapCollider> m_Traps;
     public void Init()
     {
         if (m_Tilemaps == null || m_Tilemaps.Length <= 0) return;
-
+        m_Traps = new List<TrapCollider>();
         AMUtility.RandomSeed();
 
         Tilemap tileMap = m_Tilemaps[UnityEngine.Random.Range(0, m_Tilemaps.Length)];
@@ -40,7 +42,22 @@ public class TrapManager : MonoBehaviour
             {
                 col.m_Trans.position = position;
                 col.Init();
+                m_Traps.Add(col);
             }
         }
+    }
+
+    public void TrapsRelase()
+    {
+        if (m_Traps == null) return;
+        for(int i = 0; i < m_Traps.Count;i++)
+        {
+            m_Traps[i].SetActive(false);
+            m_Traps[i].IsEnable = false;
+            m_Traps[i].transform.parent = GameManager.Instance.m_TrapColliderMgr.m_Parent;
+        }
+
+        m_Traps.Clear();
+        m_Traps = null;
     }
 }

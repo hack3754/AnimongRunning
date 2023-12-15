@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 306111520021888339}
   - component: {fileID: 4549840675437304973}
   - component: {fileID: 315740396544158797}
+  - component: {fileID: 805174706059192707}
   m_Layer: 5
   m_Name: OG_Shop_01
   m_TagString: Untagged
@@ -77,6 +78,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &805174706059192707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964428615729286126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a3081472933d84ca006006a12b96ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Obj: {fileID: 1964428615729286126}
+  m_Rect: {fileID: 306111520021888339}
+  m_IsMain: 0
 --- !u!1 &3467587250644481801
 GameObject:
   m_ObjectHideFlags: 0

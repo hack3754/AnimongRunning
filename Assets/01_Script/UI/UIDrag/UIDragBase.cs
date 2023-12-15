@@ -1,11 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 
 public class UIDragBase : UIBase, IBeginDragHandler, IDragHandler, IEndDragHandler
 {

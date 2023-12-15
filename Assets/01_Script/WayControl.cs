@@ -8,11 +8,20 @@ public class WayControl : MonoBehaviour
     public Transform m_Trans;
 
     MapObject m_Map;
-    MapDataItem m_tData;    
+    MapDataItem m_tData;
+
+    Vector3 m_PosOri;
+
+    public void Init()
+    {
+        m_PosOri = m_Trans.localPosition;
+    }
 
     public void NextMapLoad()
     {
         if (m_tData == null) return;
+
+        m_Map.TrapsRelase();
 
         Destroy(m_Map.gameObject);
 
@@ -35,6 +44,14 @@ public class WayControl : MonoBehaviour
     public void InitMap()
     {
         m_Map.Init();
+    }
+
+    public void GameReset()
+    {
+        m_Trans.localPosition = m_PosOri;
+        m_Map.TrapsRelase();
+        Destroy(m_Map.gameObject);
+        m_tData = null;
     }
 
     public void MapLoad(int id)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
 
 public class UIInGame : UIObject
@@ -11,7 +12,16 @@ public class UIInGame : UIObject
     public Text m_TxtScore;
     public UIGauge m_UIHP;
     public EventTrigger m_MoveTigger;
-    public ButtonObject m_BtnJump;
+    //public ButtonObject m_BtnJump;
+
+    public ButtonObject m_BtnUp;
+    public ButtonObject m_BtnDown;
+
+    public Transform m_TransStateParent;
+    public UIStateObject m_UIStateObject;
+
+    List<UIStateObject> m_ListTrapState;
+
     Vector3 m_BeginPos;
     Vector3 m_DragPos;
     Vector3 m_PreDragPos;
@@ -21,7 +31,12 @@ public class UIInGame : UIObject
         m_TxtScore.text = "0";
         m_UIHP.Init();
         m_UIHP.SetValue(1);
-        m_BtnJump.m_FncOnClick = OnClickJump;
+        //m_BtnJump.m_FncOnClick = OnClickJump;
+        m_BtnUp.m_FncOnClick = OnClickUp;
+        m_BtnDown.m_FncOnClick = OnClickDown;
+
+        m_ListTrapState = new List<UIStateObject>();
+        m_ListTrapState.Add(m_UIStateObject);
         /*
         EventTrigger.Entry entry_BeginDrag = new EventTrigger.Entry();
         entry_BeginDrag.eventID = EventTriggerType.BeginDrag;
@@ -41,7 +56,7 @@ public class UIInGame : UIObject
 
     }
 
-    public void Reset()
+    public void GameReset()
     {
         m_TxtTime.text = "00:00.00";
         m_TxtScore.text = "0";
@@ -50,7 +65,7 @@ public class UIInGame : UIObject
 
     public void SetTime()
     {
-        m_TxtTime.text = string.Format("{0}:{1}.{2}", GameTimeSystem.GetTime().Minutes.ToString("00"), GameTimeSystem.GetTime().Seconds.ToString("00"), GameTimeSystem.GetTime().Milliseconds.ToString("00"));
+        m_TxtTime.text = string.Format("{0}:{1}.{2}", GameTimeSystem.GetTime().Minutes.ToString("00"), GameTimeSystem.GetTime().Seconds.ToString("00"), ((int)(GameTimeSystem.GetTime().Milliseconds * 0.1f)).ToString("00"));
     }
 
     public void SetScore(int score)
@@ -66,6 +81,16 @@ public class UIInGame : UIObject
     void OnClickJump()
     {
         GameManager.Instance.m_Running.Jump("Gomong_Jump_Run");
+    }
+
+    void OnClickUp()
+    {
+        GameManager.Instance.m_Running.MoveUp();
+    }
+
+    void OnClickDown()
+    {
+        GameManager.Instance.m_Running.MoveDown();
     }
 
     public void OnBeginDrag(PointerEventData data)
@@ -105,5 +130,18 @@ public class UIInGame : UIObject
     {
         GameManager.Instance.m_Running.m_Vertical = 0;
         GameManager.Instance.m_Running.m_Dir = 0;
+    }
+
+    public void SetState(StateInfo stateInfo, bool isItem)
+    {
+        for(int i = 0;i < m_ListTrapState.Count;i++)
+        {
+            if (m_ListTrapState[i].SetData(stateInfo, isItem)) return;
+        }
+
+        UIStateObject obj = Instantiate<UIStateObject>(m_UIStateObject, m_TransStateParent);
+        obj.SetData(stateInfo, isItem);
+        m_ListTrapState.Add(obj);
+
     }
 }

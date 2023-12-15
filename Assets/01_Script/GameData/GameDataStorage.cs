@@ -20,4 +20,10 @@ public class PlayerData
         m_SprintTime = 0;
         m_IsSprint = false;
     }
+
+    public void Reset()
+    {
+        m_HP = DataManager.Instance.m_BGData.hp_max;
+        m_IsJumpBlock = false;
+    }
 }

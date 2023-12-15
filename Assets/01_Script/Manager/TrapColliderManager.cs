@@ -144,12 +144,10 @@ public class TrapColliderManager : MonoBehaviour
             if (col == null)
             {
                 col = Instantiate(m_Traps[trap][0]);
-                col.m_Trans.SetParent(parent);
                 m_Traps[trap].Add(col);
             }
-            else
-                col.m_Trans.SetParent(parent);
 
+            col.m_Trans.SetParent(parent);
             col.Set(true);
             col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
 
@@ -181,6 +179,7 @@ public class TrapColliderManager : MonoBehaviour
         {
             if (m_TrapNames == null || m_TrapNames.Count <= 0) return null;
             trap = m_TrapNames[UnityEngine.Random.Range(0, m_TrapNames.Count)];
+            //trap = m_TrapNames[5];
         }
         else if (obstacleType == ObstacleType.Item)
         {
@@ -217,7 +216,7 @@ public class TrapColliderManager : MonoBehaviour
                 col.m_Trans.SetParent(parent);
 
             col.Set(true);
-            col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
+            col.transform.localScale = new Vector3(0.8f, 0.8f, 1f);//m_Traps[trap][0].m_Trans.localScale;
 
             return col;
         }

@@ -15,15 +15,7 @@ public class UIBase : UIObject
 
     public virtual void Show()
     {
-        SetActive(true);
-        if (m_IsMain == false)
-        {
-            GameManager.Instance.m_OutGameUI.SetPrevUI(this);
-        }
-        else
-        {
-            GameManager.Instance.m_OutGameUI.ShowMain();
-        }
+        GameManager.Instance.m_OutGameUI.SetPrevUI(this);
 
     }
 

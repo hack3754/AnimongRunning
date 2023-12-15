@@ -16,15 +16,16 @@ public class BgUpdate : MonoBehaviour
     int[] m_WayIndex;
     Vector3 m_Vec3;
     float m_BgValue;
-    float m_Score;
 
     int m_WayCount = 0;
     private void Awake()
     {
         m_WayIndex = new int[m_Ways.Length];
-        for (int i = 0; i < m_WayIndex.Length; i++)
+
+        for (int i = 0; i < m_Ways.Length; i++)
         {
             m_WayIndex[i] = i;
+            m_Ways[i].Init();
         }
     }
 
@@ -65,6 +66,17 @@ public class BgUpdate : MonoBehaviour
     {
         MapObject map = obj.GetComponent<MapObject>();
         m_Ways[m_WayCount].MapLoad(map);
+    }
+
+    public void GameReset()
+    {
+        for(int i = 0;i < m_Ways.Length;i++)
+        {
+            m_Ways[i].GameReset();
+            m_WayIndex[i] = i;
+        }
+
+        m_BgValue = 0;
     }
 
     public void InitMap()
@@ -136,7 +148,7 @@ public class BgUpdate : MonoBehaviour
 
     public void SetScore(float score)
     {
-        m_Score += score;
-        GameManager.Instance.m_InGameUI.SetScore((int)m_Score);
+        GameData.m_Score += score;
+        GameManager.Instance.m_InGameUI.SetScore((int)GameData.m_Score);
     }
 }

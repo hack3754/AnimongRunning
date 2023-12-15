@@ -9,7 +9,8 @@ public class StateInfo
 {
     public float m_Time;
     public TrapType m_Type;
-    public int m_Value;
+    public float m_Value;
+    public float m_StateTime;
 }
 
 public class Player : MonoBehaviour
@@ -25,7 +26,6 @@ public class Player : MonoBehaviour
     int m_LineIndex;
     TrapCollider m_Trap;
     List<TrapCollider> m_DmgStops = new List<TrapCollider>();
-    List<StateInfo> m_States = new List<StateInfo>();
     public void Init()
     {
         m_Animator.speed = 0.5f;
@@ -34,6 +34,13 @@ public class Player : MonoBehaviour
     private void UpdateState()
     {
         
+    }
+
+    public void GameRest()
+    {
+        m_DmgStops.Clear();
+        m_Trap = null;
+        m_Map = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -143,29 +150,6 @@ public class Player : MonoBehaviour
             m_DmgStops.Add(trap);
         }
     }
-
-    public void SetDotTrap(TrapCollider trap, TrapType trapType, int value)
-    {
-        if (trap.m_tData != null) return;
-
-        for (int i = 0;i < m_States.Count;i++)
-        {
-            if (m_States[i].m_Type == trapType)
-            {
-                m_States[i].m_Time = trap.m_tData.time;
-                m_States[i].m_Value = value;
-                return;
-            }
-        }
-
-        StateInfo stateInfo = new StateInfo();
-        stateInfo.m_Time = trap.m_tData.time;
-        stateInfo.m_Type = trapType;
-        stateInfo.m_Value = value;
-
-        m_States.Add(stateInfo);
-    }
-
     #region hitTest
     /*
     RaycastHit2D[] m_Hits = new RaycastHit2D[5];

@@ -21,6 +21,7 @@ public static class AMUtility
     public readonly static string TRAP = "Trap";
     public readonly static string ITEM = "Item";
 
+    public static WaitForEndOfFrame m_WaitForEndOfFrame = new WaitForEndOfFrame();
     public static void RandomSeed()
     {
         GameData.m_RadomSeed++;

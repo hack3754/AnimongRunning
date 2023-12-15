@@ -5,14 +5,22 @@ using UnityEngine;
 public class OutGameUIMain : UIObject
 {
     public UISelectChar m_UISelectChar;
+    public UIShop m_UIShop;
     public UIMain m_UIMain;
+
+    public GameObject m_ObjTop;
+    public GameObject m_ObjBg;
+    public ButtonObject m_BtnBack;
+
     List<UIBase> m_ListPrevUI;
 
     bool m_IsMain;
     public void Init()
     {
-        m_UISelectChar.Init();
         m_UIMain.Init(GameStart);
+        m_UISelectChar.Init();
+        m_UIShop.Init();
+        m_BtnBack.m_FncOnClick = OnClickBack;
 
         m_ListPrevUI = new List<UIBase>();
 
@@ -51,7 +59,15 @@ public class OutGameUIMain : UIObject
 
         m_ListPrevUI.Clear();
 
+        SetOutGameUI(true);
+
         m_UIMain.Show();
+    }
+
+    public void SetOutGameUI(bool isMain)
+    {
+        m_ObjBg.SetActive(!isMain);
+        m_ObjTop.SetActive(!isMain);
     }
 
     /// <summary>
@@ -87,12 +103,33 @@ public class OutGameUIMain : UIObject
 
     public void SetPrevUI(UIBase ui)
     {
+        if (ui.m_IsMain == false)
+        {
+            SetOutGameUI(false);
+            if (m_ListPrevUI.Count > 0)
+            {
+                if (m_ListPrevUI[m_ListPrevUI.Count - 1] != null) m_ListPrevUI[m_ListPrevUI.Count - 1].Hide();
+            }
+        }
+        else
+        {
+            SetOutGameUI(true);
+        }
+
         if (m_ListPrevUI.Contains(ui) == false) m_ListPrevUI.Add(ui);
+
+        ui.SetActive(true);
+
     }
 
     void GameStart()
     {
         Hide();
         GameManager.Instance.GameReadyStart();
+    }
+
+    void OnClickBack()
+    {
+        ShowPrevUI();
     }
 }
