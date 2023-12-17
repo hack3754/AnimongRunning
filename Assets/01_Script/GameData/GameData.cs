@@ -8,7 +8,8 @@ public static class GameData
     public static float m_BGSpeed;
     public static float m_CAMSpeed;
 
-    public static float m_SlowSpeed;
+    public static float m_SpeedSlow;
+    public static float m_SpeedUp;
 
     public static int m_RadomSeed;
 

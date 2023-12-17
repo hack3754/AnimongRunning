@@ -18,6 +18,7 @@ public class GameManager : MSingleton<GameManager>
     public BGControl m_BGControl;
     public GameObject m_BG;
     public bool m_IsStop;
+    public bool m_IsSpeedUp;
     public bool m_IsStun;
     bool m_IsGameStart;
     bool m_IsReadyStart;
@@ -27,6 +28,7 @@ public class GameManager : MSingleton<GameManager>
         m_LoignUI.Init();
         m_IsStop = false;
         m_IsStun = false;
+        m_IsSpeedUp = false;
 
 #if UNITY_EDITOR
 
@@ -164,6 +166,11 @@ public class GameManager : MSingleton<GameManager>
         m_IsGameStart = false;
         m_InGameUI.ShowResult((int)GameData.m_Score, GameTimeSystem.GetTime());
         m_Running.m_Player.Idle();
+    }
+
+    public void GameOverBlock()
+    {
+        m_IsGameStart = false;
     }
 
     void ShowOutGame()

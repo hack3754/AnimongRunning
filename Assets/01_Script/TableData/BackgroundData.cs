@@ -8,6 +8,7 @@ public class BackgroundData : DataBase
     public float hp_max;
     public float min_speed;
     public float max_speed;
+    public float max_speed_up;
     public float sprint_time;
     public float sprint_speed;
     public float cam_max_speed;
@@ -29,6 +30,7 @@ public class BackgroundData : DataBase
             case "hp_max": hp_max = float.Parse(_row[idx_value]); break;
             case "min_speed": min_speed = float.Parse(_row[idx_value]); break;
             case "max_speed": max_speed = float.Parse(_row[idx_value]); break;
+            case "max_speed_up": max_speed_up = float.Parse(_row[idx_value]); break;
             case "sprint_time": sprint_time = float.Parse(_row[idx_value]); break;
             case "sprint_speed": sprint_speed = float.Parse(_row[idx_value]); break;
             case "cam_max_speed": cam_max_speed = float.Parse(_row[idx_value]); break;

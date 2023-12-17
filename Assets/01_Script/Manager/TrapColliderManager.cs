@@ -165,12 +165,12 @@ public class TrapColliderManager : MonoBehaviour
         {
             if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
             else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
-            else if (UnityEngine.Random.Range(0, 1000) <= 300) obstacleType = ObstacleType.Max;
+            else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
         }
         else if (trapType.Equals(AMUtility.ITEM))
         {
             if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
-            else if (UnityEngine.Random.Range(0, 1000) <= 300) obstacleType = ObstacleType.Max;
+            else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
         }
         else return null;
 

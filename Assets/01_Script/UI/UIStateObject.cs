@@ -29,15 +29,12 @@ public class UIStateObject : UIObject
             yield return AMUtility.m_WaitForEndOfFrame;
             m_StateInfo.m_StateTime += Time.deltaTime;
 
-            if (m_StateInfo.m_Type == TrapType.DotDmg)
+            ticktime += Time.deltaTime;
+            if (ticktime >= 0.1f)
             {
-                ticktime += Time.deltaTime;
-                if (ticktime >= 0.1f)
-                {
-                    //Debug.Log("Tick");
-                    GameManager.Instance.m_Running.SetDotTrigger(m_StateInfo);
-                    ticktime = 0;
-                }
+                //Debug.Log("Tick");
+                GameManager.Instance.m_Running.SetDotTrigger(m_StateInfo);
+                ticktime = 0;
             }
 
             m_ImgGauge.fillAmount = m_StateInfo.m_StateTime / m_StateInfo.m_Time;

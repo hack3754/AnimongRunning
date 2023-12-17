@@ -78,6 +78,7 @@ public class RunningManager : MonoBehaviour
 
     public void GameReadyStart()
     {
+        /*
         m_Time += Time.deltaTime;
         m_BgUpdate.m_TransBg.localPosition = Vector3.Lerp(m_PosOri, m_StartPos, m_Time);
         if (m_Time < 1) GameManager.Instance.m_BGControl.BgMove();
@@ -85,6 +86,8 @@ public class RunningManager : MonoBehaviour
         {
             StartCoroutine(GameStart());
         }
+        */
+        StartCoroutine(GameStart());
     }
 
     IEnumerator GameStart()
@@ -115,12 +118,20 @@ public class RunningManager : MonoBehaviour
             m_Vec2 = Vector2.zero;
 
 
-            if (GameData.m_SlowSpeed > 0)
+            if (GameData.m_SpeedSlow > 0)
             {
                 if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.min_speed)
                 {
-                    GameData.m_BGSpeed -= GameData.m_SlowSpeed * Time.deltaTime;
+                    GameData.m_BGSpeed -= GameData.m_SpeedSlow * Time.deltaTime;
                     if (GameData.m_BGSpeed <= DataManager.Instance.m_BGData.min_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
+                }
+            }
+            else if(GameData.m_SpeedUp > 0)
+            {
+                if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed_up)
+                {
+                    GameData.m_BGSpeed += GameData.m_SpeedUp * Time.deltaTime;
+                    if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed_up) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed_up;
                 }
             }
             else
@@ -129,11 +140,12 @@ public class RunningManager : MonoBehaviour
                 if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
                 {
                     GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
-                    //Debug.Log(GameData.m_BGSpeed);
-
                     if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
-
-                    m_Time += Time.deltaTime;
+                }
+                else if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.max_speed)
+                {
+                    GameData.m_BGSpeed -= DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
+                    if (GameData.m_BGSpeed <= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
                 }
                 /*
                 if (GameData.m_CAMSpeed < DataManager.Instance.m_BGData.cam_max_speed)
@@ -225,6 +237,17 @@ public class RunningManager : MonoBehaviour
         }
     }
 
+    public void GameOverBlock()
+    {
+        StartCoroutine(GameOverPlayer());
+    }
+    IEnumerator GameOverPlayer()
+    {
+        GameManager.Instance.GameOverBlock();
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.GameOver();
+    }
+
     public void ResetRunning()
     {
         //GameData.m_SlowSpeed = 0;
@@ -288,7 +311,7 @@ public class RunningManager : MonoBehaviour
         switch (trapType)
         {
             case TrapType.Slow:
-                GameData.m_SlowSpeed = dataValue;
+                GameData.m_SpeedSlow = dataValue;
                 m_IsJumpBlock = true;
                 if(dataTime > 0)
                 {
@@ -359,10 +382,14 @@ public class RunningManager : MonoBehaviour
 
     public void DeleteDotTrap(StateInfo info)
     {
-        if(info.m_Type == TrapType.Slow)
+        if (info.m_Type == TrapType.Slow)
         {
-            GameData.m_SlowSpeed = 0;
+            GameData.m_SpeedSlow = 0;
             m_IsJumpBlock = false;
+        }
+        else if (info.m_Type == TrapType.SpdUp)
+        {
+            GameData.m_SpeedUp = 0;
         }
 
         if(m_States.Contains(info)) m_States.Remove(info);
@@ -373,10 +400,12 @@ public class RunningManager : MonoBehaviour
         switch (stateInfo.m_Type)
         {
             case TrapType.Slow:
-                GameData.m_SlowSpeed = stateInfo.m_Value;
+                GameData.m_SpeedSlow = stateInfo.m_Value;
                 m_IsJumpBlock = true;
                 break;
             case TrapType.SpdUp:
+                GameData.m_SpeedUp = stateInfo.m_Value;
+                GameManager.Instance.m_IsSpeedUp = true;
                 break;
             case TrapType.DotDmg:
                 GameData.m_Player.m_HP -= stateInfo.m_Value;

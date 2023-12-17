@@ -70,8 +70,11 @@ public class Player : MonoBehaviour
             BlockObject block = collision.gameObject.GetComponent<BlockObject>();
             if (block != null)
             {
-                GameManager.Instance.m_IsStop = true;
-                GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
+                //게임 오브에 대한 코드
+                GameManager.Instance.m_Running.GameOverBlock();
+                //멈춤에 대한 코드
+                //GameManager.Instance.m_IsStop = true;
+                //GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
             }
         }
 
@@ -84,8 +87,6 @@ public class Player : MonoBehaviour
                 m_DmgStops.Clear();
             }
         }
-
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

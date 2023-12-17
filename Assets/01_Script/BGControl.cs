@@ -23,17 +23,17 @@ public class BGControl : MonoBehaviour
         {
             if (m_BgSpeed.Length > i)
             {
-                if (GameData.m_SlowSpeed > 0)
+                if (GameData.m_SpeedSlow > 0)
                 {
                     if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.min_speed)
                     {
-                        m_BgSpeedValue[i] -= GameData.m_SlowSpeed * Time.deltaTime;
+                        m_BgSpeedValue[i] -= GameData.m_SpeedSlow * Time.deltaTime;
                     }
                 }
                 else
                 {
                     if (m_BgSpeedValue[i] <= m_BgSpeed[i])
-                        m_BgSpeedValue[i] += GameData.m_SlowSpeed * Time.deltaTime;
+                        m_BgSpeedValue[i] += GameData.m_SpeedSlow * Time.deltaTime;
                     else
                         m_BgSpeedValue[i] = m_BgSpeed[i];
                 }
