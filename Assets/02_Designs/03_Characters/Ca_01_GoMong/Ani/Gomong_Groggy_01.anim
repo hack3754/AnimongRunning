@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gomong_Groggy
+  m_Name: Gomong_Groggy_01
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -54,11 +54,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 45b5e3a7c4959174ea42d1724d2414af, type: 3}
+      value: {fileID: 21300000, guid: 84001849752bd0644b6b4b782161fdf5, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: af2be1b340e544a4db0e9f526d4cbcbe, type: 3}
+      value: {fileID: 21300000, guid: 771d8661f922e8f4b80f4cace8fae0b0, type: 3}
     - time: 0.05
-      value: {fileID: 21300000, guid: af2be1b340e544a4db0e9f526d4cbcbe, type: 3}
+      value: {fileID: 21300000, guid: 771d8661f922e8f4b80f4cace8fae0b0, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 212
@@ -103,9 +103,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 45b5e3a7c4959174ea42d1724d2414af, type: 3}
-    - {fileID: 21300000, guid: af2be1b340e544a4db0e9f526d4cbcbe, type: 3}
-    - {fileID: 21300000, guid: af2be1b340e544a4db0e9f526d4cbcbe, type: 3}
+    - {fileID: 21300000, guid: 84001849752bd0644b6b4b782161fdf5, type: 3}
+    - {fileID: 21300000, guid: 771d8661f922e8f4b80f4cace8fae0b0, type: 3}
+    - {fileID: 21300000, guid: 771d8661f922e8f4b80f4cace8fae0b0, type: 3}
     - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
     - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
     - {fileID: 21300000, guid: 6a020373fdda8f449b9b5b1907497e8c, type: 3}
