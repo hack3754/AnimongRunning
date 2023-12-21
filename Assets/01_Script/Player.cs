@@ -71,10 +71,10 @@ public class Player : MonoBehaviour
             if (block != null)
             {
                 //게임 오브에 대한 코드
-                GameManager.Instance.m_Running.GameOverBlock();
+                //GameManager.Instance.m_Running.GameOverBlock();
                 //멈춤에 대한 코드
-                //GameManager.Instance.m_IsStop = true;
-                //GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
+                GameManager.Instance.m_IsStop = true;
+                GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
             }
         }
 

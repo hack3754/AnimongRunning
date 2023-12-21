@@ -22,11 +22,13 @@ public class TrapColliderManager : MonoBehaviour
     public TrapCollider[] m_PrefabsItem;
     public TrapCollider[] m_PrefabsScore;
     public TrapCollider[] m_PrefabsGold;
+    public TrapCollider[] m_PrefabsBlock;
 
     List<string> m_TrapNames;
     List<string> m_ItemNames;
     List<string> m_ScoreNames;
     List<string> m_GoldNames;
+    List<string> m_BlockNames;
     Dictionary<string, List<TrapCollider>> m_Traps;
 
 
@@ -101,6 +103,23 @@ public class TrapColliderManager : MonoBehaviour
                 m_Traps[m_PrefabsGold[i].name].Add(m_PrefabsGold[i]);
             }
         }
+
+        m_BlockNames = new List<string>();
+        for (int i = 0; i < m_PrefabsBlock.Length; i++)
+        {
+            if (m_BlockNames.Contains(m_PrefabsBlock[i].name) == false) m_BlockNames.Add(m_PrefabsBlock[i].name);
+
+            m_PrefabsBlock[i].Init();
+            if (m_PrefabsBlock[i].m_tData != null)
+            {
+                if (m_Traps.ContainsKey(m_PrefabsBlock[i].m_tData.res) == false)
+                {
+                    m_Traps.Add(m_PrefabsBlock[i].m_tData.res, new List<TrapCollider>());
+                }
+
+                m_Traps[m_PrefabsBlock[i].name].Add(m_PrefabsBlock[i]);
+            }
+        }
     }
 
     public TrapCollider GetTrapCollider(Transform parent, ObstacleType obstacleType)
@@ -160,38 +179,48 @@ public class TrapColliderManager : MonoBehaviour
     public TrapCollider GetRandomTrapCollider(Transform parent, string trapType)
     {
         ObstacleType obstacleType = ObstacleType.Score;
-
-        if (trapType.Equals(AMUtility.TRAP))
-        {
-            if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
-            else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
-            else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
-        }
-        else if (trapType.Equals(AMUtility.ITEM))
-        {
-            if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
-            else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
-        }
-        else return null;
-
         string trap = string.Empty;
-        if (obstacleType == ObstacleType.Trap)
+
+        if (trapType.Equals(AMUtility.BLOCK))
         {
-            if (m_TrapNames == null || m_TrapNames.Count <= 0) return null;
-            trap = m_TrapNames[UnityEngine.Random.Range(0, m_TrapNames.Count)];
-            //trap = m_TrapNames[5];
+            obstacleType = ObstacleType.Trap;
+            if (m_BlockNames == null || m_BlockNames.Count <= 0) return null;
+            trap = m_BlockNames[UnityEngine.Random.Range(0, m_BlockNames.Count)];
         }
-        else if (obstacleType == ObstacleType.Item)
+        else
         {
-            if (m_ItemNames == null || m_ItemNames.Count <= 0) return null;
-            trap = m_ItemNames[UnityEngine.Random.Range(0, m_ItemNames.Count)];
+            if (trapType.Equals(AMUtility.TRAP))
+            {
+                if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
+                else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
+                else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
+            }
+            else if (trapType.Equals(AMUtility.ITEM))
+            {
+                if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
+                else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
+            }
+            else return null;
+
+            if (obstacleType == ObstacleType.Trap)
+            {
+                if (m_TrapNames == null || m_TrapNames.Count <= 0) return null;
+                trap = m_TrapNames[UnityEngine.Random.Range(0, m_TrapNames.Count)];
+                //trap = m_TrapNames[5];
+            }
+            else if (obstacleType == ObstacleType.Item)
+            {
+                if (m_ItemNames == null || m_ItemNames.Count <= 0) return null;
+                trap = m_ItemNames[UnityEngine.Random.Range(0, m_ItemNames.Count)];
+            }
+            else if (obstacleType == ObstacleType.Score)
+            {
+                if (m_ScoreNames == null || m_ScoreNames.Count <= 0) return null;
+                trap = m_ScoreNames[UnityEngine.Random.Range(0, m_ScoreNames.Count)];
+            }
+            else return null;
         }
-        else if (obstacleType == ObstacleType.Score)
-        {
-            if (m_ScoreNames == null || m_ScoreNames.Count <= 0) return null;
-            trap = m_ScoreNames[UnityEngine.Random.Range(0, m_ScoreNames.Count)];
-        }
-        else return null;
+        
 
         if (m_Traps.ContainsKey(trap))
         {

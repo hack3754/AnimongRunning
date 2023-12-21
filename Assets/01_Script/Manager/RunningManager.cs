@@ -346,6 +346,19 @@ public class RunningManager : MonoBehaviour
                     AddDotTrap(trapType, dataValue / 100f, dataTime, !trap.m_tData.IsTrap);
                 }
                 break;
+            case TrapType.Death:
+                GameOverBlock();
+                break;
+            case TrapType.HpRecovery:
+                GameData.m_Player.m_HP += dataValue;
+                /*
+                if(GameData.m_Player.m_HP >= GameData.m_Player.m_MaxHP)
+                {
+                    GameData.m_Player.m_HP = GameData.m_Player.m_MaxHP;
+                }
+                */
+                trap.SetDisable();
+                break;
         }
     }
 

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class MapDataItem
@@ -82,5 +84,21 @@ public class MapData : DataDicBase<int, MapDataItem>
         if (m_Dic == null) return 2;
 
         return UnityEngine.Random.Range(1, m_Dic.Count) + 1;
+    }
+
+    public bool TryGetRandom(int nextid, out int id,  out MapDataItem mapData)
+    {
+        mapData = null;
+        id = 0;
+
+        if (m_Dic == null || m_Dic.ContainsKey(nextid) == false) return false;
+
+        var list = m_Dic[1].nextMaps;
+        if (list == null) list = new List<int>();
+        var pair = m_Dic.OrderBy(g => Guid.NewGuid()).FirstOrDefault(p => list.Contains(p.Key) == false && p.Key != 1);
+        id = pair.Key;
+        mapData = pair.Value;
+
+        return mapData is not null;
     }
 }

@@ -72,7 +72,7 @@ public class UISelectChar : UIDragBase
     {
         for(int i = 0;i < m_Datas.Count;i++)
         {
-            m_Datas[i].m_IsLock = GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
+            m_Datas[i].m_IsLock = false;//GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
             m_Cells[i].Refresh();
         }
 

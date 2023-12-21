@@ -355,7 +355,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_Gomong_Run
+  m_Name: UI_Run
   m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions: []
@@ -381,7 +381,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_Gomong_Idle_01
+  m_Name: UI_Idle_01
   m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions: []

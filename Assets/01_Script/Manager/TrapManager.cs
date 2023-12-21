@@ -21,8 +21,6 @@ public class TrapManager : MonoBehaviour
 
         if (tileMap == null) return;
 
-        ObstacleType obstacleType = ObstacleType.Max;
-
         foreach (Vector3Int pos in tileMap.cellBounds.allPositionsWithin)
         {
             if (!tileMap.HasTile(pos)) continue;
@@ -45,6 +43,14 @@ public class TrapManager : MonoBehaviour
                 m_Traps.Add(col);
             }
         }
+
+        Color tileColor = new Color(1f, 1f, 1f, 0);
+        foreach (var tile in m_Tilemaps)
+        {
+            tile.color = tileColor;
+            tile.gameObject.SetActive(false);
+        }
+
     }
 
     public void TrapsRelase()

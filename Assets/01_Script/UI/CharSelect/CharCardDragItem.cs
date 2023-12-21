@@ -67,7 +67,7 @@ public class CharCardDragItem : DragCell
 
         if (m_Animator != null)
         {
-            m_Animator.Play("UI_Gomong_Idle_01", -1, 0);
+            m_Animator.Play("UI_Idle_01", -1, 0);
             m_Animator.speed = 0.5f;
         }
     }
@@ -81,7 +81,7 @@ public class CharCardDragItem : DragCell
 
         if(m_Animator != null)
         {
-            m_Animator.Play("UI_Gomong_Run", -1, 0);
+            m_Animator.Play("UI_Run", -1, 0);
             m_Animator.speed = 0.5f;
         }
     }

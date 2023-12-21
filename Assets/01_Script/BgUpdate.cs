@@ -32,30 +32,33 @@ public class BgUpdate : MonoBehaviour
     public IEnumerator FirstMapLoad()
     {
         MapDataItem tData = null;
-        int nextId = 0;
+        int id = 0;
+        int firstId = 2;
         m_WayCount = 0;
         for (int i = 0; i < m_Ways.Length; i++)
         {
             if (i == 0)
             {
-                tData = DataManager.Instance.m_MapData.Get(i + 1);
+                id = 1;
+                tData = DataManager.Instance.m_MapData.Get(1);
+            }
+            else if(i == m_Ways.Length - 1 )
+            {
+                //nextId = 0;
+                //nextId = DataManager.Instance.m_MapData.GetRandom();
+                //tData = DataManager.Instance.m_MapData.Get(nextId);
+                DataManager.Instance.m_MapData.TryGetRandom(firstId, out id, out tData);
+                if (tData == null) tData = DataManager.Instance.m_MapData.Get(2);
             }
             else
             {
-                nextId = 0;
-                if (tData != null)
-                {
-                    //nextId = tData.nextMaps[UnityEngine.Random.Range(0, tData.nextMaps.Count)];
-                    nextId = DataManager.Instance.m_MapData.GetRandom();
-                    tData = DataManager.Instance.m_MapData.Get(nextId);
-                }
-
-                if (tData == null || nextId == 0) tData = DataManager.Instance.m_MapData.Get(2);
+                id = firstId;
+                tData = DataManager.Instance.m_MapData.Get(firstId);
             }
 
             if (tData != null)
             {
-                m_Ways[m_WayCount].SetMapData(tData);
+                m_Ways[m_WayCount].SetMapData(tData, id);
                 yield return ResourceManager.Instance.StartCoroutine(ResourceManager.Instance.CoInstantiate(tData.res, m_Ways[i].m_Trans, OnEndLoad));
                 m_WayCount++;
             }
@@ -110,7 +113,7 @@ public class BgUpdate : MonoBehaviour
         UpdateWay();
 
         //UI Score
-        //SetScore(m_BgValue);
+        SetScore(m_BgValue);
     }
 
 
@@ -131,7 +134,7 @@ public class BgUpdate : MonoBehaviour
             m_Ways[m_WayIndex[0]].m_Trans.localPosition = m_Vec3;
 
             //Debug.Log(m_WayIndex[0]);
-            m_Ways[m_WayIndex[0]].NextMapLoad();
+            m_Ways[m_WayIndex[0]].NextMapLoad(m_Ways[m_WayIndex[m_WayIndex.Length - 1]].ID);
             Sort();
         }
     }

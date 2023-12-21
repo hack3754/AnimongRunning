@@ -20,6 +20,7 @@ public static class AMUtility
     //Object Key
     public readonly static string TRAP = "Trap";
     public readonly static string ITEM = "Item";
+    public readonly static string BLOCK = "Block";
 
     public static WaitForEndOfFrame m_WaitForEndOfFrame = new WaitForEndOfFrame();
     public static void RandomSeed()

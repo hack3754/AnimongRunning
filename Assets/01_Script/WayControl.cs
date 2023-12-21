@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WayControl : MonoBehaviour
@@ -9,6 +8,7 @@ public class WayControl : MonoBehaviour
 
     MapObject m_Map;
     MapDataItem m_tData;
+    public int ID { get; set; }
 
     Vector3 m_PosOri;
 
@@ -17,23 +17,20 @@ public class WayControl : MonoBehaviour
         m_PosOri = m_Trans.localPosition;
     }
 
-    public void NextMapLoad()
+    public void NextMapLoad(int nextId)
     {
         if (m_tData == null) return;
 
         m_Map.TrapsRelase();
 
         Destroy(m_Map.gameObject);
-
-        int nextId = 0;
-
-        nextId = m_tData.nextMaps[Random.Range(0, m_tData.nextMaps.Count)];
         MapLoad(nextId);
     }
 
-    public void SetMapData(MapDataItem tData)
+    public void SetMapData(MapDataItem tData, int id)
     {
         m_tData = tData;
+        ID = id;
     }
 
     public void MapLoad(MapObject map)
@@ -54,9 +51,13 @@ public class WayControl : MonoBehaviour
         m_tData = null;
     }
 
-    public void MapLoad(int id)
+    public void MapLoad(int nextId)
     {
-        m_tData = DataManager.Instance.m_MapData.Get(id);
+        //m_tData = DataManager.Instance.m_MapData.Get(id);
+        int id = 0;
+        DataManager.Instance.m_MapData.TryGetRandom(nextId, out id, out m_tData);
+        ID = id;
+
         if (m_tData != null)
         {
             //ResourceManager.Instance.Instantiate(m_tData.name, m_Trans, OnEndLoad);
