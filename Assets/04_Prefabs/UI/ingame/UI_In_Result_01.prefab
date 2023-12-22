@@ -3350,6 +3350,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5408545027988687741, guid: 3ab5a30bee72c6b45b380842690ebee1, type: 3}
+      propertyPath: m_text
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408545027988687741, guid: 3ab5a30bee72c6b45b380842690ebee1, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207306709905022373, guid: 3ab5a30bee72c6b45b380842690ebee1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207306709905022373, guid: 3ab5a30bee72c6b45b380842690ebee1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 6988631825074797689, guid: 3ab5a30bee72c6b45b380842690ebee1, type: 3}
       propertyPath: m_Name
       value: Btn_BG_W400H104_01
@@ -3383,6 +3399,10 @@ PrefabInstance:
     - target: {fileID: 3700419236091193061, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
       propertyPath: m_text
       value: Home
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700419236091193061, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4996578082843854830, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
       propertyPath: m_Pivot.x
@@ -3467,6 +3487,14 @@ PrefabInstance:
     - target: {fileID: 4996578082843854830, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316100904411393419, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316100904411393419, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8925498177549987638, guid: bb4bf8b1b7d1ad34f8498ac4615b8fb4, type: 3}
       propertyPath: m_SizeDelta.x

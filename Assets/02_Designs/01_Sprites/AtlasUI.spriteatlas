@@ -109,6 +109,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0683797297c739d489c81772d6ac4ae9, type: 3}
   - {fileID: 21300000, guid: 3e9c8692e4e13ce47b10a390fc5c8ad6, type: 3}
   - {fileID: 21300000, guid: e35f6ca27d8605a4baae252c0ea2a451, type: 3}
+  - {fileID: 21300000, guid: 5f85d5b281b10f94181ed6870775cb4f, type: 3}
   - {fileID: 21300000, guid: 461296c2302088c43bd2b12113024c79, type: 3}
   - {fileID: 21300000, guid: 546640d2e7a8add4bb5f4f8e1212f3ac, type: 3}
   - {fileID: 21300000, guid: b13fced220dc45642ad3ec168d34862b, type: 3}
@@ -246,6 +247,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4c4b032b296b9424f854edf456fd9af9, type: 3}
   - {fileID: 21300000, guid: 38333f2bc823a7f4e9ee54052b8dada3, type: 3}
   - {fileID: 21300000, guid: 216dc23b613ba464a93557453d50fb2e, type: 3}
+  - {fileID: 21300000, guid: 09cb543b852972b40a047338b0a74e3a, type: 3}
   - {fileID: 21300000, guid: 215bd04bac6dc8146ac9d85cb8d90c59, type: 3}
   - {fileID: 21300000, guid: 8365184b77ad98f42ad24759be702c11, type: 3}
   - {fileID: 21300000, guid: 895e594bab932394e994aa9b8b655323, type: 3}
@@ -379,6 +381,7 @@ SpriteAtlas:
   - Tod_Jump_02
   - Gomong_Run_01
   - Mozzi_S02_Run_02
+  - InGame_LV_Gauge_BG_01
   - bg_bestscore
   - Mozzi_S01_Run_06
   - Mozzi_M04_Run_04
@@ -516,6 +519,7 @@ SpriteAtlas:
   - btn_start
   - btn_start_bg_01
   - Gomong_Run_03
+  - InGame_LV_Gauge_BG_01_01
   - Bg_Bush_02_120x120_04
   - img_x
   - Mozzi_M03_Damage_01
