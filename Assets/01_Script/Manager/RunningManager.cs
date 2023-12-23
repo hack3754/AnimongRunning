@@ -74,6 +74,8 @@ public class RunningManager : MonoBehaviour
     public void SetOutGame()
     {
         m_Obj.SetActive(true);
+        m_Player.SetPlayer();
+        GameManager.Instance.m_InGameUI.SetHP(GameData.m_Player.m_MaxHP);
     }
 
     public void GameReadyStart()
@@ -109,7 +111,7 @@ public class RunningManager : MonoBehaviour
             return;
         }
 
-        GameManager.Instance.m_InGameUI.SetTime();
+        //GameManager.Instance.m_InGameUI.SetTime();
 
         if (GameManager.Instance.m_IsStop == false && GameManager.Instance.m_IsStun == false)
         {
@@ -374,7 +376,6 @@ public class RunningManager : MonoBehaviour
         {
             if (m_States[i].m_Type == trapType)
             {
-                Debug.Log("Re Start");
                 m_States[i].m_StateTime = 0;
                 m_States[i].m_Time = dataTime;
                 m_States[i].m_Value = dataValue;

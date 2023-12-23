@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
-
+using TMPro;
 public class UIInGame : UIObject
 {
     public Camera m_Cam;
     public Text m_TxtTime;
+    public TMP_Text m_TxtHp;
     public Text m_TxtScore;
-    public UIGauge m_UIHP;
+    public UIGauge[] m_UIHP;
+    public UIGauge m_UIEmergencyHP;
     public EventTrigger m_MoveTigger;
     //public ButtonObject m_BtnJump;
 
@@ -25,12 +26,18 @@ public class UIInGame : UIObject
     Vector3 m_BeginPos;
     Vector3 m_DragPos;
     Vector3 m_PreDragPos;
-
+    float m_HpPer;
+    int m_HpIndex;
     public void Init()
     {
         m_TxtScore.text = "0";
-        m_UIHP.Init();
-        m_UIHP.SetValue(1);
+        for (int i = 0; i < m_UIHP.Length; i++)
+        {
+            m_UIHP[i].Init();
+            m_UIHP[i].SetValue(1);
+        }
+        m_UIEmergencyHP.Init();
+        m_UIEmergencyHP.SetValue(1);
         //m_BtnJump.m_FncOnClick = OnClickJump;
         m_BtnUp.m_FncOnClick = OnClickUp;
         m_BtnDown.m_FncOnClick = OnClickDown;
@@ -60,7 +67,7 @@ public class UIInGame : UIObject
     {
         m_TxtTime.text = "00:00.00";
         m_TxtScore.text = "0";
-        m_UIHP.SetValue(1);
+        SetHP(DataManager.Instance.m_BGData.hp_max);
     }
 
     public void SetTime()
@@ -75,7 +82,41 @@ public class UIInGame : UIObject
 
     public void SetHP(float hpValue)
     {
-        m_UIHP.SetValue(hpValue / DataManager.Instance.m_BGData.hp_max);
+        m_TxtHp.text = ((int)hpValue).ToString();
+        m_HpPer = hpValue / DataManager.Instance.m_BGData.hp_max;
+        m_HpIndex = (int)m_HpPer;
+        if (m_HpIndex >= 0)
+        {
+            if (m_HpPer <= 0.4f)
+            {
+                for (int i = 0; i < m_UIHP.Length; i++)
+                {
+                    m_UIHP[i].SetActive(false);
+                }
+
+                m_UIEmergencyHP.SetActive(true);
+                m_UIEmergencyHP.SetValue(m_HpPer);
+            }
+            else
+            {
+                for (int i = 0; i < m_UIHP.Length; i++)
+                {
+                    if (i <= m_HpIndex)
+                    {
+                        m_UIHP[i].SetActive(true);                        
+                        if (m_HpPer - i < 1)
+                        {
+                            m_UIHP[i].SetValue(m_HpPer - i);
+                        }
+                        else
+                            m_UIHP[i].SetValue(1);
+                    }
+                    else m_UIHP[i].SetActive(false);
+                }
+
+                m_UIEmergencyHP.SetActive(false);
+            }
+        }
     }
 
     void OnClickJump()

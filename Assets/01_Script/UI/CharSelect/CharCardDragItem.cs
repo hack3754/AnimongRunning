@@ -21,6 +21,7 @@ public class CharCardDragItem : DragCell
 {
     CharCardDragData m_Data;
     public RectTransform m_RectChar;
+    public ButtonObject m_Btn;
     public Image m_ImgIcon;
     public GameObject m_ObjLock;
     float m_Rot;
@@ -30,15 +31,20 @@ public class CharCardDragItem : DragCell
     public override void Init(IDragCellData data)
     {
         base.Init(data);
+
+        m_Btn.m_FncOnClick = OnClickItem;
+
         m_Data = (CharCardDragData)data;
         m_Rot = m_Data.Index % 2 == 0 ? -5 : 5;
-        string key = ResourceKey.GetKey(ResourceKey.m_KeyCharPrefab, m_Data.m_tData.res);
+        string key = ResourceKey.GetKey(ResourceKey.m_KeyCharUIPrefab, m_Data.m_tData.res);
         GameObject obj = ResourceLoadData.Instance.GetPrefab(key);
         if (obj != null)
         {
             GameObject charObj = Instantiate<GameObject>(obj, m_RectChar);
             m_Animator = charObj.GetComponent<Animator>();
         }
+
+        obj = null;
     }
 
     public override void SetFunction(Action<IDragCellData> fncCenter, Action<IDragCellData> fncMove)
@@ -84,5 +90,11 @@ public class CharCardDragItem : DragCell
             m_Animator.Play("UI_Run", -1, 0);
             m_Animator.speed = 0.5f;
         }
+    }
+
+    
+    void OnClickItem()
+    {
+        m_FncClickItem?.Invoke(m_Data);
     }
 }

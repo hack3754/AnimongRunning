@@ -39,17 +39,6 @@ public class OutGameUIMain : UIObject
     }
 
 
-    public void HidePrevUI(UIBase ui)
-    {
-        if (m_ListPrevUI.Count > 0)
-        {
-            if (m_ListPrevUI[m_ListPrevUI.Count - 1].Equals(ui) == false)
-                m_ListPrevUI[m_ListPrevUI.Count - 1].Hide();
-        }
-
-        if (m_ListPrevUI.Count <= 0) ShowMain();
-
-    }
     public void ShowMain()
     {
         for(int i = 0; i < m_ListPrevUI.Count;i++)
@@ -90,16 +79,6 @@ public class OutGameUIMain : UIObject
             ShowMain();
         }
     }
-
-    public void HidePrevUI()
-    {
-        if (m_ListPrevUI.Count > 0)
-        {
-            if (m_ListPrevUI[m_ListPrevUI.Count - 1] != null) m_ListPrevUI[m_ListPrevUI.Count - 1].Hide();
-            m_ListPrevUI.RemoveAt(m_ListPrevUI.Count - 1);
-        }
-    }
-
 
     public void SetPrevUI(UIBase ui)
     {

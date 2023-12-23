@@ -132,12 +132,21 @@ public class GameManager : MSingleton<GameManager>
         string key;
         foreach (var dicData in dic)
         {
+            key = ResourceKey.GetKey(ResourceKey.m_KeyCharUIPrefab, dicData.Value.res);
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                yield return StartCoroutine(ResourceManager.Instance.LoadPrefab(key, AddPrefab));
+            }
+
             key = ResourceKey.GetKey(ResourceKey.m_KeyCharPrefab, dicData.Value.res);
 
-            if (string.IsNullOrEmpty(key)) continue;
-
-            yield return StartCoroutine(ResourceManager.Instance.LoadPrefab(key, AddPrefab));
+            if (!string.IsNullOrEmpty(key))
+            {
+                yield return StartCoroutine(ResourceManager.Instance.LoadPrefab(key, AddPrefab));
+            }
         }
+
 
         yield return StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad());
 

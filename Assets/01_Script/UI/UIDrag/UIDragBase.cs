@@ -16,12 +16,17 @@ public class UIDragBase : UIBase, IBeginDragHandler, IDragHandler, IEndDragHandl
     bool m_IsMove;
     float m_BeginValue;
     float m_Pos;
-    int m_Index;
+    protected int m_Index;
 
     public override void Init()
     {
         m_Index = 0;
         m_ListData = new List<IDragCellData>();
+
+        for(int i = 0; i  < m_Cells.Length;i++)
+        {
+            m_Cells[i].m_FncClickItem = OnClickItem;
+        }
     }
 
     public virtual void Add(IDragCellData data)
@@ -46,7 +51,7 @@ public class UIDragBase : UIBase, IBeginDragHandler, IDragHandler, IEndDragHandl
         if (m_IsVertical)
         {
             m_BeginValue = eventData.position.y;
-            m_Pos = m_Content.m_Rect.localPosition.x;
+            m_Pos = m_Content.m_Rect.localPosition.y;
         }
         else
         {
@@ -133,5 +138,28 @@ public class UIDragBase : UIBase, IBeginDragHandler, IDragHandler, IEndDragHandl
             if (i == m_Index) m_Cells[i].SetCenterData(m_ListData[i]);
             else m_Cells[i].SetMoveData(m_Index, m_ListData[i]);
         }
+    }
+
+
+    //override에서 if(m_Index == data.Index) return; 필수
+    protected virtual void OnClickItem(IDragCellData data)
+    {
+        m_Pos = m_Content.m_Rect.localPosition.x;
+
+        m_IsMove = true;
+
+        if (m_Index < data.Index)
+        {
+            m_Pos -= m_MoveValue * (data.Index - m_Index);
+        }
+        else if (m_Index > data.Index)
+        {
+            m_Pos += m_MoveValue * (m_Index - data.Index);
+        }
+
+        m_Index = data.Index;
+
+        if (m_IsVertical) LeanTween.moveLocalY(m_Content.m_Obj, m_Pos, m_MoveTime).setOnComplete(EndMove);
+        else LeanTween.moveLocalX(m_Content.m_Obj, m_Pos, m_MoveTime).setOnComplete(EndMove);
     }
 }

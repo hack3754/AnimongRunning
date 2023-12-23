@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class LocalData
 {
 	List<int> m_OpenChar;
+	public int SelectCharId { get; set; }
     public LocalData()
     {
 
@@ -16,6 +17,7 @@ public class LocalData
     public void Init()
     {
 		if(m_OpenChar == null) m_OpenChar = new List<int>();
+        SelectCharId = 1;
     }
 
 	public void FirstInit()

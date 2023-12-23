@@ -15,6 +15,7 @@ public class DragCell : UIObject
 {
     protected System.Action<IDragCellData> m_FncCenter;
     protected System.Action<IDragCellData> m_FncMove;
+    public System.Action<IDragCellData> m_FncClickItem;
 
     public virtual void Init(IDragCellData data)
     {

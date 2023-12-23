@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Profiling.Memory.Experimental;
 
 public class StateInfo
 {
@@ -18,8 +19,7 @@ public class Player : MonoBehaviour
     public GameObject m_Obj;
     public Transform m_Trans;
     public Transform m_TransBody;
-    public SpriteRenderer[] m_Sprites;
-    public Animator m_Animator; //CharacterChange;
+    public CharObject m_Char;
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
     public MapObject m_Map;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     List<TrapCollider> m_DmgStops = new List<TrapCollider>();
     public void Init()
     {
-        m_Animator.speed = 0.5f;
+        
     }
 
     private void UpdateState()
@@ -111,30 +111,70 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetPlayer()
+    {
+        if(m_Char != null)
+        {
+            Destroy(m_Char.gameObject);
+            m_Char = null;
+        }
+        var table = DataManager.Instance.m_CharData.Get(GameData.m_LocalData.m_Data.SelectCharId);
+        if(table == null)
+        {
+            table = DataManager.Instance.m_CharData.Get(1);
+        }
+
+        if (table != null)
+        {
+            string key = ResourceKey.GetKey(ResourceKey.m_KeyCharPrefab, table.res);
+            GameObject obj = ResourceLoadData.Instance.GetPrefab(key);
+            if (obj != null)
+            {
+                GameObject charObj = Instantiate<GameObject>(obj, m_Trans);
+                m_Char = charObj.GetComponent<CharObject>();
+                m_Char.m_Animator.speed = 0.5f;
+            }
+
+            obj = null;
+        }
+    }
+
+    void OnEndLoad(Animator ani, bool isSuccess)
+    {
+        if (isSuccess == false || m_Char == null) return;
+        m_Char.m_Animator = ani;
+        Idle();
+    }
+
     void SetSort(int lane)
     {
-        for (int i = 0; i < m_Sprites.Length; i++)
+        if (m_Char == null) return;
+
+        for (int i = 0; i < m_Char.m_Sprites.Length; i++)
         {
-            m_Sprites[i].sortingOrder = (lane * 3) - (i + 1);
+            m_Char.m_Sprites[i].sortingOrder = (lane * 3) - (i + 1);
         }
     }
 
     public void Idle()
     {
+        if (m_Char == null) return;
         //m_Animator.Play("Idle", -1, 0);
-        m_Animator.Play("Idle");
+        m_Char.m_Animator.Play("Idle");
         //m_Animator.speed = 0.2f;
     }
 
     public void Run()
     {
-        m_Animator.Play("Run");
+        if (m_Char == null) return;
+        m_Char.m_Animator.Play("Run");
         //m_Animator.speed = 0.5f;
     }
 
     public void Jump(string aniName)
     {
-        m_Animator.Play(aniName, -1, 0);
+        if (m_Char == null) return;
+        m_Char.m_Animator.Play(aniName, -1, 0);
         //m_Animator.speed = 0.5f;
     }
 
