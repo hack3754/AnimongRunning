@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_Tod_Run
+  m_Name: UI_Dog_Run
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,15 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: b212c75b986c1094eae6c2a43ef76f71, type: 3}
+      value: {fileID: 21300000, guid: bfd9176065fc7e44298e3663c6f51e17, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: e99bee21ce447da48b439c4f80cde4c9, type: 3}
+      value: {fileID: 21300000, guid: 7513a99428857084fa12b01eea1ce28a, type: 3}
     - time: 0.06666667
-      value: {fileID: 21300000, guid: 0839b267ba42bef42b1b15c26525fb09, type: 3}
+      value: {fileID: 21300000, guid: ecc24a3c4ef27ff438a6c281580fd7da, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: 7823cffd521301046b62862cdfb06741, type: 3}
+      value: {fileID: 21300000, guid: 6177d9949a0ea85498c1b087f407226d, type: 3}
     - time: 0.11666667
-      value: {fileID: 21300000, guid: 7823cffd521301046b62862cdfb06741, type: 3}
+      value: {fileID: 21300000, guid: 6177d9949a0ea85498c1b087f407226d, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 114
@@ -70,11 +70,11 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: b212c75b986c1094eae6c2a43ef76f71, type: 3}
-    - {fileID: 21300000, guid: e99bee21ce447da48b439c4f80cde4c9, type: 3}
-    - {fileID: 21300000, guid: 0839b267ba42bef42b1b15c26525fb09, type: 3}
-    - {fileID: 21300000, guid: 7823cffd521301046b62862cdfb06741, type: 3}
-    - {fileID: 21300000, guid: 7823cffd521301046b62862cdfb06741, type: 3}
+    - {fileID: 21300000, guid: bfd9176065fc7e44298e3663c6f51e17, type: 3}
+    - {fileID: 21300000, guid: 7513a99428857084fa12b01eea1ce28a, type: 3}
+    - {fileID: 21300000, guid: ecc24a3c4ef27ff438a6c281580fd7da, type: 3}
+    - {fileID: 21300000, guid: 6177d9949a0ea85498c1b087f407226d, type: 3}
+    - {fileID: 21300000, guid: 6177d9949a0ea85498c1b087f407226d, type: 3}
     - {fileID: 21300000, guid: 6a020373fdda8f449b9b5b1907497e8c, type: 3}
     - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
     - {fileID: 21300000, guid: 6a020373fdda8f449b9b5b1907497e8c, type: 3}
