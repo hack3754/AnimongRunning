@@ -107,7 +107,8 @@ public class RunningManager : MonoBehaviour
         if (GameData.m_Player.m_HP <= 0)
         {
             //GameOver;
-            GameManager.Instance.GameOver();
+            GameOverBlock();
+            m_Player.TimeOut();
             return;
         }
 
@@ -246,7 +247,7 @@ public class RunningManager : MonoBehaviour
     IEnumerator GameOverPlayer()
     {
         GameManager.Instance.GameOverBlock();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         GameManager.Instance.GameOver();
     }
 
@@ -259,6 +260,10 @@ public class RunningManager : MonoBehaviour
 
     public void MoveUp()
     {
+        if(GameData.m_SpeedUp > 0)
+        {
+            return;
+        }
         if (m_LaneIndex <= 0)
         {
             m_LaneIndex = 0;
@@ -279,6 +284,10 @@ public class RunningManager : MonoBehaviour
 
     public void MoveDown()
     {
+        if (GameData.m_SpeedUp > 0)
+        {
+            return;
+        }
         if (m_LaneIndex >= m_LaneObjects.Length - 1)
         {
             m_LaneIndex = m_LaneObjects.Length - 1;
@@ -323,6 +332,7 @@ public class RunningManager : MonoBehaviour
             case TrapType.SpdUp:
                 if (dataTime > 0)
                 {
+                    m_Player.Slip();
                     AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
                 }
                 break;
@@ -349,6 +359,7 @@ public class RunningManager : MonoBehaviour
                 }
                 break;
             case TrapType.Death:
+                m_Player.TrapDeath();
                 GameOverBlock();
                 break;
             case TrapType.HpRecovery:
@@ -403,6 +414,7 @@ public class RunningManager : MonoBehaviour
         }
         else if (info.m_Type == TrapType.SpdUp)
         {
+            m_Player.Run();
             GameData.m_SpeedUp = 0;
         }
 

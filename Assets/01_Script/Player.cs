@@ -23,12 +23,16 @@ public class Player : MonoBehaviour
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
     public MapObject m_Map;
+
+    //Effect
+    public GameObject[] m_FxAni;
+
     int m_LineIndex;
     TrapCollider m_Trap;
     List<TrapCollider> m_DmgStops = new List<TrapCollider>();
     public void Init()
     {
-        
+        DIsableEffect();
     }
 
     private void UpdateState()
@@ -156,10 +160,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    void DIsableEffect()
+    {
+        for (int i = 0; i < m_FxAni.Length; i++)
+        {
+            m_FxAni[i].SetActive(false);
+        }
+    }
+
     public void Idle()
     {
         if (m_Char == null) return;
         //m_Animator.Play("Idle", -1, 0);
+        DIsableEffect();
         m_Char.m_Animator.Play("Idle");
         //m_Animator.speed = 0.2f;
     }
@@ -167,9 +180,35 @@ public class Player : MonoBehaviour
     public void Run()
     {
         if (m_Char == null) return;
+        DIsableEffect();
         m_Char.m_Animator.Play("Run");
+        m_FxAni[0].SetActive(true);
         //m_Animator.speed = 0.5f;
     }
+
+    public void TimeOut()
+    {
+        if (m_Char == null) return;
+        DIsableEffect();
+        m_Char.m_Animator.Play("Groggy_01");
+    }
+
+    public void TrapDeath()
+    {
+        if (m_Char == null) return;
+        DIsableEffect();
+        m_Char.m_Animator.Play("Groggy_02");
+        m_FxAni[1].SetActive(true);
+    }
+
+    public void Slip()
+    {
+        if (m_Char == null) return;
+        DIsableEffect();
+        m_Char.m_Animator.Play("Slip_01");
+        m_FxAni[2].SetActive(true);
+    }
+
 
     public void Jump(string aniName)
     {

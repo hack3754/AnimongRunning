@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class MapDataItem

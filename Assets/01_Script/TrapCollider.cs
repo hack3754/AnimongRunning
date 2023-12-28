@@ -74,6 +74,7 @@ public class TrapCollider : ObjectEntries
     public void SetDisable()
     {
         m_Obj.SetActive(false);
+        m_LineIndex = 0;
         //disable Ani
     }
 }

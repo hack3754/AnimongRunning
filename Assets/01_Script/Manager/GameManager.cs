@@ -167,14 +167,24 @@ public class GameManager : MSingleton<GameManager>
         m_LoignUI.Show();
         m_LoignUI.ShowLoading();
         m_Running.GameReset();
-        GameReady();
+        m_Running.m_Player.Idle();
+        StartCoroutine(LoadMap());
+    }
+
+    IEnumerator LoadMap()
+    {
+        yield return StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad());
+
+        m_BG.SetActive(true);
+        ShowOutGame();
+        m_Running.m_BgUpdate.InitMap();
     }
 
     public void GameOver()
     {
         m_IsGameStart = false;
         m_InGameUI.ShowResult((int)GameData.m_Score, GameTimeSystem.GetTime());
-        m_Running.m_Player.Idle();
+        //m_Running.m_Player.Idle();
     }
 
     public void GameOverBlock()

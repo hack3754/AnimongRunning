@@ -27,7 +27,7 @@ SpriteAtlas:
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
@@ -48,25 +48,31 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f6c779a1b8f6b9b4086bf0139772aa53, type: 3}
   - {fileID: 21300000, guid: 0683797297c739d489c81772d6ac4ae9, type: 3}
   - {fileID: 21300000, guid: 3e9c8692e4e13ce47b10a390fc5c8ad6, type: 3}
+  - {fileID: 21300000, guid: 5a9340c27fb58e8479f3b0c8fcaf7b61, type: 3}
   - {fileID: 21300000, guid: 56d789e3198cbc84bbc16c14ab8b8158, type: 3}
   - {fileID: 21300000, guid: ed368b0457183d848991aadf4e52e434, type: 3}
   - {fileID: 21300000, guid: 2dcda324d7ce333428983d5344b77e72, type: 3}
   - {fileID: 21300000, guid: 6fb30f355a055f64f99d1bdce841b463, type: 3}
   - {fileID: 21300000, guid: 3b4ffe75d5e9fff4dade3ecfa19fb035, type: 3}
   - {fileID: 21300000, guid: 06539fb51e33e44499e86d2b1a04c317, type: 3}
+  - {fileID: 21300000, guid: 1d61c4d5e233e6a4e8520a2e84c704c5, type: 3}
   - {fileID: 21300000, guid: b42bb3e5ff9b63c4f81fe1856c40bac3, type: 3}
   - {fileID: 21300000, guid: c05fc6765d1402247ade60a8d0281a70, type: 3}
   - {fileID: 21300000, guid: 0839b267ba42bef42b1b15c26525fb09, type: 3}
   - {fileID: 21300000, guid: a988e1b7f00df4b43b0a4b99ec79fdbd, type: 3}
+  - {fileID: 21300000, guid: 5f29e9c764134384eb164e6bfac03855, type: 3}
   - {fileID: 21300000, guid: b7e52408adc1dfc48b9e8dd7bf99f044, type: 3}
+  - {fileID: 21300000, guid: c5f8b2280d89c7445ab9642ddb49058d, type: 3}
   - {fileID: 21300000, guid: 9caf81a810d09ac4dac270cad9de8bde, type: 3}
   - {fileID: 21300000, guid: 84001849752bd0644b6b4b782161fdf5, type: 3}
+  - {fileID: 21300000, guid: 2a5851a9a532a5a44837ab74c41b5ce5, type: 3}
   - {fileID: 21300000, guid: f252080afd96330428a2f43ca8f099bf, type: 3}
   - {fileID: 21300000, guid: 9bcb865a7acdb0c43a8df6b7fbe6f82e, type: 3}
   - {fileID: 21300000, guid: a0edd47a8a383ef48aa4c3dc4f7c9ca6, type: 3}
   - {fileID: 21300000, guid: d046580bf71ce894c8bb5ff8dc9abd2f, type: 3}
   - {fileID: 21300000, guid: 216dc23b613ba464a93557453d50fb2e, type: 3}
   - {fileID: 21300000, guid: b212c75b986c1094eae6c2a43ef76f71, type: 3}
+  - {fileID: 21300000, guid: b3a5abfba3503704299371b0eec313f0, type: 3}
   - {fileID: 21300000, guid: fc08e15c3af3cad44995bb6d63df341a, type: 3}
   - {fileID: 21300000, guid: 8798f1dcc7d44504aab216366a3dd514, type: 3}
   - {fileID: 21300000, guid: 5837f31d6d7e30241b7bf789f788122a, type: 3}
@@ -89,25 +95,31 @@ SpriteAtlas:
   - Tod_Jump_03
   - Tod_Jump_02
   - Gomong_Run_01
+  - Gomong_Slip_01
   - Gomong_Jump_03
   - Gomong_Groggy_02_01
   - Tod_Groggy_02_01
   - Gomong_Idle_02
   - Gomong_board_02
   - Tod_Idle_02
+  - Gomong_Slip_02
   - Gomong_Jump_05_place
   - Gomong_Jump_02
   - Tod_Run_03
   - Gomong_Jump_04
+  - Tod_Slip_03
   - Tod_board_02
+  - Tod_Slip_01
   - Gomong_Run_04
   - Gomong_Groggy_01_01
+  - Gomong_Slip_03
   - Tod_Jump_05_place
   - Tod_board_01
   - Tod_Groggy_02_02
   - Tod_Jump_01
   - Gomong_Run_03
   - Tod_Run_01
+  - Tod_Slip_02
   - Tod_Jump_04
   - Tod_Groggy_01_02
   - Gomong_Idle_01

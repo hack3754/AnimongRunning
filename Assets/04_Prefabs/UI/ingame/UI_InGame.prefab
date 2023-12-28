@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 6910510510882027297}
   - component: {fileID: 4129608327268930387}
   m_Layer: 5
-  m_Name: Btn_Down
+  m_Name: Btn_Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1890,8 +1890,8 @@ MonoBehaviour:
   - {fileID: 1238923183751560372}
   m_UIEmergencyHP: {fileID: 642008150128837523}
   m_MoveTigger: {fileID: 6615459478462613799}
-  m_BtnUp: {fileID: 7810339920470528955}
-  m_BtnDown: {fileID: 4129608327268930387}
+  m_BtnUp: {fileID: 4129608327268930387}
+  m_BtnDown: {fileID: 7810339920470528955}
   m_TransStateParent: {fileID: 4882524215429264123}
   m_UIStateObject: {fileID: 6945323195809523498}
 --- !u!1 &7489422305485221976
@@ -2253,7 +2253,7 @@ GameObject:
   - component: {fileID: 7209429012751340351}
   - component: {fileID: 7810339920470528955}
   m_Layer: 5
-  m_Name: Btn_Up
+  m_Name: Btn_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
