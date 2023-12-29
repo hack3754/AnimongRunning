@@ -63,6 +63,7 @@ public class RunningManager : MonoBehaviour
         m_Player.GameRest();
         m_BgUpdate.m_TransBg.localPosition = m_PosOri;
         m_BgUpdate.GameReset();
+        m_States.Clear();
 
         GameManager.Instance.m_IsStop = false;
         GameManager.Instance.m_IsStun = false;
@@ -246,6 +247,7 @@ public class RunningManager : MonoBehaviour
     }
     IEnumerator GameOverPlayer()
     {
+        m_States.Clear();
         GameManager.Instance.GameOverBlock();
         yield return new WaitForSeconds(1.0f);
         GameManager.Instance.GameOver();
@@ -407,6 +409,7 @@ public class RunningManager : MonoBehaviour
 
     public void DeleteDotTrap(StateInfo info)
     {
+        if (GameManager.Instance.IsGameStart == false) return;
         if (info.m_Type == TrapType.Slow)
         {
             GameData.m_SpeedSlow = 0;

@@ -27,6 +27,15 @@ public class UIStateObject : UIObject
         while(true)
         {
             yield return AMUtility.m_WaitForEndOfFrame;
+
+            if(GameManager.Instance.IsGameStart == false)
+            {
+                m_StateInfo = null;
+                m_Obj.SetActive(false);
+                m_IsSet = false;
+                yield break;
+            }
+
             m_StateInfo.m_StateTime += Time.deltaTime;
 
             ticktime += Time.deltaTime;

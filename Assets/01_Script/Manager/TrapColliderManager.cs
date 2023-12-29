@@ -245,7 +245,7 @@ public class TrapColliderManager : MonoBehaviour
                 col.m_Trans.SetParent(parent);
 
             col.Set(true);
-            col.transform.localScale = new Vector3(0.8f, 0.8f, 1f);//m_Traps[trap][0].m_Trans.localScale;
+            col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
 
             return col;
         }

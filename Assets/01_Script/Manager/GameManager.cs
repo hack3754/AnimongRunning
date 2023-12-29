@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,9 @@ public class GameManager : MSingleton<GameManager>
     public bool m_IsStun;
     bool m_IsGameStart;
     bool m_IsReadyStart;
+    List<Coroutine> m_StateCoroutine;
+
+    public bool IsGameStart { get { return m_IsGameStart; } }
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class GameManager : MSingleton<GameManager>
         m_IsStop = false;
         m_IsStun = false;
         m_IsSpeedUp = false;
+        m_StateCoroutine = new List<Coroutine>();
 
 #if UNITY_EDITOR
 

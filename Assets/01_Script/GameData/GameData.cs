@@ -31,6 +31,8 @@ public static class GameData
     {
         m_BGSpeed = 0;
         m_RadomSeed = 1;
+        m_SpeedSlow = 0;
+        m_SpeedUp = 0;
         m_Score = 0;
         m_Player.Reset();
     }

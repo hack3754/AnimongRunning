@@ -183,6 +183,14 @@ public class UIInGame : UIObject
         UIStateObject obj = Instantiate<UIStateObject>(m_UIStateObject, m_TransStateParent);
         obj.SetData(stateInfo, isItem);
         m_ListTrapState.Add(obj);
+    }
 
+    public void AllStopState()
+    {
+        if (m_ListTrapState == null) return;
+        for(int i = 0;i < m_ListTrapState.Count;i++)
+        {
+            m_ListTrapState[i].StopAllCoroutines();
+        }
     }
 }

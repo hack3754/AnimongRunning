@@ -6320,6 +6320,10 @@ PrefabInstance:
       value: Mud_001
       objectReference: {fileID: 0}
     - target: {fileID: 530979289308406217, guid: 8b2968957d5fcd0428de649e62a808a2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530979289308406217, guid: 8b2968957d5fcd0428de649e62a808a2, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
