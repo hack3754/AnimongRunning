@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ef_CA_Sweat_01
+  m_Name: Mud_001
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,15 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 0}
+      value: {fileID: 21300000, guid: 42e7f8d42f5822c43a1cef587a378fbd, type: 3}
     - time: 0.016666668
-      value: {fileID: 21300000, guid: 754b353f11d02824f925edb39cc912c6, type: 3}
+      value: {fileID: 21300000, guid: 753d8dfe17585db4d98819ba507ff60c, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: 7213f83f584e6e24cbc07009659add06, type: 3}
+      value: {fileID: 21300000, guid: 96fd40640e5057140b950c29a25a8a30, type: 3}
     - time: 0.05
-      value: {fileID: 21300000, guid: affe859cee6728f408daf9f1040a746e, type: 3}
+      value: {fileID: 21300000, guid: 8af91ec2a52d6c247a47d634ad676825, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Sprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -39,17 +39,17 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 850496168
       attribute: 0
       script: {fileID: 0}
       typeID: 212
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 0}
-    - {fileID: 21300000, guid: 754b353f11d02824f925edb39cc912c6, type: 3}
-    - {fileID: 21300000, guid: 7213f83f584e6e24cbc07009659add06, type: 3}
-    - {fileID: 21300000, guid: affe859cee6728f408daf9f1040a746e, type: 3}
+    - {fileID: 21300000, guid: 42e7f8d42f5822c43a1cef587a378fbd, type: 3}
+    - {fileID: 21300000, guid: 753d8dfe17585db4d98819ba507ff60c, type: 3}
+    - {fileID: 21300000, guid: 96fd40640e5057140b950c29a25a8a30, type: 3}
+    - {fileID: 21300000, guid: 8af91ec2a52d6c247a47d634ad676825, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

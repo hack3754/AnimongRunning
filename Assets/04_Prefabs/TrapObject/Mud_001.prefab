@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 530979289308406219}
   - component: {fileID: 530979289308406228}
   - component: {fileID: -993332121131356231}
+  - component: {fileID: 7207990937637999069}
   m_Layer: 0
   m_Name: Mud_001
   m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &530979289308406216
 Transform:
   m_ObjectHideFlags: 0
@@ -99,6 +100,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &7207990937637999069
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530979289308406217}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ad6f351d1f1fce469553f9f00bc406a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3650860523761437231
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +194,7 @@ SpriteRenderer:
   m_SortingLayerID: -982782189
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6b78982506d3a10408cbc8770cc66401, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42e7f8d42f5822c43a1cef587a378fbd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
