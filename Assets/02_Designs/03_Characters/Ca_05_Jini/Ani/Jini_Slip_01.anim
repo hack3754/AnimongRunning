@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dog_Slip_01
+  m_Name: Jini_Slip_01
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: cfa352ec1be47bf44b114a9b1c17e18d, type: 3}
+      value: {fileID: 21300000, guid: 46c94d37fa1cdd64db9c27ebba98ad63, type: 3}
     - time: 0.016666668
-      value: {fileID: 21300000, guid: 02106317eb16a7a4683fe5e50aae4d30, type: 3}
+      value: {fileID: 21300000, guid: bc43e1146e58103428803994f6aa4c22, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: 1da266308f4953c48afacc02039bee06, type: 3}
+      value: {fileID: 21300000, guid: 64bc7de756d6b3d4ca69109603cf1eca, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 212
@@ -58,9 +58,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: cfa352ec1be47bf44b114a9b1c17e18d, type: 3}
-    - {fileID: 21300000, guid: 02106317eb16a7a4683fe5e50aae4d30, type: 3}
-    - {fileID: 21300000, guid: 1da266308f4953c48afacc02039bee06, type: 3}
+    - {fileID: 21300000, guid: 46c94d37fa1cdd64db9c27ebba98ad63, type: 3}
+    - {fileID: 21300000, guid: bc43e1146e58103428803994f6aa4c22, type: 3}
+    - {fileID: 21300000, guid: 64bc7de756d6b3d4ca69109603cf1eca, type: 3}
     - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2

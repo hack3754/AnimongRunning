@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dog_Groggy_02
+  m_Name: Jini_Groggy_02
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -45,9 +45,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: f23b3a0ca70b8b64e89482d0372bca6d, type: 3}
+      value: {fileID: 21300000, guid: b4b74eeceeb5a2744af08bf663e1be31, type: 3}
     - time: 0.016666668
-      value: {fileID: 21300000, guid: 9f8fcebaea8849747b822fd7c98b262e, type: 3}
+      value: {fileID: 21300000, guid: a3705eff090fe1447bb0104e413b630a, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 212
@@ -90,8 +90,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: f23b3a0ca70b8b64e89482d0372bca6d, type: 3}
-    - {fileID: 21300000, guid: 9f8fcebaea8849747b822fd7c98b262e, type: 3}
+    - {fileID: 21300000, guid: b4b74eeceeb5a2744af08bf663e1be31, type: 3}
+    - {fileID: 21300000, guid: a3705eff090fe1447bb0104e413b630a, type: 3}
     - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
     - {fileID: 21300000, guid: 1b97fb9f7e7862949bd2bf9cf36d2579, type: 3}
   m_AnimationClipSettings:

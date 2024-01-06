@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2304049331001779267}
   - component: {fileID: 5550229197493992036}
   m_Layer: 5
-  m_Name: UI_Ca_04_Dog
+  m_Name: UI_Ca_05_Jini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ Animator:
   m_GameObject: {fileID: 780753378839400881}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a0cea4dbb964f54293cafe2c5f6fbc2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 67bff9efbcc1ced4fab8b72fabcb173a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5f782deb670395f4aa7b43a4a89fb75b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9c7344b1881ce24eaa343bb49a59157, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
