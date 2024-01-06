@@ -9,6 +9,8 @@ public class LocalData
 {
 	List<int> m_OpenChar;
 	public int SelectCharId { get; set; }
+	public int Gold { get; set; }
+	public float Score { get; set; }
     public LocalData()
     {
 
@@ -33,6 +35,13 @@ public class LocalData
 			FirstInit();
 		}
 		return m_OpenChar.Contains(id) ==false;
+	}
+	public void SetScore()
+	{
+		if(GameData.m_Score > Score)
+		{
+			Score = GameData.m_Score;
+        }
 	}
 }
 

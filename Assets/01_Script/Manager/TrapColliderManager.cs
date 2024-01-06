@@ -178,7 +178,7 @@ public class TrapColliderManager : MonoBehaviour
 
     public TrapCollider GetRandomTrapCollider(Transform parent, string trapType)
     {
-        ObstacleType obstacleType = ObstacleType.Score;
+        ObstacleType obstacleType = ObstacleType.Max;
         string trap = string.Empty;
 
         if (trapType.Equals(AMUtility.BLOCK))
@@ -191,14 +191,14 @@ public class TrapColliderManager : MonoBehaviour
         {
             if (trapType.Equals(AMUtility.TRAP))
             {
-                if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
+                if (UnityEngine.Random.Range(0, 1000) <= 50) obstacleType = ObstacleType.Item;
+                else if (UnityEngine.Random.Range(0, 1000) <= 600) obstacleType = ObstacleType.Gold;
                 else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
-                else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
             }
             else if (trapType.Equals(AMUtility.ITEM))
             {
                 if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
-                else if (UnityEngine.Random.Range(0, 1000) <= 950) obstacleType = ObstacleType.Max;
+                else if (UnityEngine.Random.Range(0, 1000) <= 600) obstacleType = ObstacleType.Gold;
             }
             else return null;
 
@@ -217,6 +217,11 @@ public class TrapColliderManager : MonoBehaviour
             {
                 if (m_ScoreNames == null || m_ScoreNames.Count <= 0) return null;
                 trap = m_ScoreNames[UnityEngine.Random.Range(0, m_ScoreNames.Count)];
+            }
+            else if (obstacleType == ObstacleType.Gold)
+            {
+                if (m_GoldNames == null || m_GoldNames.Count <= 0) return null;
+                trap = m_GoldNames[UnityEngine.Random.Range(0, m_GoldNames.Count)];
             }
             else return null;
         }

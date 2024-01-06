@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class InGameUIMain : UIObject
@@ -41,15 +42,22 @@ public class InGameUIMain : UIObject
         m_UIMian.SetScore(score);
     }
 
+    public void SetGold(int gold)
+    {
+        m_UIMian.SetGold(gold);
+    }
+
     public void SetHP(float hpValue)
     {
         m_UIMian.SetHP(hpValue);
     }
 
-    public void ShowResult(int score, System.TimeSpan time)
+    public void ShowResult(System.TimeSpan time)
     {
+        GameData.m_LocalData.m_Data.SetScore();
+
         m_ObjBG.SetActive(true);
         m_UIMian.m_Obj.SetActive(false);
-        m_UIResult.Show(score, time);
+        m_UIResult.Show(time);
     }
 }

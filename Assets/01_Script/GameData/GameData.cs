@@ -16,6 +16,7 @@ public static class GameData
     public static LocalDataSave m_LocalData;
 
     public static float m_Score;
+    public static int m_Gold;
     public static void Init()
     {
         m_Player = new PlayerData();
@@ -34,6 +35,7 @@ public static class GameData
         m_SpeedSlow = 0;
         m_SpeedUp = 0;
         m_Score = 0;
+        m_Gold = 0;
         m_Player.Reset();
     }
 }

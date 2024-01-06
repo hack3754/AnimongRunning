@@ -154,4 +154,10 @@ public class BgUpdate : MonoBehaviour
         GameData.m_Score += score;
         GameManager.Instance.m_InGameUI.SetScore((int)GameData.m_Score);
     }
+
+    public void SetGold(int gold)
+    {
+        GameData.m_Gold += gold;
+        GameManager.Instance.m_InGameUI.SetGold((int)GameData.m_Gold);
+    }
 }

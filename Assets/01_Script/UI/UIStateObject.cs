@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class UIStateObject : UIObject
 {
-    public Image m_ImgGauge; 
+    public Image m_ImgGauge;
+    public TMP_Text m_TxtCount;
     StateInfo m_StateInfo;
     bool m_IsSet;
     public bool SetData(StateInfo stateInfo, bool isItem)

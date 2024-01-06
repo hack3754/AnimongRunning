@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     int m_LineIndex;
     TrapCollider m_Trap;
     List<TrapCollider> m_DmgStops = new List<TrapCollider>();
+    bool m_IsRainboots;
     public void Init()
     {
         DIsableEffect();
@@ -40,8 +41,9 @@ public class Player : MonoBehaviour
         
     }
 
-    public void GameRest()
+    public void GameReset()
     {
+        m_IsRainboots = false;
         m_DmgStops.Clear();
         m_Trap = null;
         m_Map = null;
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
             TrapCollider trap = collision.gameObject.GetComponent<TrapCollider>();
             if (trap != null)
             {
+                if (m_IsRainboots && (trap.m_tData.res.Equals("Poop_001") || trap.m_tData.res.Equals("Mud_001"))) return;
                 m_Trap = trap;
                 GameManager.Instance.m_Running.SetTrap(m_Trap);
             }
@@ -190,7 +193,8 @@ public class Player : MonoBehaviour
     {
         if (m_Char == null) return;
         DIsableEffect();
-        m_Char.m_Animator.Play("Groggy_01");
+        m_Char.m_Animator.Play("Groggy_03");
+        m_FxAni[3].SetActive(true);
     }
 
     public void TrapDeath()
@@ -230,6 +234,12 @@ public class Player : MonoBehaviour
             m_DmgStops.Add(trap);
         }
     }
+
+    public void SetRainboots(bool isEnable)
+    {
+        m_IsRainboots = isEnable;
+    }
+
     #region hitTest
     /*
     RaycastHit2D[] m_Hits = new RaycastHit2D[5];

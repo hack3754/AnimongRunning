@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 public class UIInGame : UIObject
 {
     public Camera m_Cam;
     public Text m_TxtTime;
     public TMP_Text m_TxtHp;
     public Text m_TxtScore;
+    public TMP_Text m_TxtGold;
     public UIGauge[] m_UIHP;
     public UIGauge m_UIEmergencyHP;
     public EventTrigger m_MoveTigger;
@@ -31,6 +33,7 @@ public class UIInGame : UIObject
     public void Init()
     {
         m_TxtScore.text = "0";
+        m_TxtGold.text = "0";
         for (int i = 0; i < m_UIHP.Length; i++)
         {
             m_UIHP[i].Init();
@@ -67,6 +70,7 @@ public class UIInGame : UIObject
     {
         m_TxtTime.text = "00:00.00";
         m_TxtScore.text = "0";
+        m_TxtGold.text = "0";
         SetHP(DataManager.Instance.m_BGData.hp_max);
     }
 
@@ -79,6 +83,12 @@ public class UIInGame : UIObject
     {
         m_TxtScore.text = score.ToString();
     }
+
+    public void SetGold(int gold)
+    {
+        m_TxtGold.text = gold.ToString();
+    }
+
 
     public void SetHP(float hpValue)
     {

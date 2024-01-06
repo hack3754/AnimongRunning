@@ -2096,6 +2096,7 @@ MonoBehaviour:
   m_TxtTime: {fileID: 2103903830209128174}
   m_TxtHp: {fileID: 1849976073790833243}
   m_TxtScore: {fileID: 36750481127086414}
+  m_TxtGold: {fileID: 3067485244271987171}
   m_UIHP:
   - {fileID: 6940468823300431866}
   - {fileID: 2761773783195785753}
@@ -3062,7 +3063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5341067333210183019, guid: 84e6d7278b97d1445a0b89a7885809e6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5412926801199812617, guid: 84e6d7278b97d1445a0b89a7885809e6, type: 3}
       propertyPath: m_IsActive
@@ -3078,7 +3079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7477193810810365145, guid: 84e6d7278b97d1445a0b89a7885809e6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7767441847229929960, guid: 84e6d7278b97d1445a0b89a7885809e6, type: 3}
       propertyPath: m_AnchoredPosition.x

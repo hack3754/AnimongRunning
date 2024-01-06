@@ -2514,6 +2514,7 @@ MonoBehaviour:
   m_TxtTime: {fileID: 5464542665632788229}
   m_TxtScore: {fileID: 7145253096565304978}
   m_TxtLastScore: {fileID: 1203207937341699496}
+  m_TxtGold: {fileID: 4665971460261275772}
 --- !u!1 &6796434167896557808
 GameObject:
   m_ObjectHideFlags: 0

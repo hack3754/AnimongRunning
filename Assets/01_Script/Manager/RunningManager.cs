@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 public enum JumpState
 {
     Up,
@@ -60,7 +62,7 @@ public class RunningManager : MonoBehaviour
     {
         m_Time = 0;
         GameData.GameReset();
-        m_Player.GameRest();
+        m_Player.GameReset();
         m_BgUpdate.m_TransBg.localPosition = m_PosOri;
         m_BgUpdate.GameReset();
         m_States.Clear();
@@ -321,6 +323,13 @@ public class RunningManager : MonoBehaviour
     {
         float dataTime = 0;
         if (trap.m_tData.time > 0) dataTime = trap.m_tData.time / 100f;
+
+
+        if(!trap.m_tData.IsTrap)
+        {
+            trap.SetDisable();
+        }
+
         switch (trapType)
         {
             case TrapType.Slow:
@@ -334,13 +343,15 @@ public class RunningManager : MonoBehaviour
             case TrapType.SpdUp:
                 if (dataTime > 0)
                 {
-                    m_Player.Slip();
+                    if(trap.m_tData.IsTrap) m_Player.Slip();
                     AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
                 }
                 break;
             case TrapType.Score:
                 m_BgUpdate.SetScore(dataValue);
-                trap.SetDisable();
+                break;
+            case TrapType.Gold:
+                m_BgUpdate.SetGold(dataValue);
                 break;
             case TrapType.Stop:
                 GameManager.Instance.m_IsStun = true;
@@ -372,7 +383,13 @@ public class RunningManager : MonoBehaviour
                     GameData.m_Player.m_HP = GameData.m_Player.m_MaxHP;
                 }
                 */
-                trap.SetDisable();
+                break;
+            case TrapType.Dmg:
+                GameData.m_Player.m_HP -= dataValue;
+                break;
+            case TrapType.Rainboots:
+                m_Player.SetRainboots(true);
+                AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
                 break;
         }
     }
@@ -419,6 +436,10 @@ public class RunningManager : MonoBehaviour
         {
             m_Player.Run();
             GameData.m_SpeedUp = 0;
+        }
+        else if(info.m_Type == TrapType.Rainboots)
+        {
+            m_Player.SetRainboots(false);
         }
 
         if(m_States.Contains(info)) m_States.Remove(info);

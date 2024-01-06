@@ -188,7 +188,7 @@ public class GameManager : MSingleton<GameManager>
     public void GameOver()
     {
         m_IsGameStart = false;
-        m_InGameUI.ShowResult((int)GameData.m_Score, GameTimeSystem.GetTime());
+        m_InGameUI.ShowResult(GameTimeSystem.GetTime());
         //m_Running.m_Player.Idle();
     }
 
