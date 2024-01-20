@@ -6,15 +6,18 @@ using UnityEngine.UI;
 using TMPro;
 public class UIStateObject : UIObject
 {
+    public Image m_ImgIcon;
     public Image m_ImgGauge;
     public TMP_Text m_TxtCount;
     StateInfo m_StateInfo;
     bool m_IsSet;
+    public bool isSet { get { return m_IsSet; } }
     public bool SetData(StateInfo stateInfo, bool isItem)
     {
         if (m_IsSet) return false;
         m_IsSet = true;
         m_Obj.SetActive(isItem);
+        if(m_ImgIcon != null && isItem) m_ImgIcon.sprite = ResourceLoadData.Instance.GetItemSprite(stateInfo.m_Res);
         m_StateInfo = stateInfo;
         GameManager.Instance.StartCoroutine(SetState());
 

@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 public class UIInGame : UIObject
 {
     public Camera m_Cam;
+    public Canvas m_Canvas;
     public Text m_TxtTime;
     public TMP_Text m_TxtHp;
     public Text m_TxtScore;
@@ -20,8 +21,11 @@ public class UIInGame : UIObject
     public ButtonObject m_BtnUp;
     public ButtonObject m_BtnDown;
 
+    public RectTransform m_RectGold;
     public Transform m_TransStateParent;
     public UIStateObject m_UIStateObject;
+    public UIStateObject[] m_UIStateObjects;
+    //Coin
 
     List<UIStateObject> m_ListTrapState;
 
@@ -47,6 +51,8 @@ public class UIInGame : UIObject
 
         m_ListTrapState = new List<UIStateObject>();
         m_ListTrapState.Add(m_UIStateObject);
+
+        SetGoldPos();
         /*
         EventTrigger.Entry entry_BeginDrag = new EventTrigger.Entry();
         entry_BeginDrag.eventID = EventTriggerType.BeginDrag;
@@ -185,6 +191,18 @@ public class UIInGame : UIObject
 
     public void SetState(StateInfo stateInfo, bool isItem)
     {
+        if (isItem)
+        {
+            for(int i = 0;i < m_UIStateObjects.Length;i++)
+            {
+                if (m_UIStateObjects[i].isSet == false)
+                {
+                    m_UIStateObjects[i].SetData(stateInfo, isItem);
+                    break;
+                }
+            }
+            return;
+        }
         for(int i = 0;i < m_ListTrapState.Count;i++)
         {
             if (m_ListTrapState[i].SetData(stateInfo, isItem)) return;
@@ -202,5 +220,12 @@ public class UIInGame : UIObject
         {
             m_ListTrapState[i].StopAllCoroutines();
         }
+    }
+
+    public void SetGoldPos()
+    {
+        Vector3 pos = m_Cam.WorldToScreenPoint(m_RectGold.transform.position);
+        pos.z = (m_Canvas.transform.position - m_Cam.transform.position).magnitude;
+        GameData.m_PosGold = Camera.main.ScreenToWorldPoint(pos);
     }
 }

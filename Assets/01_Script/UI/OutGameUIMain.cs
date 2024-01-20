@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class OutGameUIMain : UIObject
 {
     public UISelectChar m_UISelectChar;
     public UIShop m_UIShop;
     public UIMain m_UIMain;
+    public TMP_Text m_TxtCoin;
 
     public GameObject m_ObjTop;
     public GameObject m_ObjBg;
@@ -25,6 +26,8 @@ public class OutGameUIMain : UIObject
         m_ListPrevUI = new List<UIBase>();
 
         m_IsMain = true;
+
+        SetCoin();
     }
 
     public void Show()
@@ -110,5 +113,10 @@ public class OutGameUIMain : UIObject
     void OnClickBack()
     {
         ShowPrevUI();
+    }
+
+    public void SetCoin()
+    {
+        m_TxtCoin.text = GameData.m_LocalData.m_Data.Gold.ToString();
     }
 }

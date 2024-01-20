@@ -36,6 +36,11 @@ public class LocalData
 		}
 		return m_OpenChar.Contains(id) ==false;
 	}
+
+	public void AddOpenChar(int id)
+	{
+		if (m_OpenChar.Contains(id) == false) m_OpenChar.Add(id);
+	}
 	public void SetScore()
 	{
 		if(GameData.m_Score > Score)

@@ -282,4 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Obj: {fileID: 7690864237714906945}
   m_Rect: {fileID: 581057594227675608}
+  m_ImgIcon: {fileID: 4902801707264225367}
   m_ImgGauge: {fileID: 2167937767760697893}
+  m_TxtCount: {fileID: 0}

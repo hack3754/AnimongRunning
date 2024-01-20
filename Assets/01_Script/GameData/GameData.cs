@@ -10,6 +10,7 @@ public static class GameData
 
     public static float m_SpeedSlow;
     public static float m_SpeedUp;
+    public static bool m_IsMove;
 
     public static int m_RadomSeed;
 
@@ -17,6 +18,8 @@ public static class GameData
 
     public static float m_Score;
     public static int m_Gold;
+
+    public static Vector3 m_PosGold;
     public static void Init()
     {
         m_Player = new PlayerData();
@@ -25,6 +28,7 @@ public static class GameData
         m_LocalData = new LocalDataSave();
         m_LocalData.Init();
 
+        m_IsMove = true;
         m_RadomSeed = 1;
     }
 

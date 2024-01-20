@@ -17,6 +17,7 @@ public class GameManager : MSingleton<GameManager>
     public InGameUIMain m_InGameUI;
     public OutGameUIMain m_OutGameUI;
     public BGControl m_BGControl;
+    public MoveObjManager m_MoveObj;
     public GameObject m_BG;
     public bool m_IsStop;
     public bool m_IsSpeedUp;
@@ -30,6 +31,7 @@ public class GameManager : MSingleton<GameManager>
     private void Awake()
     {
         m_LoignUI.Init();
+        m_MoveObj.Init();
         m_IsStop = false;
         m_IsStun = false;
         m_IsSpeedUp = false;
@@ -166,22 +168,31 @@ public class GameManager : MSingleton<GameManager>
         ResourceLoadData.Instance.AddPrefab(key, prefab);
     }
 
-    public void GameRestart()
+    public void GameRestart(bool isHome = true)
     {
         m_InGameUI.GameReset();
         m_LoignUI.Show();
         m_LoignUI.ShowLoading();
         m_Running.GameReset();
         m_Running.m_Player.Idle();
-        StartCoroutine(LoadMap());
+        StartCoroutine(LoadMap(isHome));
     }
 
-    IEnumerator LoadMap()
+    IEnumerator LoadMap(bool isHome = true)
     {
         yield return StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad());
 
-        m_BG.SetActive(true);
-        ShowOutGame();
+
+        if (isHome)
+        {
+            m_BG.SetActive(true);
+            ShowOutGame();
+        }
+        else
+        {
+            m_LoignUI.Hide();
+            GameReadyStart();
+        }
         m_Running.m_BgUpdate.InitMap();
     }
 
@@ -231,6 +242,7 @@ public class GameManager : MSingleton<GameManager>
         m_Running.Running();
         if (m_IsStop || m_IsStun) return;
         m_BGControl.BgMove();
+        m_InGameUI.m_UIMian.SetGoldPos();
     }
 
 }

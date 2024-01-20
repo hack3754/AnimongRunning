@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum ObstacleType
 {
@@ -31,7 +32,7 @@ public class TrapColliderManager : MonoBehaviour
     List<string> m_BlockNames;
     Dictionary<string, List<TrapCollider>> m_Traps;
 
-
+    Vector3 m_Scale;
 
     public void Init()
     {
@@ -168,6 +169,11 @@ public class TrapColliderManager : MonoBehaviour
 
             col.m_Trans.SetParent(parent);
             col.Set(true);
+            if (trap.Contains("item_Fruit"))
+            {
+                Debug.Log(m_Traps[trap][0].m_Trans.localScale);
+            }
+
             col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
 
             return col;
@@ -229,6 +235,7 @@ public class TrapColliderManager : MonoBehaviour
 
         if (m_Traps.ContainsKey(trap))
         {
+            m_Scale = m_Traps[trap][0].m_Trans.localScale;
             TrapCollider col = null;
 
             for (int i = 1; i < m_Traps[trap].Count; i++)
@@ -250,8 +257,7 @@ public class TrapColliderManager : MonoBehaviour
                 col.m_Trans.SetParent(parent);
 
             col.Set(true);
-            col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
-
+            col.transform.localScale = m_Scale;
             return col;
         }
 
@@ -260,7 +266,6 @@ public class TrapColliderManager : MonoBehaviour
 
     public void Free(List<TrapCollider> objs)
     {
-        Vector3 localScale = Vector3.one;
         for(int i = 0;i < objs.Count;i++)
         {
             objs[i].Set(false);

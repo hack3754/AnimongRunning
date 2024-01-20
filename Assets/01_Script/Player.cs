@@ -8,6 +8,7 @@ using UnityEngine.Profiling.Memory.Experimental;
 
 public class StateInfo
 {
+    public string m_Res;
     public float m_Time;
     public TrapType m_Type;
     public float m_Value;

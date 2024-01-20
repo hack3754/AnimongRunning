@@ -264,7 +264,7 @@ public class RunningManager : MonoBehaviour
 
     public void MoveUp()
     {
-        if(GameData.m_SpeedUp > 0)
+        if(GameData.m_IsMove == false)
         {
             return;
         }
@@ -288,7 +288,7 @@ public class RunningManager : MonoBehaviour
 
     public void MoveDown()
     {
-        if (GameData.m_SpeedUp > 0)
+        if (GameData.m_IsMove == false)
         {
             return;
         }
@@ -337,14 +337,18 @@ public class RunningManager : MonoBehaviour
                 m_IsJumpBlock = true;
                 if(dataTime > 0)
                 {
-                    AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
+                    AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap, trap.m_tData.res);
                 }
                 break;
             case TrapType.SpdUp:
                 if (dataTime > 0)
                 {
-                    if(trap.m_tData.IsTrap) m_Player.Slip();
-                    AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
+                    if (trap.m_tData.IsTrap)
+                    {
+                        m_Player.Slip();
+                        GameData.m_IsMove = false;
+                    }
+                    AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap, trap.m_tData.res);
                 }
                 break;
             case TrapType.Score:
@@ -352,6 +356,7 @@ public class RunningManager : MonoBehaviour
                 break;
             case TrapType.Gold:
                 m_BgUpdate.SetGold(dataValue);
+                GameManager.Instance.m_MoveObj.SetMoveObject(trap.transform.position, GameData.m_PosGold, trap.m_tData.value2 - 1);
                 break;
             case TrapType.Stop:
                 GameManager.Instance.m_IsStun = true;
@@ -368,7 +373,7 @@ public class RunningManager : MonoBehaviour
             case TrapType.DotDmg:
                 if (dataTime > 0)
                 {
-                    AddDotTrap(trapType, dataValue / 100f, dataTime, !trap.m_tData.IsTrap);
+                    AddDotTrap(trapType, dataValue / 100f, dataTime, !trap.m_tData.IsTrap, trap.m_tData.res);
                 }
                 break;
             case TrapType.Death:
@@ -389,7 +394,7 @@ public class RunningManager : MonoBehaviour
                 break;
             case TrapType.Rainboots:
                 m_Player.SetRainboots(true);
-                AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap);
+                AddDotTrap(trapType, dataValue, dataTime, !trap.m_tData.IsTrap, trap.m_tData.res);
                 break;
         }
     }
@@ -400,7 +405,7 @@ public class RunningManager : MonoBehaviour
         GameManager.Instance.m_IsStun = false;
     }
 
-    public bool AddDotTrap(TrapType trapType, float dataValue, float dataTime, bool isItem)
+    public bool AddDotTrap(TrapType trapType, float dataValue, float dataTime, bool isItem, string res)
     {
         for (int i = 0; i < m_States.Count; i++)
         {
@@ -414,6 +419,7 @@ public class RunningManager : MonoBehaviour
         }
 
         StateInfo stateInfo = new StateInfo();
+        stateInfo.m_Res = res;
         stateInfo.m_StateTime = 0;
         stateInfo.m_Time = dataTime;
         stateInfo.m_Type = trapType;
@@ -436,6 +442,7 @@ public class RunningManager : MonoBehaviour
         {
             m_Player.Run();
             GameData.m_SpeedUp = 0;
+            GameData.m_IsMove = true;
         }
         else if(info.m_Type == TrapType.Rainboots)
         {

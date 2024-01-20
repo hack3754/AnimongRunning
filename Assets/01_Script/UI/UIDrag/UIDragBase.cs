@@ -162,4 +162,26 @@ public class UIDragBase : UIBase, IBeginDragHandler, IDragHandler, IEndDragHandl
         if (m_IsVertical) LeanTween.moveLocalY(m_Content.m_Obj, m_Pos, m_MoveTime).setOnComplete(EndMove);
         else LeanTween.moveLocalX(m_Content.m_Obj, m_Pos, m_MoveTime).setOnComplete(EndMove);
     }
+
+    protected void SetSelectPos(IDragCellData data)
+    {
+        m_Pos = m_Content.m_Rect.localPosition.x;
+
+        m_IsMove = true;
+
+        if (m_Index < data.Index)
+        {
+            m_Pos -= m_MoveValue * (data.Index - m_Index);
+        }
+        else if (m_Index > data.Index)
+        {
+            m_Pos += m_MoveValue * (m_Index - data.Index);
+        }
+
+        m_Index = data.Index;
+
+        Vector3 pos = m_Content.transform.localPosition;
+        pos.x = m_Pos;
+        m_Content.transform.localPosition = pos;
+    }
 }

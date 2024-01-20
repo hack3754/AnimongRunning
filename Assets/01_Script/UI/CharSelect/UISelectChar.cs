@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UISelectChar : UIDragBase
 {
@@ -11,6 +12,9 @@ public class UISelectChar : UIDragBase
     public UIObject m_ObjBtnPurchase;
     public ButtonObject m_BtnPurchase;
     public ButtonObject m_BtnAds;
+
+    public TMP_Text m_TxtCoin;
+
     CharCardDragData m_SelectData;
     List<CharCardDragData> m_Datas = new List<CharCardDragData>();
     public override void Init()
@@ -84,9 +88,10 @@ public class UISelectChar : UIDragBase
     {
         for(int i = 0;i < m_Datas.Count;i++)
         {
-            m_Datas[i].m_IsLock = false;//GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
+            m_Datas[i].m_IsLock = GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
             if(m_Datas[i].m_tData.id == GameData.m_LocalData.m_Data.SelectCharId)
             {
+                SetSelectPos(m_Datas[i]);
                 m_Index = m_Datas[i].Index;
                 m_SelectData = m_Datas[i];
             }
@@ -110,8 +115,10 @@ public class UISelectChar : UIDragBase
         m_ObjBtnPurchase.SetActive(itemData.m_IsLock);
         m_BtnSelect.SetActive(!itemData.m_IsLock);
 
+        m_TxtCoin.text = itemData.m_tData.price.ToString();
+
         //Speed
-        for(int i = 0;i < itemData.m_tData.speed;i++)
+        for (int i = 0;i < itemData.m_tData.speed;i++)
         {
             m_ObjSpeed[i].SetActive(true);
         }
@@ -154,7 +161,21 @@ public class UISelectChar : UIDragBase
 
     void OnClickPurchase()
     {
+        if (m_SelectData == null || GameData.m_LocalData.m_Data.Gold < m_SelectData.m_tData.price) return;
 
+        GameData.m_LocalData.m_Data.Gold -= m_SelectData.m_tData.price;
+        GameData.m_LocalData.m_Data.AddOpenChar(m_SelectData.m_tData.id);
+        GameData.m_LocalData.Save();
+
+        GameManager.Instance.m_OutGameUI.SetCoin();
+
+        for (int i = 0; i < m_Datas.Count; i++)
+        {
+            m_Datas[i].m_IsLock = GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
+            m_Cells[i].Refresh();
+        }
+
+        SetCenter(m_SelectData);
     }
     void OnClickSelect()
     {
