@@ -2301,6 +2301,7 @@ MonoBehaviour:
   m_Obj: {fileID: 7274933320200882319}
   m_Rect: {fileID: 5407693928291044457}
   m_Cam: {fileID: 0}
+  m_Canvas: {fileID: 0}
   m_TxtTime: {fileID: 2103903830209128174}
   m_TxtHp: {fileID: 1849976073790833243}
   m_TxtScore: {fileID: 36750481127086414}
@@ -2565,7 +2566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 777dda6c579e7694e8e71c0bab029186, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20cb56ba5d2eb5a49870523fa88bf330, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2733,7 +2734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6de944fd6eca55b479ee8e6d18e19128, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f00a9792441b9648aef438fbc5894c3, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
