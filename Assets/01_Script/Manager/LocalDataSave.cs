@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class LocalData
 {
 	List<int> m_OpenChar;
 	public int SelectCharId { get; set; }
-	public int Gold { get; set; }
+    public int Gold { get; set; }
 	public float Score { get; set; }
+
+    public System.DateTime m_SelectTime;
     public LocalData()
     {
 
@@ -130,6 +133,17 @@ public class LocalDataSave
 
 			m_LocalData.Add(userName, m_Data);
 		}
+	}
+
+	public void SelectCharID()
+	{
+		if (DataManager.Instance.m_CharData == null) return;
+		if(m_Data.m_SelectTime.Year < System.DateTime.Now.Year || m_Data.m_SelectTime.Month < System.DateTime.Now.Month || m_Data.m_SelectTime.Day < System.DateTime.Now.Day)
+		{
+			m_Data.SelectCharId = UnityEngine.Random.Range(0, DataManager.Instance.m_CharData.Get().Count) + 1;
+            m_Data.m_SelectTime = System.DateTime.Now;
+			SaveData();
+        }
 	}
 
 	public void SaveData()

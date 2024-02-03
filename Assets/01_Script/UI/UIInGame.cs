@@ -18,8 +18,8 @@ public class UIInGame : UIObject
     public EventTrigger m_MoveTigger;
     //public ButtonObject m_BtnJump;
 
-    public ButtonObject m_BtnUp;
-    public ButtonObject m_BtnDown;
+    public ButtonObject[] m_BtnUp;
+    public ButtonObject[] m_BtnDown;
 
     public RectTransform m_RectGold;
     public Transform m_TransStateParent;
@@ -46,9 +46,16 @@ public class UIInGame : UIObject
         m_UIEmergencyHP.Init();
         m_UIEmergencyHP.SetValue(1);
         //m_BtnJump.m_FncOnClick = OnClickJump;
-        m_BtnUp.m_FncOnClick = OnClickUp;
-        m_BtnDown.m_FncOnClick = OnClickDown;
+        for (int i = 0; i < m_BtnUp.Length; i++)
+        {
+            m_BtnUp[i].m_FncOnClick = OnClickUp;
+        }
 
+        for (int i = 0; i < m_BtnDown.Length; i++)
+        {
+            m_BtnDown[i].m_FncOnClick = OnClickDown;
+        }
+        
         m_ListTrapState = new List<UIStateObject>();
         m_ListTrapState.Add(m_UIStateObject);
 
@@ -99,7 +106,7 @@ public class UIInGame : UIObject
     public void SetHP(float hpValue)
     {
         m_TxtHp.text = ((int)hpValue).ToString();
-        m_HpPer = hpValue / DataManager.Instance.m_BGData.hp_max;
+        m_HpPer = hpValue / GameData.m_Player.m_MaxHP;
         m_HpIndex = (int)m_HpPer;
         if (m_HpIndex >= 0)
         {

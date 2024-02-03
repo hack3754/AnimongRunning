@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -982782189
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 103
   m_Sprite: {fileID: 21300000, guid: f7c98e20e0f1b924baec59511ec1fbfa, type: 3}
   m_Color: {r: 0.18431373, g: 0.25490198, b: 0.37254903, a: 0.88235295}
   m_FlipX: 0
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -982782189
   m_SortingLayer: 3
-  m_SortingOrder: 4
+  m_SortingOrder: 104
   m_Sprite: {fileID: 21300000, guid: 24c867f743ecd124c89a893aa3cf953d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -240,7 +240,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -982782189
   m_SortingLayer: 3
-  m_SortingOrder: 5
+  m_SortingOrder: 105
   m_Sprite: {fileID: 21300000, guid: c67f7846f0c37874d85aeb7d87018f1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 6067187846373919170}
   - component: {fileID: 7694407326599670867}
   - component: {fileID: 2308772553438643453}
-  - component: {fileID: 7493111797687475525}
+  - component: {fileID: 3287238664810480327}
   m_Layer: 0
   m_Name: Mozzi_Boss_01
   m_TagString: Untagged
@@ -362,7 +362,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7493111797687475525
+--- !u!114 &3287238664810480327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -371,10 +371,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7340854581779686588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3067615d65add4418cf388f678d3c5f, type: 3}
+  m_Script: {fileID: 11500000, guid: c3cc8d2375f4e634aba4cd67506d4818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Animator: {fileID: 2308772553438643453}
-  m_Sprites:
-  - {fileID: 1588951916532616322}
-  - {fileID: 0}
+  m_Obj: {fileID: 7340854581779686588}
+  m_Trans: {fileID: 6067187846373919170}
+  m_PosLast: 0

@@ -88,8 +88,8 @@ public class UISelectChar : UIDragBase
     {
         for(int i = 0;i < m_Datas.Count;i++)
         {
-            m_Datas[i].m_IsLock = GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
-            if(m_Datas[i].m_tData.id == GameData.m_LocalData.m_Data.SelectCharId)
+            m_Datas[i].m_IsLock = GameData.IsCharLock(m_Datas[i].m_tData.id);
+            if(m_Datas[i].m_tData.id == GameData.m_Player.m_PlayCharId)
             {
                 SetSelectPos(m_Datas[i]);
                 m_Index = m_Datas[i].Index;
@@ -161,17 +161,18 @@ public class UISelectChar : UIDragBase
 
     void OnClickPurchase()
     {
-        if (m_SelectData == null || GameData.m_LocalData.m_Data.Gold < m_SelectData.m_tData.price) return;
+        if (m_SelectData == null || GameData.m_LocalData.m_Data.Gold < m_SelectData.m_tData.price 
+            || GameData.m_PlayCharIDs.Contains(m_SelectData.m_tData.id)) return;
 
         GameData.m_LocalData.m_Data.Gold -= m_SelectData.m_tData.price;
-        GameData.m_LocalData.m_Data.AddOpenChar(m_SelectData.m_tData.id);
+        GameData.m_PlayCharIDs.Add(m_SelectData.m_tData.id);
         GameData.m_LocalData.Save();
 
         GameManager.Instance.m_OutGameUI.SetCoin();
 
         for (int i = 0; i < m_Datas.Count; i++)
         {
-            m_Datas[i].m_IsLock = GameData.m_LocalData.m_Data.IsLock(m_Datas[i].m_tData.id);
+            m_Datas[i].m_IsLock = GameData.IsCharLock(m_Datas[i].m_tData.id);
             m_Cells[i].Refresh();
         }
 
@@ -181,7 +182,8 @@ public class UISelectChar : UIDragBase
     {
         if (m_SelectData != null)
         {
-            GameData.m_LocalData.m_Data.SelectCharId = m_SelectData.m_tData.id;
+            GameData.m_Player.m_PlayCharId = m_SelectData.m_tData.id;
+            GameData.m_Player.SetSelectChar();
             GameManager.Instance.m_Running.m_Player.SetPlayer();
             GameManager.Instance.m_OutGameUI.ShowPrevUI();
         }

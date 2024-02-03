@@ -14,6 +14,7 @@ public class RunningManager : MonoBehaviour
     public Camera m_Cam;
     public GameObject m_Obj;
     public Player m_Player;
+    public BossObject m_Boss;
     public BgUpdate m_BgUpdate;
     public Transform m_TransCamera;
     public LaneObject[] m_LaneObjects;
@@ -52,6 +53,7 @@ public class RunningManager : MonoBehaviour
     public void Init()
     {
         m_Player.Init();
+        m_Boss.Init();
         m_IsJumpBlock = false;
         m_PosOri = m_BgUpdate.m_TransBg.localPosition;
 
@@ -63,12 +65,11 @@ public class RunningManager : MonoBehaviour
         m_Time = 0;
         GameData.GameReset();
         m_Player.GameReset();
+        m_Boss.GameReset();
+        m_Player.SetPlayer();
         m_BgUpdate.m_TransBg.localPosition = m_PosOri;
         m_BgUpdate.GameReset();
         m_States.Clear();
-
-        GameManager.Instance.m_IsStop = false;
-        GameManager.Instance.m_IsStun = false;
 
         m_LaneIndex = m_LaneObjects.Length / 2;
         m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
@@ -107,6 +108,7 @@ public class RunningManager : MonoBehaviour
     {
         GameData.m_Player.m_HP -= Time.deltaTime;
         GameManager.Instance.m_InGameUI.SetHP(GameData.m_Player.m_HP);
+        m_Boss.MoveUpdate(GameData.m_Player.m_HP);
         if (GameData.m_Player.m_HP <= 0)
         {
             //GameOver;
@@ -117,7 +119,7 @@ public class RunningManager : MonoBehaviour
 
         //GameManager.Instance.m_InGameUI.SetTime();
 
-        if (GameManager.Instance.m_IsStop == false && GameManager.Instance.m_IsStun == false)
+        if (GameData.m_IsStop == false && GameData.m_IsStun == false)
         {
             m_BgUpdate.BgMoveScore(GameData.m_BGSpeed);
 
@@ -143,15 +145,15 @@ public class RunningManager : MonoBehaviour
             else
             {
 
-                if (GameData.m_BGSpeed < DataManager.Instance.m_BGData.max_speed)
+                if (GameData.m_BGSpeed < GameData.m_Player.m_MaxSpeed)
                 {
                     GameData.m_BGSpeed += DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
-                    if (GameData.m_BGSpeed >= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
+                    if (GameData.m_BGSpeed >= GameData.m_Player.m_MaxSpeed) GameData.m_BGSpeed = GameData.m_Player.m_MaxSpeed;
                 }
-                else if (GameData.m_BGSpeed > DataManager.Instance.m_BGData.max_speed)
+                else if (GameData.m_BGSpeed > GameData.m_Player.m_MaxSpeed)
                 {
                     GameData.m_BGSpeed -= DataManager.Instance.m_BGData.bg_speed * Time.deltaTime;
-                    if (GameData.m_BGSpeed <= DataManager.Instance.m_BGData.max_speed) GameData.m_BGSpeed = DataManager.Instance.m_BGData.max_speed;
+                    if (GameData.m_BGSpeed <= GameData.m_Player.m_MaxSpeed) GameData.m_BGSpeed = GameData.m_Player.m_MaxSpeed;
                 }
                 /*
                 if (GameData.m_CAMSpeed < DataManager.Instance.m_BGData.cam_max_speed)
@@ -221,7 +223,7 @@ public class RunningManager : MonoBehaviour
             //m_Vec2.y += Vertical;
             //m_Player.m_RigidBody.velocity = m_Vec2;
 
-            if (GameManager.Instance.m_IsStun == false)
+            if (GameData.m_IsStun == false)
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
@@ -245,6 +247,7 @@ public class RunningManager : MonoBehaviour
 
     public void GameOverBlock()
     {
+        GameData.m_IsStun = true;
         StartCoroutine(GameOverPlayer());
     }
     IEnumerator GameOverPlayer()
@@ -259,7 +262,7 @@ public class RunningManager : MonoBehaviour
     {
         //GameData.m_SlowSpeed = 0;
         //m_IsJumpBlock = false;
-        GameManager.Instance.m_IsStop = false;
+        GameData.m_IsStop = false;
     }
 
     public void MoveUp()
@@ -276,7 +279,7 @@ public class RunningManager : MonoBehaviour
 
         if (m_Player.m_Map != null)
         {
-            if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
+            if (GameData.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
             {
                 return;
             }
@@ -300,7 +303,7 @@ public class RunningManager : MonoBehaviour
 
         if (m_Player.m_Map != null)
         {
-            if (GameManager.Instance.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
+            if (GameData.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
             {
                 return;
             }
@@ -359,7 +362,7 @@ public class RunningManager : MonoBehaviour
                 GameManager.Instance.m_MoveObj.SetMoveObject(trap.transform.position, GameData.m_PosGold, trap.m_tData.value2 - 1);
                 break;
             case TrapType.Stop:
-                GameManager.Instance.m_IsStun = true;
+                GameData.m_IsStun = true;
                 GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
                 StartCoroutine(RunAgain(dataTime));
                 break;
@@ -367,7 +370,7 @@ public class RunningManager : MonoBehaviour
                 trap.SetDisable();
                 break;
             case TrapType.DmgStop:
-                GameManager.Instance.m_IsStop = true;
+                GameData.m_IsStop = true;
                 m_Player.SetDmgStop(trap);
                 break;
             case TrapType.DotDmg:
@@ -402,7 +405,7 @@ public class RunningManager : MonoBehaviour
     IEnumerator RunAgain(float time)
     {
         yield return new WaitForSeconds(time);
-        GameManager.Instance.m_IsStun = false;
+        GameData.m_IsStun = false;
     }
 
     public bool AddDotTrap(TrapType trapType, float dataValue, float dataTime, bool isItem, string res)
@@ -462,7 +465,7 @@ public class RunningManager : MonoBehaviour
                 break;
             case TrapType.SpdUp:
                 GameData.m_SpeedUp = stateInfo.m_Value;
-                GameManager.Instance.m_IsSpeedUp = true;
+                GameData.m_IsSpeedUp = true;
                 break;
             case TrapType.DotDmg:
                 GameData.m_Player.m_HP -= stateInfo.m_Value;
@@ -472,7 +475,7 @@ public class RunningManager : MonoBehaviour
 
     public void Jump(string aniName)
     {
-        if (GameManager.Instance.m_IsStop) return;
+        if (GameData.m_IsStop) return;
 
         if (m_IsJumpBlock || m_IsJump) return;
         m_Player.Jump(aniName);

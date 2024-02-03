@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
                 //게임 오브에 대한 코드
                 //GameManager.Instance.m_Running.GameOverBlock();
                 //멈춤에 대한 코드
-                GameManager.Instance.m_IsStop = true;
+                GameData.m_IsStop = true;
                 GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
             }
         }
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
             BlockObject block = collision.gameObject.GetComponent<BlockObject>();
             if (block != null)
             {
-                GameManager.Instance.m_IsStop = false;
+                GameData.m_IsStop = false;
             }
         }
     }
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
             Destroy(m_Char.gameObject);
             m_Char = null;
         }
-        var table = DataManager.Instance.m_CharData.Get(GameData.m_LocalData.m_Data.SelectCharId);
+        var table = DataManager.Instance.m_CharData.Get(GameData.m_Player.m_PlayCharId);
         if(table == null)
         {
             table = DataManager.Instance.m_CharData.Get(1);

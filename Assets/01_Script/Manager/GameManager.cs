@@ -19,9 +19,6 @@ public class GameManager : MSingleton<GameManager>
     public BGControl m_BGControl;
     public MoveObjManager m_MoveObj;
     public GameObject m_BG;
-    public bool m_IsStop;
-    public bool m_IsSpeedUp;
-    public bool m_IsStun;
     bool m_IsGameStart;
     bool m_IsReadyStart;
     List<Coroutine> m_StateCoroutine;
@@ -32,9 +29,6 @@ public class GameManager : MSingleton<GameManager>
     {
         m_LoignUI.Init();
         m_MoveObj.Init();
-        m_IsStop = false;
-        m_IsStun = false;
-        m_IsSpeedUp = false;
         m_StateCoroutine = new List<Coroutine>();
 
 #if UNITY_EDITOR
@@ -240,7 +234,7 @@ public class GameManager : MSingleton<GameManager>
 
         if (m_IsGameStart == false) return;
         m_Running.Running();
-        if (m_IsStop || m_IsStun) return;
+        if (GameData.m_IsStop || GameData.m_IsStun) return;
         m_BGControl.BgMove();
         m_InGameUI.m_UIMian.SetGoldPos();
     }

@@ -108,6 +108,9 @@ public class OutGameUIMain : UIObject
     {
         Hide();
         GameManager.Instance.GameReadyStart();
+
+        if (GameData.m_PlayCharIDs.Contains(GameData.m_Player.m_PlayCharId) && GameData.m_Player.m_PlayCharId != GameData.m_LocalData.m_Data.SelectCharId)
+            GameData.m_PlayCharIDs.Remove(GameData.m_Player.m_PlayCharId);
     }
 
     void OnClickBack()

@@ -32,12 +32,15 @@ public class TrapColliderManager : MonoBehaviour
     List<string> m_BlockNames;
     Dictionary<string, List<TrapCollider>> m_Traps;
 
+    Dictionary<string, Vector3> m_TrapScale;
+
     Vector3 m_Scale;
 
     public void Init()
     {
         m_TrapNames = new List<string>();
         m_Traps = new Dictionary<string, List<TrapCollider>>();
+        m_TrapScale = new Dictionary<string, Vector3>();
         for (int i = 0; i < m_PrefabsTrap.Length; i++)
         {
             if (m_TrapNames.Contains(m_PrefabsTrap[i].name) == false) m_TrapNames.Add(m_PrefabsTrap[i].name);
@@ -48,6 +51,7 @@ public class TrapColliderManager : MonoBehaviour
                 if (m_Traps.ContainsKey(m_PrefabsTrap[i].m_tData.res) == false)
                 {
                     m_Traps.Add(m_PrefabsTrap[i].m_tData.res, new List<TrapCollider>());
+                    m_TrapScale.Add(m_PrefabsTrap[i].m_tData.res, m_PrefabsTrap[i].transform.localScale);
                 }
 
                 m_Traps[m_PrefabsTrap[i].name].Add(m_PrefabsTrap[i]);
@@ -65,6 +69,7 @@ public class TrapColliderManager : MonoBehaviour
                 if (m_Traps.ContainsKey(m_PrefabsItem[i].m_tData.res) == false)
                 {
                     m_Traps.Add(m_PrefabsItem[i].m_tData.res, new List<TrapCollider>());
+                    m_TrapScale.Add(m_PrefabsItem[i].m_tData.res, m_PrefabsItem[i].transform.localScale);
                 }
 
                 m_Traps[m_PrefabsItem[i].name].Add(m_PrefabsItem[i]);
@@ -82,6 +87,7 @@ public class TrapColliderManager : MonoBehaviour
                 if (m_Traps.ContainsKey(m_PrefabsScore[i].m_tData.res) == false)
                 {
                     m_Traps.Add(m_PrefabsScore[i].m_tData.res, new List<TrapCollider>());
+                    m_TrapScale.Add(m_PrefabsScore[i].m_tData.res, m_PrefabsScore[i].transform.localScale);
                 }
 
                 m_Traps[m_PrefabsScore[i].name].Add(m_PrefabsScore[i]);
@@ -99,6 +105,7 @@ public class TrapColliderManager : MonoBehaviour
                 if (m_Traps.ContainsKey(m_PrefabsGold[i].m_tData.res) == false)
                 {
                     m_Traps.Add(m_PrefabsGold[i].m_tData.res, new List<TrapCollider>());
+                    m_TrapScale.Add(m_PrefabsGold[i].m_tData.res, m_PrefabsGold[i].transform.localScale);
                 }
 
                 m_Traps[m_PrefabsGold[i].name].Add(m_PrefabsGold[i]);
@@ -116,6 +123,7 @@ public class TrapColliderManager : MonoBehaviour
                 if (m_Traps.ContainsKey(m_PrefabsBlock[i].m_tData.res) == false)
                 {
                     m_Traps.Add(m_PrefabsBlock[i].m_tData.res, new List<TrapCollider>());
+                    m_TrapScale.Add(m_PrefabsBlock[i].m_tData.res, m_PrefabsBlock[i].transform.localScale);
                 }
 
                 m_Traps[m_PrefabsBlock[i].name].Add(m_PrefabsBlock[i]);
@@ -169,11 +177,6 @@ public class TrapColliderManager : MonoBehaviour
 
             col.m_Trans.SetParent(parent);
             col.Set(true);
-            if (trap.Contains("item_Fruit"))
-            {
-                Debug.Log(m_Traps[trap][0].m_Trans.localScale);
-            }
-
             col.transform.localScale = m_Traps[trap][0].m_Trans.localScale;
 
             return col;
@@ -235,7 +238,7 @@ public class TrapColliderManager : MonoBehaviour
 
         if (m_Traps.ContainsKey(trap))
         {
-            m_Scale = m_Traps[trap][0].m_Trans.localScale;
+            if(m_TrapScale.ContainsKey(trap)) m_Scale = m_TrapScale[trap];
             TrapCollider col = null;
 
             for (int i = 1; i < m_Traps[trap].Count; i++)
@@ -262,18 +265,5 @@ public class TrapColliderManager : MonoBehaviour
         }
 
         return null;
-    }
-
-    public void Free(List<TrapCollider> objs)
-    {
-        for(int i = 0;i < objs.Count;i++)
-        {
-            objs[i].Set(false);
-            objs[i].m_Trans.SetParent(m_Parent);
-            if (m_Traps.ContainsKey(objs[i].name))
-            {
-                objs[i].transform.localScale = m_Traps[name][0].m_Trans.localScale;
-            }
-        }
     }
 }
