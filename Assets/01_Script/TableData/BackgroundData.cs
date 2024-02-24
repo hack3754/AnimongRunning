@@ -17,10 +17,17 @@ public class BackgroundData : DataBase
     public float hp_value;
     public float speed_value;
 
-    public override void Init()
+    public override void Init(bool isLocalLoad)
     {
-        base.Init();
-        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=515660359");
+        base.Init(isLocalLoad);
+        string path = string.Empty;
+
+        if (isLocalLoad) path = ResourceManager.Instance.GetKey(ResourceManager.PathType.DATA, "Background");
+        else
+            path = "https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=515660359";
+        
+
+        Load(path, isLocalLoad);
     }
 
     protected override void ParseData(string[] _row)

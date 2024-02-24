@@ -14,6 +14,9 @@ public class LocalData
 	public float Score { get; set; }
 
     public System.DateTime m_SelectTime;
+	public int m_Controller;
+	public int m_SoundSetting;
+	public bool m_IsSelectController;
     public LocalData()
     {
 
@@ -22,12 +25,15 @@ public class LocalData
     public void Init()
     {
 		if(m_OpenChar == null) m_OpenChar = new List<int>();
-        SelectCharId = 1;
     }
 
 	public void FirstInit()
 	{
         m_OpenChar.Add(1);
+        SelectCharId = 1;
+        m_Controller = 0;
+		m_SoundSetting = 0;
+        m_IsSelectController = false;
     }
 
 	public bool IsLock(int id)

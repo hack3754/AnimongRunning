@@ -42,12 +42,12 @@ public class BgUpdate : MonoBehaviour
                 id = 1;
                 tData = DataManager.Instance.m_MapData.Get(1);
             }
-            else if(i == m_Ways.Length - 1 )
+            else if(i <= m_Ways.Length - 1 )
             {
                 //nextId = 0;
                 //nextId = DataManager.Instance.m_MapData.GetRandom();
                 //tData = DataManager.Instance.m_MapData.Get(nextId);
-                DataManager.Instance.m_MapData.TryGetRandom(firstId, out id, out tData);
+                DataManager.Instance.m_MapData.TryGetRandom(id, out id, out tData);
                 if (tData == null) tData = DataManager.Instance.m_MapData.Get(2);
             }
             else

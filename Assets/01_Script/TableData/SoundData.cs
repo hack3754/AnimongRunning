@@ -13,20 +13,19 @@ public class SoundData : DataDicBase<int, SoundDataItem>
     public Dictionary<int, SoundDataItem> dic;
     private List<int> listIdx;
 
-    public override void Init()
+    public override void Init(bool isLocalLoad)
     {
-        base.Init();
+        base.Init(isLocalLoad);
         dic = new Dictionary<int, SoundDataItem>();
         listIdx = new List<int>();
 
-        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=651490087");
-        /*
-        #if UNITY_EDITOR
-                Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=0");
-        #else
-                Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=0");
-        #endif
-        */
+        string path = string.Empty;
+
+        if (isLocalLoad) path = ResourceManager.Instance.GetKey(ResourceManager.PathType.DATA, "Sound");
+        else
+            path = "https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=651490087";
+
+        Load(path, isLocalLoad);
     }
 
     protected override void ParseDataFirst(string[] _row)

@@ -1,0 +1,12 @@
+#Background설명,key,value
+배경 속도,bg_speed,5
+hp(초),hp_max,30
+Min_Speed,min_speed,3
+Max_Speed,max_speed,6
+Sprint_Time,sprint_time,2
+Sprint_Speed,sprint_speed,15
+Cam_Max_Speed,cam_max_speed,3
+Cam_Speed,cam_speed,0.5
+Max_Speed,max_speed_up,9
+char_hp_value,hp_value,10
+char_speed_value,speed_value,3

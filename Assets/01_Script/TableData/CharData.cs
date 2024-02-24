@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class CharDataItem
@@ -17,18 +18,18 @@ public class CharDataItem
 
 public class CharData : DataDicBase<int, CharDataItem>
 {
-    public override void Init()
+    public override void Init(bool isLocalLoad)
     {
-        base.Init();
+        base.Init(isLocalLoad);
 
-        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=1784063883");
-        /*
-        #if UNITY_EDITOR
-                Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=0");
-        #else
-                Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=0");
-        #endif
-        */
+        string path = string.Empty;
+
+        if (isLocalLoad) path = ResourceManager.Instance.GetKey(ResourceManager.PathType.DATA, "Character");
+        else
+            path = "https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=1784063883";
+
+        Load(path, isLocalLoad);
+
     }
 
     protected override void ParseDataFirst(string[] _row)

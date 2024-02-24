@@ -1,0 +1,10 @@
+#Global설명,key,value
+광고 보여지는 횟수,ad_cnt,1
+광고 대기 시간 (초),ad_wait_time,2
+광고 id,ad_id,ca-app-pub-5514917895492992/1775773339
+배경 속도,bg_speed,0.5
+hp(초),hp_max,100
+Min_Speed,min_speed,2
+Max_Speed,max_speed,10
+Sprint_Time,sprint_time,2
+Sprint_Speed,sprint_speed,15

@@ -235,4 +235,13 @@ public class UIInGame : UIObject
         pos.z = (m_Canvas.transform.position - m_Cam.transform.position).magnitude;
         GameData.m_PosGold = Camera.main.ScreenToWorldPoint(pos);
     }
+
+    public void SetController()
+    {
+        for(int i =0;i < m_BtnUp.Length;i++)
+        {
+            m_BtnUp[i].SetActive(i == GameData.m_LocalData.m_Data.m_Controller);
+            m_BtnDown[i].SetActive(i == GameData.m_LocalData.m_Data.m_Controller);
+        }
+    }
 }

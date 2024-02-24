@@ -19,6 +19,7 @@ public class RunningManager : MonoBehaviour
     public Transform m_TransCamera;
     public LaneObject[] m_LaneObjects;
     public Transform[] m_Points;
+    public Transform[] m_BossPoints;
 
     public float m_PlayerSpeed;
     public float m_VerticalSpeed;
@@ -53,7 +54,7 @@ public class RunningManager : MonoBehaviour
     public void Init()
     {
         m_Player.Init();
-        m_Boss.Init();
+        m_Boss.Init(SetBossPosition);
         m_IsJumpBlock = false;
         m_PosOri = m_BgUpdate.m_TransBg.localPosition;
 
@@ -245,6 +246,11 @@ public class RunningManager : MonoBehaviour
         }
     }
 
+    public void SetBossPosition()
+    {
+        m_Boss.SetPosition(m_BossPoints[m_LaneIndex].position);
+    }
+
     public void GameOverBlock()
     {
         GameData.m_IsStun = true;
@@ -287,6 +293,7 @@ public class RunningManager : MonoBehaviour
         m_LaneIndex--;
 
         m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+        m_Boss.SetPosition(m_BossPoints[m_LaneIndex].position);
     }
 
     public void MoveDown()
@@ -312,6 +319,7 @@ public class RunningManager : MonoBehaviour
         m_LaneIndex++;
 
         m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
+        m_Boss.SetPosition(m_BossPoints[m_LaneIndex].position);
     }
 
     public void SetTrap(TrapCollider trap)

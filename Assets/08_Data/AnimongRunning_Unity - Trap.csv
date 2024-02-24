@@ -1,0 +1,10 @@
+#Trap설명,key,1,2,3,4,5,6,7,8,9,10,1001,1002,1003,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,3001,3002,3003,3004,3005
+Trap sprite 이름,res,Mud_001,Thorn_001,Con_001,Hive_001,Rock_001,BigRock_001,Poop_001,Bush_001,Bush_002,ThornsBumble_001,item_Coin_01,item_Coin_05,item_Coin_10,item_Fruit_01,item_Fruit_02,item_Fruit_03,item_Fruit_04,item_Fruit_05,item_Fruit_06,item_Fruit_07,item_Fruit_08,item_Fruit_09,item_Fruit_10,item_Fruit_11,Item_Energy_01,Item_Energy_02,Item_Icon_31,Item_Icon_43,Item_Icon_51
+Trap 타입,type,SpdUp,Dmg,Death,SpdUp,Death,Death,SpdUp,Death,Death,Dmg,Gold,Gold,Gold,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,HpRecovery,Helmet,SpdUp, Rainboots
+Trap 타입,type2,,,,DotDmg,,,DotDmg,,,Slow,,,,,,,,,,,,,,,,,,,
+player 아래,IsUnder,1,1,0,1,0,0,1,0,0,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+여러가지 값,time,100,,,100,,,100,,,,,,,,,,,,,,,,,,,,,100,100
+여러가지 값,time2,,,,200,,,200,,,,,,,,,,,,,,,,,,,,,,
+여러가지 값,value,200,5,,200,,,200,,,,1,5,10,5,5,5,5,5,5,5,5,5,5,50,50,100,,200,
+여러가지 값,value2,,,,10,,,10,,,,1,2,3,,,,,,,,,,,50,,,,,
+트랩인지 아닌지,IsTrap,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,

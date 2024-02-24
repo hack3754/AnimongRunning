@@ -77,56 +77,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map
-  - m_GUID: cc2238591aa203c41bbe06ec07e1b99e
-    m_Address: Assets/04_Prefabs/Map/Map11.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: ef36fe072de3f1f4d907d787fbec1935
-    m_Address: Assets/04_Prefabs/Map/Map12.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: 1813a0cf058126840884e8de6b8455de
-    m_Address: Assets/04_Prefabs/Map/Map13.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: bb2e370bb46f5d74eb641bca4663d60d
-    m_Address: Assets/04_Prefabs/Map/Map14.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: 2ceff598fbd420c40b337de7857a60ec
-    m_Address: Assets/04_Prefabs/Map/Map15.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: e3ae3891870862f438b046e61ed1e8b9
-    m_Address: Assets/04_Prefabs/Map/Map16.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: ad7ef198252e30f40981afdcc7d43438
-    m_Address: Assets/04_Prefabs/Map/Map17.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: ec230d5f13c766942b91665d15a4c75d
-    m_Address: Assets/04_Prefabs/Map/Map18.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: 9612ae459680ee5499acc16609054e08
-    m_Address: Assets/04_Prefabs/Map/Map19.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
-  - m_GUID: 8de62c027b7b7d54ebdb7dc3c91b68f9
-    m_Address: Assets/04_Prefabs/Map/Map20.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Map
   - m_GUID: 4616ae152e6e75745ad3f3d54ce4a3e2
     m_Address: Assets/04_Prefabs/UI/Character/UI_Ca_02_Tod.prefab
     m_ReadOnly: 0
@@ -162,6 +112,30 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 689a5ac08f396a44ab82e98da17e9ccb
     m_Address: Assets/04_Prefabs/UI/Character/UI_Ca_05_Jini.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f91944befde704e499d59fe7e7a6b8e9
+    m_Address: Assets/08_Data/AnimongRunning_Unity - Background.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc4408beb7c7c0a438fb8ec8efbaa9fb
+    m_Address: Assets/08_Data/AnimongRunning_Unity - Character.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f10a14040b6c4aa448eaafaa7c7c6692
+    m_Address: Assets/08_Data/AnimongRunning_Unity - Map.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5f90447c06b547a4c84ef42c2d7508a5
+    m_Address: Assets/08_Data/AnimongRunning_Unity - Golbal.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 00c183179373b404c837e21d312b5ff4
+    m_Address: Assets/08_Data/AnimongRunning_Unity - Sound.csv
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7dacc734247d2ef4eadc3b06260dc980
+    m_Address: Assets/08_Data/AnimongRunning_Unity - Trap.csv
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

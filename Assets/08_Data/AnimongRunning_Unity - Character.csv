@@ -1,0 +1,10 @@
+#Sound설명,key,1,2,3,4,5
+Health,health,3,2,2,2,2
+Power,power,2,3,3,3,3
+Speed,speed,1,2,2,2,2
+Vitality,vitality,1,2,2,2,2
+Luck,luck,1,2,2,2,2
+Prefab,res,Ca_01_Go,Ca_02_Tod,Ca_03_Tokki,Ca_04_Dog,Ca_05_Jini
+Name,name,Gomong,Tod,Tokki,Dog,Jini
+Icon,resIcon,,,,,
+Price,price,100,100,200,300,400

@@ -7,6 +7,7 @@ public class DataManager : MSingleton<DataManager>
 {
 	//public PopupLoaing loading;
 	public GameObject go;
+	public bool m_IsLocalLoad;
 
 	private bool is_load;
 	private int load_cnt;
@@ -67,7 +68,7 @@ public class DataManager : MSingleton<DataManager>
 		
 		for(int i =0; i < m_ListData.Count; i++)
 		{
-            m_ListData[i].Init();
+            m_ListData[i].Init(m_IsLocalLoad);
 		}
 	}
 

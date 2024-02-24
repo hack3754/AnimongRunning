@@ -22,11 +22,11 @@ public class EnemyDataItem
 
 public class EnemyData : DataDicBase<int, EnemyDataItem>
 {
-    public override void Init()
+    public override void Init(bool isLocalLoad)
     {
-        base.Init();
+        base.Init(isLocalLoad);
 
-        Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=1660719681");
+        Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=1660719681",isLocalLoad);
 /*
 #if UNITY_EDITOR
 		Load("https://docs.google.com/spreadsheets/d/1j1df9NRMQL8ZuErrvuAiKUqkC_7uAAw8VR_JJhIBffM/export?format=csv&gid=0");

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class MapDataItem
@@ -11,12 +12,17 @@ public class MapDataItem
 }
 public class MapData : DataDicBase<int, MapDataItem>
 {
-    public override void Init()
+    public override void Init(bool isLocalLoad)
     {
-        base.Init();
+        base.Init(isLocalLoad);
 
-        //Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=932822041");
-        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=1808877930");
+        string path = string.Empty;
+
+        if (isLocalLoad) path = ResourceManager.Instance.GetKey(ResourceManager.PathType.DATA, "Map");
+        else
+            path = "https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=1808877930";
+
+        Load(path, isLocalLoad);
     }
 
     protected override void ParseDataFirst(string[] _row)
@@ -86,17 +92,28 @@ public class MapData : DataDicBase<int, MapDataItem>
 
     public bool TryGetRandom(int nextid, out int id,  out MapDataItem mapData)
     {
+        /*
         mapData = null;
         id = 0;
 
         if (m_Dic == null || m_Dic.ContainsKey(nextid) == false) return false;
 
-        var list = m_Dic[1].nextMaps;
+        var list = m_Dic[nextid].nextMaps;
         if (list == null) list = new List<int>();
-        var pair = m_Dic.OrderBy(g => Guid.NewGuid()).FirstOrDefault(p => list.Contains(p.Key) == false && p.Key != 1);
-        id = pair.Key;
-        mapData = pair.Value;
+        System.Random r = new System.Random();
+        //var pair = m_Dic.OrderBy(g => Guid.NewGuid()).FirstOrDefault(p => list.Contains(p.Key) == false && p.Key != 1);
+        var pair = m_Dic.Where(p => list.Contains(p.Key) == false && p.Key != 1) .OrderBy(x => r.Next()).ToList();
+        int index = UnityEngine.Random.Range(0, pair.Count);
+        id = pair[index].Key;
+        mapData = pair[index].Value;
 
         return mapData is not null;
+        */
+
+        id = 0;
+        mapData = m_Dic[2];
+
+        return mapData is not null;
+
     }
 }

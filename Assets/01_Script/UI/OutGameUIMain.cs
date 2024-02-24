@@ -7,6 +7,12 @@ public class OutGameUIMain : UIObject
     public UISelectChar m_UISelectChar;
     public UIShop m_UIShop;
     public UIMain m_UIMain;
+
+
+    //Popup
+    public UIPopupSetting m_UIPopupSetting;
+    public UIPopupSelectController m_UIPopupSelectController;
+
     public TMP_Text m_TxtCoin;
 
     public GameObject m_ObjTop;
@@ -21,6 +27,11 @@ public class OutGameUIMain : UIObject
         m_UIMain.Init(GameStart);
         m_UISelectChar.Init();
         m_UIShop.Init();
+
+        //Popup
+        m_UIPopupSetting.Init();
+        m_UIPopupSelectController.Init();
+
         m_BtnBack.m_FncOnClick = OnClickBack;
 
         m_ListPrevUI = new List<UIBase>();

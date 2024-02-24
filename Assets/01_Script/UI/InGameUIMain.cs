@@ -22,6 +22,7 @@ public class InGameUIMain : UIObject
     {
         SetActive(true);
         m_UIMian.m_Obj.SetActive(true);
+        m_UIMian.SetController();
     }
 
     public void GameReset()

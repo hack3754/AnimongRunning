@@ -58,9 +58,7 @@ public class TrapManager : MonoBehaviour
         if (m_Traps == null) return;
         for(int i = 0; i < m_Traps.Count;i++)
         {
-            m_Traps[i].SetActive(false);
-            m_Traps[i].IsEnable = false;
-            m_Traps[i].transform.parent = GameManager.Instance.m_TrapColliderMgr.m_Parent;
+            m_Traps[i].InitTrap();
         }
 
         m_Traps.Clear();

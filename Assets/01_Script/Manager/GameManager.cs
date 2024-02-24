@@ -206,6 +206,11 @@ public class GameManager : MSingleton<GameManager>
     {
         m_LoignUI.Hide();
         m_OutGameUI.Show();
+        if (!GameData.m_LocalData.m_Data.m_IsSelectController)
+            m_OutGameUI.m_UIPopupSelectController.Show();
+        else
+            m_OutGameUI.m_UIPopupSelectController.Hide();
+
         m_Running.SetOutGame();
     }
 

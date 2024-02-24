@@ -15,14 +15,26 @@ public class DataBase : MonoBehaviour
     protected int idx_value;
 	protected int idx_desc;
 	protected int idx_max;
-    virtual public void Init()
+    virtual public void Init(bool isLocalLoad)
     {
       
     }
 
-    virtual public void Load(string _path)
+    virtual public void Load(string _path, bool isLocalLoad)
     {
-        StartCoroutine(DoLoad(_path));
+        if (isLocalLoad)
+        {
+            ResourceManager.Instance.LoadAsync<TextAsset>(_path, (assets, isSucess) =>
+            {
+                if (isSucess)
+                {
+                    DataLoad(assets.text);
+                }
+            });
+        }
+        else
+            StartCoroutine(DoLoad(_path));
+
     }
 
     private IEnumerator DoLoad(string _path)
@@ -39,42 +51,48 @@ public class DataBase : MonoBehaviour
 #if UNITY_EDITOR
 		Debug.Log(www.downloadHandler.text);
 #endif
-		string[] cell = www.downloadHandler.text.Split(CHAR_ENTER);
-		string[] row;
-		int i, j;
-		
-		idx_key = 0;
-		idx_value = 0;
+        DataLoad(www.downloadHandler.text);
 
-		for (i = 0; i < cell.Length; i++)
-		{
-			cell[i] = cell[i].Trim();
-			row = cell[i].Split(CHAR_COMMA);
-			
-			if (i == 0)
-			{
-				for (j = 0; j < row.Length; j++)
-				{
-					if (row[j].Contains("#")) idx_desc = j;
-					if (row[j].Contains("key")) idx_key = j;
-					if (row[j].Contains("value")) idx_value = j;
-					if(string.IsNullOrEmpty(row[j])) break;
-				}
-				idx_max = j;
-				ParseDataFirst(row);
-				continue;
-			}
-			if(row.Length <= idx_key) continue;
-			if(row[idx_key] == "desc") continue;
-
-            ParseData(row);
-		}
-		
-		www.Dispose();
-
-		DataManager.Instance.CheckLoad();
+        www.Dispose();
 		yield break;
 	}
+
+	public void DataLoad(string txt)
+	{
+        string[] cell = txt.Split(CHAR_ENTER);
+        string[] row;
+        int i, j;
+
+        idx_key = 0;
+        idx_value = 0;
+
+        for (i = 0; i < cell.Length; i++)
+        {
+            cell[i] = cell[i].Trim();
+            row = cell[i].Split(CHAR_COMMA);
+
+            if (i == 0)
+            {
+                for (j = 0; j < row.Length; j++)
+                {
+                    if (row[j].Contains("#")) idx_desc = j;
+                    if (row[j].Contains("key")) idx_key = j;
+                    if (row[j].Contains("value")) idx_value = j;
+                    if (string.IsNullOrEmpty(row[j])) break;
+                }
+                idx_max = j;
+                ParseDataFirst(row);
+                continue;
+            }
+            if (row.Length <= idx_key) continue;
+            if (row[idx_key] == "desc") continue;
+
+            ParseData(row);
+        }
+
+        DataManager.Instance.CheckLoad();
+    }
+
 	protected virtual void ParseDataFirst(string[] _row)
 	{
 

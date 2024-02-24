@@ -8,9 +8,9 @@ public class DataDicBase<U, T> : DataBase where T : class
     protected Dictionary<U, T> m_Dic;
     protected List<int> m_ListIdx;
     
-    override public void Init()
+    override public void Init(bool isLocalLoad)
     {
-        base.Init();
+        base.Init(isLocalLoad);
         m_Dic = new Dictionary<U, T>();
         m_ListIdx = new List<int>();
     }

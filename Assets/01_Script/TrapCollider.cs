@@ -29,8 +29,11 @@ public class TrapCollider : ObjectEntries
     public void InitTrap()
     {
         IsEnable = false;
+        SetActive(false);
         m_LineIndex = 0;
+        m_Trans.parent = GameManager.Instance.m_TrapColliderMgr.m_Parent;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_tData == null || m_tData.IsUnder == true) return;

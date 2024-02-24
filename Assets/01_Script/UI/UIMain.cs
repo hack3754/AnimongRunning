@@ -8,7 +8,7 @@ public class UIMain : UIBase
     public ButtonObject m_BtnShop;
     public ButtonObject m_BtnRanking;
     public ButtonObject m_BtnCharSelect;
-    //public ButtonObject m_BtnCharSetting;
+    public ButtonObject m_BtnSetting;
     public ButtonObject m_BtnAD;
     System.Action m_FncStart;
     public void Init(System.Action fncStart)
@@ -20,6 +20,7 @@ public class UIMain : UIBase
         m_BtnRanking.m_FncOnClick = OnClickRanking;
         m_BtnCharSelect.m_FncOnClick = OnClickCharSelect;
         m_BtnAD.m_FncOnClick = OnClickAds;
+        m_BtnSetting.m_FncOnClick = OnClickSetting;
 
     }
     public override void Show()
@@ -51,4 +52,8 @@ public class UIMain : UIBase
         AdsManager.Instance.ShowRewardedAd();
     }
 
+    void OnClickSetting()
+    {
+        GameManager.Instance.m_OutGameUI.m_UIPopupSetting.Show();
+    }
 }

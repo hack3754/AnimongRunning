@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class ResourceManager : MSingleton<ResourceManager>
 {
+
     public enum PathType
     {
         NONE,
@@ -17,6 +18,7 @@ public class ResourceManager : MSingleton<ResourceManager>
         PREFAB,
         SKLETONDATA,
         TBL,
+        DATA,
     }
 
 	public bool m_isExcelLoad = true; // 엑셀파일 로드. 에디터용
@@ -75,6 +77,7 @@ public class ResourceManager : MSingleton<ResourceManager>
         case PathType.PREFAB:       return string.Format( $"{key}.prefab" );
         case PathType.SKLETONDATA:  return string.Format( $"{key}_SkeletonData.asset" );
         case PathType.TBL:          return string.Format( $"{key}.txt" );
+        case PathType.DATA: return string.Format($"Assets/08_Data/AnimongRunning_Unity - {key}.csv");
         }
 
         return null;

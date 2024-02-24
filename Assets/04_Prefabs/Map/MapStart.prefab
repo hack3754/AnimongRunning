@@ -931,6 +931,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Way_Start
       objectReference: {fileID: 0}
+    - target: {fileID: 6967698210279748398, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967698210279748398, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967698210279748398, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -982782189
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414063188047192920, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414063188047192920, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414063188047192920, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8429734095330495466, guid: 8d32c729b68926648af2d9b62cdf1cca, type: 3}
       propertyPath: m_RootOrder
       value: 0

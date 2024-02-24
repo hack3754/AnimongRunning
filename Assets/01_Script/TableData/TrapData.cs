@@ -35,10 +35,17 @@ public class TrapDataItem
 }
 public class TrapData : DataDicBase<int, TrapDataItem>
 {
-    public override void Init()
+    public override void Init(bool isLocalLoad)
     {
-        base.Init();
-        Load("https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=932822041");
+        base.Init(isLocalLoad);
+
+        string path = string.Empty;
+
+        if (isLocalLoad) path = ResourceManager.Instance.GetKey(ResourceManager.PathType.DATA, "Trap");
+        else
+            path = "https://docs.google.com/spreadsheets/d/1s7xA3eH8Gc6dV8gOXOzWg0CjKBeGb5vcdw5UHm155xI/export?format=csv&gid=932822041";
+
+        Load(path, isLocalLoad);
     }
 
     protected override void ParseDataFirst(string[] _row)
