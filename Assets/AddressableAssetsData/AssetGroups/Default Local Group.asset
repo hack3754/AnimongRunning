@@ -138,6 +138,18 @@ MonoBehaviour:
     m_Address: Assets/08_Data/AnimongRunning_Unity - Trap.csv
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 447d8c4aa6349ca46a93d93282bad246
+    m_Address: Assets/04_Prefabs/UI/Character/UI_Ca_06_Buta.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a25dabdfba7726c4eab8d3bc15b09f50
+    m_Address: Assets/04_Prefabs/UI/Character/UI_Ca_07_Pibi.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ddc513006733e5e4db03060167fc01c5
+    m_Address: Assets/04_Prefabs/Objects/Characters/Ca_07_Pibi.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 37d5b46f01917074abbe2c18df07aab1, type: 2}
   m_SchemaSet:

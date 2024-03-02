@@ -76,6 +76,14 @@ public class RunningManager : MonoBehaviour
         m_Player.m_RigidBody.position = m_Points[m_LaneIndex].position;
     }
 
+    public void GameContinue()
+    {
+        GameData.GameContinue();
+        m_Player.GameReset();
+        m_Boss.GameReset();
+        m_Player.SetPlayer();
+    }
+
     public void SetOutGame()
     {
         m_Obj.SetActive(true);
@@ -393,6 +401,7 @@ public class RunningManager : MonoBehaviour
                 break;
             case TrapType.HpRecovery:
                 GameData.m_Player.m_HP += dataValue;
+                m_Boss.SetSpeed();
                 /*
                 if(GameData.m_Player.m_HP >= GameData.m_Player.m_MaxHP)
                 {
@@ -402,6 +411,7 @@ public class RunningManager : MonoBehaviour
                 break;
             case TrapType.Dmg:
                 GameData.m_Player.m_HP -= dataValue;
+                m_Boss.SetSpeed();
                 break;
             case TrapType.Rainboots:
                 m_Player.SetRainboots(true);

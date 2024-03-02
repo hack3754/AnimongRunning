@@ -92,7 +92,7 @@ public class MapData : DataDicBase<int, MapDataItem>
 
     public bool TryGetRandom(int nextid, out int id,  out MapDataItem mapData)
     {
-        /*
+
         mapData = null;
         id = 0;
 
@@ -108,12 +108,12 @@ public class MapData : DataDicBase<int, MapDataItem>
         mapData = pair[index].Value;
 
         return mapData is not null;
-        */
-
+        
+        /*
         id = 0;
         mapData = m_Dic[2];
-
+        
         return mapData is not null;
-
+        */
     }
 }

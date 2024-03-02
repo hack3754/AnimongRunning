@@ -84,7 +84,12 @@ public class UIInGame : UIObject
         m_TxtTime.text = "00:00.00";
         m_TxtScore.text = "0";
         m_TxtGold.text = "0";
-        SetHP(DataManager.Instance.m_BGData.hp_max);
+        SetHP(GameData.m_Player.m_MaxHP);
+    }
+
+    public void GameContinue()
+    {
+        SetHP(GameData.m_Player.m_MaxHP);
     }
 
     public void SetTime()
@@ -108,6 +113,7 @@ public class UIInGame : UIObject
         m_TxtHp.text = ((int)hpValue).ToString();
         m_HpPer = hpValue / GameData.m_Player.m_MaxHP;
         m_HpIndex = (int)m_HpPer;
+
         if (m_HpIndex >= 0)
         {
             if (m_HpPer <= 0.4f)

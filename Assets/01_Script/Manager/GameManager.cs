@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.Rendering;
+using System.Runtime.InteropServices;
 public class GameManager : MSingleton<GameManager>
 {
     public Camera m_Cam;
@@ -19,10 +23,13 @@ public class GameManager : MSingleton<GameManager>
     public BGControl m_BGControl;
     public MoveObjManager m_MoveObj;
     public GameObject m_BG;
+    public RectTransform[] m_RectDecoBGs;
     bool m_IsGameStart;
     bool m_IsReadyStart;
     List<Coroutine> m_StateCoroutine;
 
+
+    Vector2 m_Vec2;
     public bool IsGameStart { get { return m_IsGameStart; } }
 
     private void Awake()
@@ -30,6 +37,10 @@ public class GameManager : MSingleton<GameManager>
         m_LoignUI.Init();
         m_MoveObj.Init();
         m_StateCoroutine = new List<Coroutine>();
+
+        //gogleplayservice
+        PlayGamesPlatform.Activate();
+        Social.localUser.Authenticate(ProcessAuthentication);
 
 #if UNITY_EDITOR
 
@@ -61,6 +72,41 @@ public class GameManager : MSingleton<GameManager>
         SetResolution();
     }
 
+    internal void ProcessAuthentication(bool status)
+    {
+        if (status)
+        {
+            ILeaderboard lb = PlayGamesPlatform.Instance.CreateLeaderboard();
+            lb.id = "CgkIxYGzvLsTEAIQAQ";
+            lb.LoadScores(ok =>
+            {
+                if (ok)
+                {
+                    LoadUsersAndDisplay(lb);
+                }
+                else
+                {
+                    Debug.Log("Error retrieving leaderboardi");
+                }
+            });
+        }
+        else
+        {
+           
+        }
+    }
+
+    internal void LoadUsersAndDisplay(ILeaderboard lb)
+    {
+        if(lb != null)
+        {
+            if(lb.localUserScore != null)
+            {
+                GameData.m_Score = lb.localUserScore.value;
+            }
+        }
+    }
+
     public void SetResolution()
     {
         int setWidth = 1280; // 荤侩磊 汲沥 呈厚
@@ -80,6 +126,11 @@ public class GameManager : MSingleton<GameManager>
             m_Cam.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f); // 货肺款 Rect 利侩
             m_UICam.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f); // 货肺款 Rect 利侩
 
+            for (int i = 0; i < m_RectDecoBGs.Length; i++)
+            {
+                m_Vec2 = m_RectDecoBGs[i].sizeDelta;
+            }
+
             //m_OutGameScaler.referenceResolution *= new Vector2((m_OutGameScaler.referenceResolution.x / Screen.width), (Screen.height / m_OutGameScaler.referenceResolution.y));
             //m_InGameScaler.referenceResolution *= new Vector2((m_InGameScaler.referenceResolution.x / Screen.width), (Screen.height / m_InGameScaler.referenceResolution.y));
         }
@@ -88,6 +139,11 @@ public class GameManager : MSingleton<GameManager>
             float newHeight = ((float)deviceWidth / deviceHeight) / ((float)setWidth / setHeight); // 货肺款 臭捞
             m_Cam.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight); // 货肺款 Rect 利侩
             m_UICam.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight); // 货肺款 Rect 利侩
+
+            for(int i = 0; i < m_RectDecoBGs.Length;i++)
+            {
+                m_Vec2 = m_RectDecoBGs[i].sizeDelta;
+            }
 
             //m_OutGameScaler.referenceResolution *= new Vector2((Screen.width / m_OutGameScaler.referenceResolution.x), (m_OutGameScaler.referenceResolution.y / Screen.height));
             //m_InGameScaler.referenceResolution *= new Vector2((Screen.width / m_OutGameScaler.referenceResolution.x), (m_OutGameScaler.referenceResolution.y / Screen.height));
@@ -172,6 +228,17 @@ public class GameManager : MSingleton<GameManager>
         StartCoroutine(LoadMap(isHome));
     }
 
+    public void GameContinue()
+    {
+        m_IsReadyStart = true;
+        m_InGameUI.GameContinue();
+        m_InGameUI.Show();
+
+        m_Running.GameContinue();
+        m_Running.m_Player.Idle();
+        m_Running.m_Player.Run();
+    }
+
     IEnumerator LoadMap(bool isHome = true)
     {
         yield return StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad());
@@ -242,6 +309,17 @@ public class GameManager : MSingleton<GameManager>
         if (GameData.m_IsStop || GameData.m_IsStun) return;
         m_BGControl.BgMove();
         m_InGameUI.m_UIMian.SetGoldPos();
+    }
+
+    public void OnApplicationPause(bool paused)
+    {
+        if(paused == false)
+        {
+            //m_Cam.rect = new Rect(0f, 0f, 1f, 1f); // 货肺款 Rect 利侩
+            //m_UICam.rect = new Rect(0f, 0f, 1f, 1f); // 货肺款 Rect 利侩
+            //GL.Clear(true, true, new Color32(0x23, 0x1F, 0x20, 0xFF));
+            //SetResolution();
+        }
     }
 
 }

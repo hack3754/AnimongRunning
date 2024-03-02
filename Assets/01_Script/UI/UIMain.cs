@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 public class UIMain : UIBase
 {
     public ButtonObject m_BtnStart;
@@ -40,7 +41,7 @@ public class UIMain : UIBase
 
     void OnClickRanking()
     {
-
+        ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI("CgkIxYGzvLsTEAIQAQ");
     }
     void OnClickCharSelect()
     {
@@ -49,7 +50,12 @@ public class UIMain : UIBase
 
     void OnClickAds()
     {
-        AdsManager.Instance.ShowRewardedAd();
+        AdsManager.Instance.ShowRewardedAd(GetReward);
+    }
+
+    void GetReward()
+    {
+
     }
 
     void OnClickSetting()

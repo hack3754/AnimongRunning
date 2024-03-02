@@ -1,6 +1,7 @@
 using GoogleMobileAds.Api;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class BossObject : ObjectEntries
@@ -18,7 +19,11 @@ public class BossObject : ObjectEntries
     Vector3 m_Vec3;
     float m_PosY;
     bool m_IsMove;
-    
+
+
+    float m_Speed;
+    float m_Distance;
+
     public void Init(System.Action fncSetBossPosition)
     {
         m_PosFirst = m_Trans.localPosition.x;
@@ -26,25 +31,30 @@ public class BossObject : ObjectEntries
     }
 
     public void MoveUpdate(float hpValue)
-    {
+    {   
         m_HpPer = hpValue / GameData.m_Player.m_MaxHP;
+        
         if (m_HpPer <= 0.4f)
         {
             m_Obj.SetActive(true);
 
             if (m_IsShow == false)
             {
-                m_FirstHp = m_HpPer;
                 m_HpPos = m_Trans.position;
                 m_FncSetBossPosition?.Invoke();
+                SetSpeed();
             }
 
             m_IsShow = true;
 
             m_PosY = m_Trans.position.y;
-            m_Trans.position = Vector3.Lerp(m_HpPos, m_TransLast.position, 1 - (m_HpPer / m_FirstHp));
+            //m_Trans.position = Vector3.Lerp(m_HpPos, m_TransLast.position, 1 - (m_HpPer / m_FirstHp));
+            //Vector3 speed = Vector3.zero;
+            //m_Trans.position = Vector3.SmoothDamp(m_Trans.position, m_TransLast.position, ref speed, 0.1f);
+            //m_Trans.position = Vector3.MoveTowards(m_Trans.position, m_TransLast.position, (m_HpPer / m_FirstHp));
 
             m_Vec3 = m_Trans.position;
+            m_Vec3.x += m_Speed * Time.deltaTime;
             m_Vec3.y = m_PosY;
             m_Trans.position = m_Vec3;
         }
@@ -53,7 +63,7 @@ public class BossObject : ObjectEntries
             if(m_IsShow)
             {
                 m_IsShow = false;
-                /*
+
                 m_PosY = m_Trans.position.y;
                 m_Trans.position = Vector3.MoveTowards(m_Trans.position, m_TransFirst.position, 20 * Time.deltaTime);
 
@@ -66,14 +76,19 @@ public class BossObject : ObjectEntries
                     m_IsShow = false;
                     m_Obj.SetActive(false);
                 }
-                */
             }
             else
             {
                 //m_IsShow = false;
                 //m_Obj.SetActive(false);
             }
-        }
+        }        
+    }
+
+    public void SetSpeed()
+    {
+        m_Distance = Vector3.Distance(m_Trans.position, m_TransLast.position);
+        m_Speed = m_Distance / GameData.m_Player.m_HP;
     }
 
     public void SetPosition(Vector3 pos)
@@ -85,5 +100,8 @@ public class BossObject : ObjectEntries
     public void GameReset()
     {
         m_Obj.SetActive(false);
+        m_IsShow = false;
+        m_Speed = 0;
+        m_Trans.position = m_TransFirst.position;
     }
 }

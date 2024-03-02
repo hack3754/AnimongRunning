@@ -62,13 +62,14 @@ public class AdsManager : MSingleton<AdsManager>
             });
     }
 
-    public void ShowRewardedAd()
+    public void ShowRewardedAd(Action fncGetReward)
     {
         const string rewardMsg =
             "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
 
         if (m_RewardedAd != null && m_RewardedAd.CanShowAd())
         {
+            m_FncGetReward = fncGetReward;
             m_RewardedAd.Show((Reward reward) =>
             {
                 // TODO: Reward the user.
@@ -88,6 +89,7 @@ public class AdsManager : MSingleton<AdsManager>
         ad.OnAdPaid += (AdValue adValue) =>
         {
             m_FncGetReward?.Invoke();
+            m_FncGetReward = null;
         };
         // Raised when an impression is recorded for an ad.
         ad.OnAdImpressionRecorded += () =>

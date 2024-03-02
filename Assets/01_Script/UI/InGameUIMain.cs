@@ -21,7 +21,7 @@ public class InGameUIMain : UIObject
     public void Show()
     {
         SetActive(true);
-        m_UIMian.m_Obj.SetActive(true);
+        m_UIMian.SetActive(true);
         m_UIMian.SetController();
     }
 
@@ -31,6 +31,14 @@ public class InGameUIMain : UIObject
         m_ObjBG.SetActive(false);
         m_UIResult.Hide();
         m_UIMian.GameReset();
+    }
+
+    public void GameContinue()
+    {
+        m_ObjBG.SetActive(false);
+        m_UIMian.SetActive(true);
+        m_UIMian.GameContinue();
+        m_UIResult.Hide();
     }
 
     public void SetTime()
@@ -55,10 +63,8 @@ public class InGameUIMain : UIObject
 
     public void ShowResult(System.TimeSpan time)
     {
-        GameData.m_LocalData.m_Data.SetScore();
-
         m_ObjBG.SetActive(true);
-        m_UIMian.m_Obj.SetActive(false);
+        m_UIMian.SetActive(false);
         m_UIResult.Show(time);
     }
 }
