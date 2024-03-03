@@ -38,9 +38,11 @@ public class GameManager : MSingleton<GameManager>
         m_MoveObj.Init();
         m_StateCoroutine = new List<Coroutine>();
 
+#if UNITY_ANDROID
         //gogleplayservice
         PlayGamesPlatform.Activate();
         Social.localUser.Authenticate(ProcessAuthentication);
+#endif
 
 #if UNITY_EDITOR
 

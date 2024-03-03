@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
 using GooglePlayGames;
-using UnityEngine.SocialPlatforms;
-using System.Diagnostics;
 
 public class UIResult : UIObject
 {
@@ -87,7 +83,9 @@ public class UIResult : UIObject
 
     void OnClickRanking()
     {
+#if UNITY_ANDROID
         ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI("CgkIxYGzvLsTEAIQAQ");
+#endif
     }
 
     void OnClickShare()

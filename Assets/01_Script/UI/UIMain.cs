@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GooglePlayGames;
-using UnityEngine.SocialPlatforms;
 public class UIMain : UIBase
 {
     public ButtonObject m_BtnStart;
@@ -41,7 +38,9 @@ public class UIMain : UIBase
 
     void OnClickRanking()
     {
+#if UNITY_ANDROID
         ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI("CgkIxYGzvLsTEAIQAQ");
+#endif
     }
     void OnClickCharSelect()
     {
