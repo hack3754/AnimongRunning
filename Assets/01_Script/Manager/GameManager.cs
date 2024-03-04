@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms;
-using UnityEngine.Rendering;
-using System.Runtime.InteropServices;
+
 public class GameManager : MSingleton<GameManager>
 {
     public Camera m_Cam;
@@ -76,6 +74,7 @@ public class GameManager : MSingleton<GameManager>
 
     internal void ProcessAuthentication(bool status)
     {
+#if UNITY_ANDROID
         if (status)
         {
             ILeaderboard lb = PlayGamesPlatform.Instance.CreateLeaderboard();
@@ -96,6 +95,7 @@ public class GameManager : MSingleton<GameManager>
         {
            
         }
+#endif
     }
 
     internal void LoadUsersAndDisplay(ILeaderboard lb)
