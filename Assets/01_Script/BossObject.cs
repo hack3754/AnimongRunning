@@ -60,6 +60,7 @@ public class BossObject : ObjectEntries
         }
         else
         {
+            /*
             if(m_IsShow)
             {
                 m_IsShow = false;
@@ -77,16 +78,19 @@ public class BossObject : ObjectEntries
                     m_Obj.SetActive(false);
                 }
             }
-            else
-            {
-                //m_IsShow = false;
-                //m_Obj.SetActive(false);
-            }
+            */
+  
         }        
     }
 
     public void SetSpeed()
     {
+        Debug.Log(GameData.m_Player.m_HP / GameData.m_Player.m_MaxHP);
+        if ((GameData.m_Player.m_HP / GameData.m_Player.m_MaxHP) > 0.4f)
+        {
+            m_IsShow = false;
+            return;
+        }
         m_Distance = Vector3.Distance(m_Trans.position, m_TransLast.position);
         m_Speed = m_Distance / GameData.m_Player.m_HP;
     }

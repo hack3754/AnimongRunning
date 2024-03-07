@@ -189,7 +189,7 @@ public class TrapColliderManager : MonoBehaviour
     {
         ObstacleType obstacleType = ObstacleType.Max;
         string trap = string.Empty;
-
+        
         if (trapType.Equals(AMUtility.BLOCK))
         {
             obstacleType = ObstacleType.Trap;
@@ -200,14 +200,23 @@ public class TrapColliderManager : MonoBehaviour
         {
             if (trapType.Equals(AMUtility.TRAP))
             {
-                if (UnityEngine.Random.Range(0, 1000) <= 50) obstacleType = ObstacleType.Item;
-                else if (UnityEngine.Random.Range(0, 1000) <= 600) obstacleType = ObstacleType.Gold;
-                else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
+
+                //if (UnityEngine.Random.Range(0, 1000) <= 50) obstacleType = ObstacleType.Item;
+                //else if (UnityEngine.Random.Range(0, 1000) <= 600) obstacleType = ObstacleType.Gold;
+                //else if (UnityEngine.Random.Range(0, 1000) <= 100) obstacleType = ObstacleType.Trap;
+
+                int ran = UnityEngine.Random.Range(0, 1000);
+                if (ran >= 10 && ran <= 20) obstacleType = ObstacleType.Item;
+
+                //ran = UnityEngine.Random.Range(0, 1000);
+                if (obstacleType == ObstacleType.Max && ran >= 100 && ran <= 300) obstacleType = ObstacleType.Gold;
+
+                //ran = UnityEngine.Random.Range(0, 1000);
+                if (obstacleType == ObstacleType.Max && ran >= 750 && ran <= 800) obstacleType = ObstacleType.Trap;
             }
             else if (trapType.Equals(AMUtility.ITEM))
             {
-                if (UnityEngine.Random.Range(0, 10000) <= 1) obstacleType = ObstacleType.Item;
-                else if (UnityEngine.Random.Range(0, 1000) <= 600) obstacleType = ObstacleType.Gold;
+
             }
             else return null;
 

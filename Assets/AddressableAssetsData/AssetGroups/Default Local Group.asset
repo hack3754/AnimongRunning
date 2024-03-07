@@ -150,6 +150,10 @@ MonoBehaviour:
     m_Address: Assets/04_Prefabs/Objects/Characters/Ca_07_Pibi.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5ba2ae3c6659d9246bc5bbfc98335fe1
+    m_Address: Assets/04_Prefabs/Objects/Characters/Ca_06_Buta.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 37d5b46f01917074abbe2c18df07aab1, type: 2}
   m_SchemaSet:

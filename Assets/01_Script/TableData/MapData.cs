@@ -102,10 +102,21 @@ public class MapData : DataDicBase<int, MapDataItem>
         if (list == null) list = new List<int>();
         System.Random r = new System.Random();
         //var pair = m_Dic.OrderBy(g => Guid.NewGuid()).FirstOrDefault(p => list.Contains(p.Key) == false && p.Key != 1);
-        var pair = m_Dic.Where(p => list.Contains(p.Key) == false && p.Key != 1) .OrderBy(x => r.Next()).ToList();
-        int index = UnityEngine.Random.Range(0, pair.Count);
-        id = pair[index].Key;
-        mapData = pair[index].Value;
+        //var pair = m_Dic.Where(p => list.Contains(p.Key) == false && p.Key != 1) .OrderBy(x => r.Next()).ToList();//nextid »« list
+        if (list.Count > 0)
+        {
+            var pair = m_Dic.Where(p => list.Contains(p.Key) && p.Key != 1).OrderBy(x => r.Next()).ToList();
+            int index = UnityEngine.Random.Range(0, pair.Count);
+            id = pair[index].Key;
+            mapData = pair[index].Value;
+        }
+        else
+        {
+            var pair = m_Dic.Where(p => p.Key != 1).OrderBy(x => r.Next()).ToList();
+            int index = UnityEngine.Random.Range(0, pair.Count);
+            id = pair[index].Key;
+            mapData = pair[index].Value;
+        }
 
         return mapData is not null;
         
