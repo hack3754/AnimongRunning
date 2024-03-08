@@ -20,6 +20,7 @@ public static class GameData
     public static int m_Gold;
 
     public static bool m_IsContinue;
+    public static float m_ContinueTime;
 
     public static Vector3 m_PosGold;
 
@@ -69,6 +70,7 @@ public static class GameData
         m_IsStun = false;
         m_IsMove = true;
         m_IsContinue = false;
+        m_ContinueTime = 0;
         m_Player.Reset();
 
         m_Player.m_PlayCharId = m_LocalData.m_Data.SelectCharId;
@@ -85,7 +87,6 @@ public static class GameData
         m_IsSpeedUp = false;
         m_IsStun = false;
         m_IsMove = true;
-        m_IsContinue = false;
 
         m_Player.SetSelectChar();
     }

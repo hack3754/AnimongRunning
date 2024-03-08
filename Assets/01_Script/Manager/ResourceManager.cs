@@ -4,9 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using System.Threading.Tasks;
 using System.Linq;
-using UnityEngine.SceneManagement;
 
 public class ResourceManager : MSingleton<ResourceManager>
 {

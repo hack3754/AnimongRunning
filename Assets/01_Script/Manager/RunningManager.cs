@@ -79,9 +79,9 @@ public class RunningManager : MonoBehaviour
     public void GameContinue()
     {
         GameData.GameContinue();
-        m_Player.GameReset();
         m_Boss.GameReset();
         m_Player.SetPlayer();
+        m_Player.GameContinue();
     }
 
     public void SetOutGame()
@@ -125,6 +125,8 @@ public class RunningManager : MonoBehaviour
             m_Player.TimeOut();
             return;
         }
+
+        if (GameData.m_ContinueTime > 0) GameData.m_ContinueTime -= Time.deltaTime;
 
         //GameManager.Instance.m_InGameUI.SetTime();
 
@@ -291,9 +293,26 @@ public class RunningManager : MonoBehaviour
             return;
         }
 
+        /*
         if (m_Player.m_Map != null)
         {
             if (GameData.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
+            {
+                return;
+            }
+        }
+        */
+
+        if (GameData.m_IsStop)
+        {
+            if (m_Player.m_PreMap != null && m_Player.m_PreMap.m_BlockIndex.Contains(m_LaneIndex - 1))
+            {
+                return;
+            }
+        }
+        else
+        {
+            if (m_Player.m_Map != null && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex - 1))
             {
                 return;
             }
@@ -316,9 +335,26 @@ public class RunningManager : MonoBehaviour
             return;
         }
 
+        /*
         if (m_Player.m_Map != null)
         {
             if (GameData.m_IsStop == false && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
+            {
+                return;
+            }
+        }
+        */
+
+        if (GameData.m_IsStop)
+        {
+            if (m_Player.m_PreMap != null && m_Player.m_PreMap.m_BlockIndex.Contains(m_LaneIndex + 1))
+            {
+                return;
+            }
+        }
+        else
+        {
+            if (m_Player.m_Map != null && m_Player.m_Map.m_BlockIndex.Contains(m_LaneIndex + 1))
             {
                 return;
             }
@@ -340,6 +376,7 @@ public class RunningManager : MonoBehaviour
 
     void ObstacleTrigger(TrapType trapType, int dataValue, TrapCollider trap)
     {
+        if (GameData.m_ContinueTime > 0) return;
         float dataTime = 0;
         if (trap.m_tData.time > 0) dataTime = trap.m_tData.time / 100f;
 

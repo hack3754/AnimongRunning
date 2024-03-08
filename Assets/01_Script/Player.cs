@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public Collider2D m_Col;
     public Rigidbody2D m_RigidBody;
     public MapObject m_Map;
+    public MapObject m_PreMap;
 
     //Effect
     public GameObject[] m_FxAni;
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour
     TrapCollider m_Trap;
     List<TrapCollider> m_DmgStops = new List<TrapCollider>();
     bool m_IsRainboots;
+
+    BlockObject m_Block;
     public void Init()
     {
         DIsableEffect();
@@ -48,6 +51,15 @@ public class Player : MonoBehaviour
         m_DmgStops.Clear();
         m_Trap = null;
         m_Map = null;
+        m_Char.Clear();
+    }
+
+    public void GameContinue()
+    {
+        m_IsRainboots = false;
+        m_DmgStops.Clear();
+        m_Trap = null;
+        m_Char.SetBlink();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,6 +93,7 @@ public class Player : MonoBehaviour
                 //게임 오브에 대한 코드
                 //GameManager.Instance.m_Running.GameOverBlock();
                 //멈춤에 대한 코드
+                m_Block = block;
                 GameData.m_IsStop = true;
                 GameData.m_BGSpeed = DataManager.Instance.m_BGData.min_speed;
             }
@@ -89,6 +102,9 @@ public class Player : MonoBehaviour
         if (collision.tag == TagName.Map.ToString())
         {
             MapCollider mapCol = collision.gameObject.GetComponent<MapCollider>();
+
+            m_PreMap = m_Map;
+
             if (mapCol != null)
             {
                 m_Map = mapCol.m_MapObj;
@@ -112,9 +128,10 @@ public class Player : MonoBehaviour
         if (collision.tag == TagName.Block.ToString())
         {
             BlockObject block = collision.gameObject.GetComponent<BlockObject>();
-            if (block != null)
+            if (block != null && (m_Block == null || m_Block.Equals(block)))
             {
                 GameData.m_IsStop = false;
+                m_Block = null;
             }
         }
     }
