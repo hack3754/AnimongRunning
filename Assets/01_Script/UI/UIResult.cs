@@ -75,10 +75,11 @@ public class UIResult : UIObject
     {
         m_ObjBtnContinue.SetActive(false);
         m_ObjBtnResult.SetActive(true);
-
+#if !UNITY_EDITOR
         Social.ReportScore((int)GameData.m_Score, "CgkIxYGzvLsTEAIQAQ", (bool success) => {
 
         });
+#endif
     }
 
     IEnumerator StartResult()
