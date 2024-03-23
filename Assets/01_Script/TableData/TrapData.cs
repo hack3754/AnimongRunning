@@ -32,6 +32,7 @@ public class TrapDataItem
     public int time2;
     public int value;
     public int value2;
+    public int sound;
 }
 public class TrapData : DataDicBase<int, TrapDataItem>
 {
@@ -87,7 +88,8 @@ public class TrapData : DataDicBase<int, TrapDataItem>
                 case "value": m_Dic[idx].value = int.Parse(_row[i]); break;
                 case "value2": m_Dic[idx].value2 = int.Parse(_row[i]); break;
                 case "IsTrap": m_Dic[idx].IsTrap = int.Parse(_row[i]) == 1; break;
-                    
+                case "sound": m_Dic[idx].sound = int.Parse(_row[i]); break;
+
             }
         }
     }

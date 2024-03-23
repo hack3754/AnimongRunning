@@ -275,7 +275,8 @@ public class SoundManager : MonoBehaviour
 	/// <param name="isVS"></param>
 	public void PlaySound( int sound, float delayTime = 0, bool loop = false, bool isVS = false)
     {
-        if (effectVolume == 0 || sound == 0 || DataManager.Instance.m_SoundData == null )
+        //if (effectVolume == 0 || sound == 0 || DataManager.Instance.m_SoundData == null )
+        if (sound == 0 || DataManager.Instance.m_SoundData == null)
         {
             return;
         }
@@ -286,7 +287,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        string fileName = soundData.res;
+        string fileName = ResourceKey.GetKey(ResourceKey.m_KeySound, soundData.res);
 
 
         AudioClip clip;
@@ -339,9 +340,9 @@ public class SoundManager : MonoBehaviour
 
     public MPool<AudioSource> m_pool;
 
-    public void InitPool(Transform parent)
+    public void InitPool()
     {
-        m_pool = new MPool<AudioSource>(m_recSource.gameObject, parent, 10, 30);
+        m_pool = new MPool<AudioSource>(m_recSource.gameObject, transform, 10, 30);
     }
 
     public AudioSource GetSource()

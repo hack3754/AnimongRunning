@@ -19,6 +19,7 @@ public class UIMain : UIBase
         m_BtnCharSelect.m_FncOnClick = OnClickCharSelect;
         m_BtnAD.m_FncOnClick = OnClickAds;
         m_BtnSetting.m_FncOnClick = OnClickSetting;
+        m_BtnAD.m_TxtName.text = DataManager.Instance.m_GlobalData.ad_gold.ToString();
 
     }
     public override void Show()
@@ -49,12 +50,18 @@ public class UIMain : UIBase
 
     void OnClickAds()
     {
-        AdsManager.Instance.ShowRewardedAd(GetReward);
+#if !UNITY_EDITOR
+        AdsManager.Instance.ShowRewardedAd(GetAdsReward, AdsType.Gold);   
+#else
+        GetAdsReward();
+#endif
     }
 
-    void GetReward()
+    void GetAdsReward()
     {
-
+        GameData.m_LocalData.m_Data.Gold += DataManager.Instance.m_GlobalData.ad_gold;
+        GameManager.Instance.m_OutGameUI.SetCoin();
+        GameData.m_LocalData.Save();
     }
 
     void OnClickSetting()

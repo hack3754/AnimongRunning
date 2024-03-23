@@ -7,6 +7,7 @@ public class GlobalData : DataBase
 	public string ad_id;
 	public int ad_cnt;
 	public float ad_wait_time;
+    public int ad_gold;
 
     public override void Init(bool isLocalLoad)
     {
@@ -34,6 +35,7 @@ public class GlobalData : DataBase
 			case "ad_id": ad_id = _row[idx_value]; break;
 			case "ad_cnt": ad_cnt = int.Parse(_row[idx_value]); break;
 			case "ad_wait_time": ad_wait_time = float.Parse(_row[idx_value]); break;
+            case "ad_gold": ad_gold = int.Parse(_row[idx_value]); break;
 
         }
     }

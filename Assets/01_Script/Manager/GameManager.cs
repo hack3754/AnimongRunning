@@ -34,6 +34,8 @@ public class GameManager : MSingleton<GameManager>
     {
         m_LoignUI.Init();
         m_MoveObj.Init();
+        GameSetting.m_EffectVolume = 1;        
+        m_Sound.InitPool();
         m_StateCoroutine = new List<Coroutine>();
 
 #if UNITY_ANDROID
@@ -206,6 +208,8 @@ public class GameManager : MSingleton<GameManager>
             }
         }
 
+        Dictionary<int, SoundDataItem> dicSound = DataManager.Instance.m_SoundData.Get();
+
 
         yield return StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad());
 
@@ -218,6 +222,11 @@ public class GameManager : MSingleton<GameManager>
     void AddPrefab(string key, GameObject prefab)
     {
         ResourceLoadData.Instance.AddPrefab(key, prefab);
+    }
+
+    void AddSound(string key, AudioClip clip)
+    {
+        
     }
 
     public void GameRestart(bool isHome = true)

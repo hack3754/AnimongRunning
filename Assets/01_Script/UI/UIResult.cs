@@ -113,9 +113,9 @@ public class UIResult : UIObject
     void OnClickAds()
     {
 #if !UNITY_EDITOR
-        AdsManager.Instance.ShowRewardedAd(GetReward);
+        AdsManager.Instance.ShowRewardedAd(GetAdsReward, AdsType.Continue);   
 #else
-        GetReward();
+        GetAdsReward();
 #endif
     }
 
@@ -125,7 +125,7 @@ public class UIResult : UIObject
     }
 
 
-    void GetReward()
+    void GetAdsReward()
     {
         GameData.m_ContinueTime = 2;
         GameData.m_IsContinue = true;

@@ -43,6 +43,7 @@ public class UISelectChar : UIDragBase
 
         if (m_BtnSelect != null) m_BtnSelect.m_FncOnClick = OnClickSelect;
         if (m_BtnPurchase != null) m_BtnPurchase.m_FncOnClick = OnClickPurchase;
+        if (m_BtnAds != null) m_BtnAds.m_FncOnClick = OnClickAds;
     }
 
     public override void Show()
@@ -164,8 +165,9 @@ public class UISelectChar : UIDragBase
         if (m_SelectData == null || GameData.m_LocalData.m_Data.Gold < m_SelectData.m_tData.price 
             || GameData.m_PlayCharIDs.Contains(m_SelectData.m_tData.id)) return;
 
-        GameData.m_LocalData.m_Data.Gold -= m_SelectData.m_tData.price;
         GameData.m_PlayCharIDs.Add(m_SelectData.m_tData.id);
+
+        GameData.m_LocalData.m_Data.Gold -= m_SelectData.m_tData.price;
         GameData.m_LocalData.Save();
 
         GameManager.Instance.m_OutGameUI.SetCoin();
@@ -178,6 +180,32 @@ public class UISelectChar : UIDragBase
 
         SetCenter(m_SelectData);
     }
+
+    void OnClickAds()
+    {
+        if (m_SelectData == null || GameData.m_LocalData.m_Data.Gold < m_SelectData.m_tData.price
+           || GameData.m_PlayCharIDs.Contains(m_SelectData.m_tData.id)) return;
+
+#if !UNITY_EDITOR
+        AdsManager.Instance.ShowRewardedAd(GetAdsReward, AdsType.CharSelect);        
+#else
+        GetAdsReward();
+#endif
+    }
+
+    void GetAdsReward()
+    {
+        GameData.m_PlayCharIDs.Add(m_SelectData.m_tData.id);
+
+        for (int i = 0; i < m_Datas.Count; i++)
+        {
+            m_Datas[i].m_IsLock = GameData.IsCharLock(m_Datas[i].m_tData.id);
+            m_Cells[i].Refresh();
+        }
+
+        SetCenter(m_SelectData);
+    }
+
     void OnClickSelect()
     {
         if (m_SelectData != null)

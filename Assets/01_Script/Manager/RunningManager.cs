@@ -370,6 +370,7 @@ public class RunningManager : MonoBehaviour
     {
         if (trap == null || trap.m_tData == null) return;
 
+        GameManager.Instance.m_Sound.PlaySound(trap.m_tData.sound);
         ObstacleTrigger(trap.m_tData.type, trap.m_tData.value, trap);
         ObstacleTrigger(trap.m_tData.type2, trap.m_tData.value2, trap);
     }

@@ -10,13 +10,11 @@ public class SoundDataItem
 
 public class SoundData : DataDicBase<int, SoundDataItem>
 {
-    public Dictionary<int, SoundDataItem> dic;
     private List<int> listIdx;
 
     public override void Init(bool isLocalLoad)
     {
         base.Init(isLocalLoad);
-        dic = new Dictionary<int, SoundDataItem>();
         listIdx = new List<int>();
 
         string path = string.Empty;
@@ -41,9 +39,9 @@ public class SoundData : DataDicBase<int, SoundDataItem>
                 continue;
             }
             listIdx.Add(int.Parse(_row[i]));
-            if (dic.ContainsKey(listIdx[i])) continue;
-            dic.Add(listIdx[i], new SoundDataItem());
-            dic[listIdx[i]].id = listIdx[i];
+            if (m_Dic.ContainsKey(listIdx[i])) continue;
+            m_Dic.Add(listIdx[i], new SoundDataItem());
+            m_Dic[listIdx[i]].id = listIdx[i];
         }
     }
     protected override void ParseData(string[] _row)
@@ -57,7 +55,7 @@ public class SoundData : DataDicBase<int, SoundDataItem>
             idx = listIdx[i];
             switch (_row[idx_key])
             {
-                case "res": dic[idx].res = _row[i]; break;
+                case "res": m_Dic[idx].res = _row[i]; break;
             }
         }
     }

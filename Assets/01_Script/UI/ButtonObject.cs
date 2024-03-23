@@ -85,7 +85,7 @@ public class ButtonObject : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         switch (m_SoundType)
         {
             case SoundType.Click:
-				GameManager.Instance.m_Sound.PlayEffectSound(1);
+				//GameManager.Instance.m_Sound.PlayEffectSound(1);
 				break;
 
 		}

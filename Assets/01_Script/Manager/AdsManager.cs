@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
+using UnityEditor.Rendering;
+public enum AdsType
+{
+    Gold,
+    CharSelect,
+    Continue,
+}
 
 public class AdsManager : MSingleton<AdsManager>
 {
@@ -11,18 +18,9 @@ public class AdsManager : MSingleton<AdsManager>
     private RewardedAd m_RewardedAd;
     Action m_FncGetReward;
     // Start is called before the first frame update
+
     void Start()
     {
-#if UNITY_ANDROID
-        if (IsTest) m_AdUnityId = "ca-app-pub-3940256099942544/5224354917";
-        else m_AdUnityId = "ca-app-pub-1490810296230779/1306547469";
-#elif UNITY_IPHONE
-        if(IsTest) m_AdUnityId = "ca-app-pub-3940256099942544/1712485313";
-        //else m_AdUnityId = "ca-app-pub-1490810296230779/1306547469";
-#else
-        m_AdUnityId = "unused";
-#endif
-
         MobileAds.Initialize(GoogleAdsInit);
     }
 
@@ -62,8 +60,32 @@ public class AdsManager : MSingleton<AdsManager>
             });
     }
 
-    public void ShowRewardedAd(Action fncGetReward)
+    public void ShowRewardedAd(Action fncGetReward, AdsType adsType)
     {
+#if UNITY_ANDROID
+        if (IsTest)
+        {
+            m_AdUnityId = "ca-app-pub-3940256099942544/5224354917";
+        }
+        else
+        {
+            switch (adsType)
+            {
+                case AdsType.Gold: m_AdUnityId = "ca-app-pub-1490810296230779/3933294932"; break;
+                case AdsType.CharSelect: m_AdUnityId = "ca-app-pub-1490810296230779/1306547469"; break;
+                case AdsType.Continue: m_AdUnityId = "ca-app-pub-1490810296230779/5588570657"; break;
+                default: m_AdUnityId = "ca-app-pub-3940256099942544/5224354917"; break;
+            }
+        }
+#elif UNITY_IPHONE                                                
+        if (IsTest)
+        {
+            m_AdUnityId = "ca-app-pub-3940256099942544/1712485313";
+        }
+#else
+        m_AdUnityId = "unused";
+#endif
+
         const string rewardMsg =
             "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
 

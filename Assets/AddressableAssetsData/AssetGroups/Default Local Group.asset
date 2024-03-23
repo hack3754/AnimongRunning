@@ -154,6 +154,10 @@ MonoBehaviour:
     m_Address: Assets/04_Prefabs/Objects/Characters/Ca_06_Buta.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1022d62ce05e8c54a893f2feb985ff16
+    m_Address: Assets/07_Sound/Effect/Coin.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 37d5b46f01917074abbe2c18df07aab1, type: 2}
   m_SchemaSet:

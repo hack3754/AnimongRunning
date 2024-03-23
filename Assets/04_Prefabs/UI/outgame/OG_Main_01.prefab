@@ -2024,6 +2024,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7633460490700769109}
     m_Modifications:
+    - target: {fileID: 643307553836185725, guid: e8966a4832259b246b87c6c41c0bfe5c, type: 3}
+      propertyPath: m_TxtName
+      value: 
+      objectReference: {fileID: 4806515611139804940}
     - target: {fileID: 1747798584706512729, guid: e8966a4832259b246b87c6c41c0bfe5c, type: 3}
       propertyPath: m_Sprite
       value: 
