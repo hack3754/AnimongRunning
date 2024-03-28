@@ -162,6 +162,22 @@ MonoBehaviour:
     m_Address: Assets/07_Sound/Effect
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 776727b66d463d9469ab66a7988a5c09
+    m_Address: Assets/07_Sound/Effect/Coin.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53532cb666d78a94e84bfc5ec49db02c
+    m_Address: Assets/07_Sound/Effect/Run.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7760d20f8368f054f847440236369cef
+    m_Address: Assets/04_Prefabs/Objects/Characters/Ca_08_Dave.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1411b01a3ce657147adcc2c88301533d
+    m_Address: Assets/04_Prefabs/UI/Character/UI_Ca_08_Dave.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 37d5b46f01917074abbe2c18df07aab1, type: 2}
   m_SchemaSet:

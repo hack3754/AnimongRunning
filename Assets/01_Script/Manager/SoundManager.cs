@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
 
     public System.Action <AudioClip>          onEnd;
 
-    public Dictionary<string, AudioClip> m_dicSound = new Dictionary<string, AudioClip>();
+    Dictionary<string, AudioClip> m_dicSound = new Dictionary<string, AudioClip>();
 
     public bool     m_EditorMute = false;
     public bool     m_Editor = false;
@@ -294,7 +294,7 @@ public class SoundManager : MonoBehaviour
         if (m_dicSound.ContainsKey(fileName))
         {
             clip = m_dicSound[fileName];
-            Play(clip, loop);
+            Play(clip, soundData, loop);
         }
         else
         {
@@ -306,19 +306,19 @@ public class SoundManager : MonoBehaviour
                     {
                         m_dicSound.Add(fileName, audioClip);
                     }
-                    Play(audioClip, loop);
+                    Play(audioClip, soundData, loop);
                 }
             });
         }
 
-        void Play(AudioClip audioClip, bool isloop = false)
+        void Play(AudioClip audioClip, SoundDataItem data, bool isloop = false)
         {
             var audioSource = GetSource();
             audioSource.gameObject.SetActive(true);
             audioSource.clip = audioClip;
             audioSource.loop = isloop;
             audioSource.mute = false;
-            audioSource.volume = effectVolume;
+            audioSource.volume = data.volume;
             audioSource.Play();
             if (isloop)
             {
@@ -332,6 +332,22 @@ public class SoundManager : MonoBehaviour
             }
             else StartCoroutine(OnUpdate(audioSource));
         }
+    }
+
+
+    public void AddSound(string fileName, AudioClip audioClip)
+    {
+        if (m_dicSound.ContainsKey(fileName) == false)
+        {
+            m_dicSound.Add(fileName, audioClip);
+        }
+    }
+
+    public AudioClip GetSound(string fileName)
+    {
+        if (m_dicSound.ContainsKey(fileName)) return m_dicSound[fileName];
+
+        return null;
     }
 
     #region SOUND_POOL

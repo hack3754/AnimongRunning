@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Profiling.Memory.Experimental;
+
 
 public class StateInfo
 {
@@ -25,6 +24,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D m_RigidBody;
     public MapObject m_Map;
     public MapObject m_PreMap;
+    public AudioSource m_Audio;
 
     //Effect
     public GameObject[] m_FxAni;
@@ -195,6 +195,7 @@ public class Player : MonoBehaviour
         //m_Animator.Play("Idle", -1, 0);
         DIsableEffect();
         m_Char.m_Animator.Play("Idle");
+        m_Audio.Stop();
         //m_Animator.speed = 0.2f;
     }
 
@@ -203,6 +204,7 @@ public class Player : MonoBehaviour
         if (m_Char == null) return;
         DIsableEffect();
         m_Char.m_Animator.Play("Run");
+        PlaySound(2);
         m_FxAni[0].SetActive(true);
         //m_Animator.speed = 0.5f;
     }
@@ -212,6 +214,7 @@ public class Player : MonoBehaviour
         if (m_Char == null) return;
         DIsableEffect();
         m_Char.m_Animator.Play("Groggy_03");
+        m_Audio.Stop();
         m_FxAni[3].SetActive(true);
     }
 
@@ -220,6 +223,7 @@ public class Player : MonoBehaviour
         if (m_Char == null) return;
         DIsableEffect();
         m_Char.m_Animator.Play("Groggy_02");
+        m_Audio.Stop();
         m_FxAni[1].SetActive(true);
     }
 
@@ -229,6 +233,7 @@ public class Player : MonoBehaviour
         DIsableEffect();
         m_Char.m_Animator.Play("Slip_01");
         m_FxAni[2].SetActive(true);
+        m_Audio.Stop();
     }
 
 
@@ -256,6 +261,34 @@ public class Player : MonoBehaviour
     public void SetRainboots(bool isEnable)
     {
         m_IsRainboots = isEnable;
+    }
+
+    public void PlaySound(int sound)
+    {
+        //if (effectVolume == 0 || sound == 0 || DataManager.Instance.m_SoundData == null )
+        if (sound == 0 || DataManager.Instance.m_SoundData == null)
+        {
+            return;
+        }
+
+        var soundData = DataManager.Instance.m_SoundData.Get(sound);
+
+        if (soundData == null)
+        {
+            return;
+        }
+
+        string fileName = ResourceKey.GetKey(ResourceKey.m_KeySound, soundData.res);
+
+        AudioClip clip = GameManager.Instance.m_Sound.GetSound(fileName);
+
+        if (clip != null)
+        {
+            m_Audio.clip = clip;
+            m_Audio.volume = soundData.volume;
+            m_Audio.Play();
+        }
+   
     }
 
     #region hitTest

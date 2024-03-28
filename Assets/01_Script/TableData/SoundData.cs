@@ -6,6 +6,7 @@ public class SoundDataItem
 {
     public int id;
     public string res;
+    public float volume;
 }
 
 public class SoundData : DataDicBase<int, SoundDataItem>
@@ -56,6 +57,7 @@ public class SoundData : DataDicBase<int, SoundDataItem>
             switch (_row[idx_key])
             {
                 case "res": m_Dic[idx].res = _row[i]; break;
+                case "volume": m_Dic[idx].volume = int.Parse(_row[i]) / 100f; break;
             }
         }
     }

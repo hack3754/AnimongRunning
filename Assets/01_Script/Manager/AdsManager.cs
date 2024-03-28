@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
-using UnityEditor.Rendering;
 public enum AdsType
 {
     Gold,

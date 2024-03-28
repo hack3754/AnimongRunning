@@ -210,6 +210,16 @@ public class GameManager : MSingleton<GameManager>
 
         Dictionary<int, SoundDataItem> dicSound = DataManager.Instance.m_SoundData.Get();
 
+        foreach (var dicData in dicSound)
+        {
+            key = ResourceKey.GetKey(ResourceKey.m_KeySound, dicData.Value.res);
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                yield return StartCoroutine(ResourceManager.Instance.LoadSound(key, AddSound));
+            }
+        }
+
 
         yield return StartCoroutine(m_Running.m_BgUpdate.FirstMapLoad());
 
@@ -226,7 +236,7 @@ public class GameManager : MSingleton<GameManager>
 
     void AddSound(string key, AudioClip clip)
     {
-        
+        m_Sound.AddSound(key, clip);
     }
 
     public void GameRestart(bool isHome = true)

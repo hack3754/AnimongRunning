@@ -561,6 +561,39 @@ public class ResourceManager : MSingleton<ResourceManager>
         }
     }
 
+    public IEnumerator LoadSound(string key, Action<string, AudioClip> onResult)
+    {
+        var checkOp = Addressables.LoadResourceLocationsAsync(key);
+
+        yield return checkOp;
+
+        if (checkOp.Result.Count > 0)
+        {
+            if (m_Handles.ContainsKey(key))
+            {
+                onResult?.Invoke(key, m_Handles[key].Result as AudioClip);
+            }
+            else
+            {
+                var op = Addressables.LoadAssetAsync<AudioClip>(key);
+
+                yield return op;
+
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    if (op.Result != null)
+                    {
+                        AddHandle(key, op);
+                    }
+                    else
+                        Addressables.Release(op);
+
+                    onResult?.Invoke(key, op.Task.Result);
+                }
+            }
+        }
+    }
+
     /*
     public void LoadScene( JMSceneLoadManager.SCENES scenes, Action<float> progress, Action onFinish, LoadSceneMode loadMode = LoadSceneMode.Single )
     {
